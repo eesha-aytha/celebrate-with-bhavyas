@@ -202,16 +202,8 @@ em { font-style: italic; color: var(--gold-light); }
 
 /* ---------- About ---------- */
 .about { background: var(--black-2); }
-.about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(3rem, 7vw, 6rem); align-items: center; }
+.about-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(3rem, 7vw, 6rem); align-items: center; }
 .about-visual { position: relative; }
-.badge-float {
-  position: absolute; right: -24px; bottom: 40px;
-  background: var(--black); border: 1px solid var(--gold);
-  padding: 1.2rem 1.6rem; display: flex; align-items: center; gap: 1rem;
-  box-shadow: 0 20px 40px -20px #000;
-}
-.badge-num { font-family: var(--serif); font-size: 2.6rem; color: var(--gold-light); line-height: 1; }
-.badge-txt { font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; color: var(--blue); line-height: 1.5; }
 .about-copy p { color: var(--muted); margin-bottom: 1.2rem; }
 
 /* ---------- Services ---------- */
@@ -319,7 +311,6 @@ em { font-style: italic; color: var(--gold-light); }
   .nav-toggle { z-index: 60; }
 
   .about-grid, .contact-grid { grid-template-columns: 1fr; }
-  .badge-float { right: 12px; }
     .hero-glow { width: 320px; height: 320px; right: -160px; }
   .gallery-grid { columns: 2; }
   .about-visual { max-width: 520px; }
@@ -373,17 +364,43 @@ em { font-style: italic; color: var(--gold-light); }
 .hero::before { z-index: 0; }
 
 /* Founders portraits */
-.about-visual { display: grid; grid-template-columns: repeat(12, 1fr); align-items: end; padding-bottom: 2rem; }
-.portrait { position: relative; margin: 0; }
-.portrait img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; filter: saturate(.92) contrast(1.05); }
-.portrait figcaption {
-  position: absolute; left: 0; right: 0; bottom: 0; padding: 2.4rem 1rem .9rem;
-  font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--gold-light);
-  background: linear-gradient(transparent, rgba(10,10,11,.92));
+.about-visual { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2.2vw, 1.6rem); position: relative; }
+.about-visual::before {
+  content: ""; position: absolute; inset: 14% -1.2rem -1.2rem; z-index: 0;
+  border: 1px solid var(--line); background: radial-gradient(ellipse at 50% 100%, rgba(201,165,76,.1), transparent 70%);
 }
-.portrait-main { grid-column: 1 / 9; grid-row: 1; outline: 1px solid var(--gold); outline-offset: 12px; }
-.portrait-second { grid-column: 7 / 13; grid-row: 1; margin-bottom: -2rem; z-index: 1; border: 6px solid var(--black-2); box-shadow: 0 30px 60px -20px #000; }
-.badge-float { left: -12px; right: auto; bottom: auto; top: 24px; z-index: 2; }
+.portrait {
+  position: relative; z-index: 1; margin: 0; padding: 8px;
+  background: var(--black); border: 1px solid rgba(201,165,76,.45);
+  box-shadow: 0 30px 60px -28px #000, 0 0 0 1px rgba(168,216,240,.06);
+  transition: transform .6s var(--ease), border-color .6s, box-shadow .6s;
+}
+.portrait-frame { position: relative; overflow: hidden; }
+.portrait img {
+  width: 100%; aspect-ratio: 3 / 4.2; object-fit: cover; object-position: center 15%;
+  filter: saturate(.92) contrast(1.05); transition: transform 1.2s var(--ease);
+}
+.portrait-frame::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, transparent 55%, rgba(10,10,11,.92));
+}
+.portrait figcaption {
+  position: absolute; left: 8px; right: 8px; bottom: 8px; z-index: 1;
+  padding: 0 1.1rem 1.1rem; display: grid; gap: .2rem;
+}
+.portrait-name { font-family: var(--serif); font-size: clamp(1.1rem, 1.8vw, 1.4rem); color: var(--ivory); line-height: 1.2; }
+.portrait-role {
+  display: inline-flex; align-items: center; gap: .55rem;
+  font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-light);
+}
+.portrait-role::before { content: ""; width: 18px; height: 1px; background: var(--blue); }
+.portrait:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 40px 70px -30px rgba(201,165,76,.4); }
+.portrait:hover img { transform: scale(1.05); }
+@media (max-width: 560px) {
+  .portrait-role { letter-spacing: .2em; }
+  .portrait figcaption { padding: 0 .7rem .8rem; }
+  .about-visual::before { inset: 14% -.6rem -.6rem; }
+}
 
 /* Service card photos */
 .service-img { margin: 0 -1.8rem; height: 190px; overflow: hidden; position: relative; }
@@ -431,7 +448,6 @@ em { font-style: italic; color: var(--gold-light); }
 .lightbox-close { position: absolute; top: 1.2rem; right: 1.6rem; background: none; border: 0; color: var(--ivory); font-size: 2.4rem; line-height: 1; cursor: pointer; }
 .lightbox-close:hover { color: var(--blue); }
 @media (max-width: 860px) {
-  .badge-float { left: 0; }
   .testimonials, .banner { background-attachment: scroll; }
 }
 
