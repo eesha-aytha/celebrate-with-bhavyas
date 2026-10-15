@@ -3,17 +3,19 @@
    ========================================================== */
 
 :root {
-  --black: #0a0a0b;
-  --black-2: #111113;
-  --black-3: #1a1a1d;
+  /* Warm charcoal base (lighter than pure black, still rich) */
+  --bg-rgb: 30, 29, 34;
+  --black: rgb(var(--bg-rgb));
+  --black-2: #27262c;
+  --black-3: #323138;
   --gold: #c9a54c;
   --gold-light: #e6cc85;
   --gold-dark: #9c7c2f;
   --blue: #a8d8f0;
   --blue-soft: rgba(168, 216, 240, 0.12);
   --ivory: #f5f0e6;
-  --muted: #a8a39a;
-  --line: rgba(201, 165, 76, 0.22);
+  --muted: #b8b2a8;
+  --line: rgba(201, 165, 76, 0.28);
 
   --serif: "Cormorant Garamond", Georgia, serif;
   --sans: "Montserrat", system-ui, sans-serif;
@@ -115,7 +117,7 @@ em { font-style: italic; color: var(--gold-light); }
 .site-header::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
   opacity: 0; transition: opacity .4s;
-  background: rgba(10, 10, 11, .88); backdrop-filter: blur(12px);
+  background: rgba(var(--bg-rgb), .88); backdrop-filter: blur(12px);
 }
 .site-header.scrolled {
   padding: .8rem 0;
@@ -270,7 +272,7 @@ em { font-style: italic; color: var(--gold-light); }
 /* ---------- Testimonials ---------- */
 .testimonials {
   background:
-    linear-gradient(rgba(10,10,11,.88), rgba(10,10,11,.94)),
+    linear-gradient(rgba(var(--bg-rgb), .88), rgba(var(--bg-rgb), .94)),
     url("images/floral-stage.jpg") center / cover fixed;
 }
 
@@ -378,7 +380,7 @@ em { font-style: italic; color: var(--gold-light); }
 .hero-bg {
   position: absolute; inset: 0;
   background:
-    linear-gradient(90deg, rgba(10,10,11,.96) 0%, rgba(10,10,11,.82) 45%, rgba(10,10,11,.45) 100%),
+    linear-gradient(90deg, rgba(var(--bg-rgb), .96) 0%, rgba(var(--bg-rgb), .82) 45%, rgba(var(--bg-rgb), .45) 100%),
     linear-gradient(0deg, var(--black) 0%, transparent 35%),
     url("images/hero-night-dinner.jpg") center / cover;
   animation: slowzoom 30s ease-in-out infinite alternate;
@@ -405,7 +407,7 @@ em { font-style: italic; color: var(--gold-light); }
 }
 .portrait-frame::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(180deg, transparent 55%, rgba(10,10,11,.92));
+  background: linear-gradient(180deg, transparent 55%, rgba(var(--bg-rgb), .92));
 }
 .portrait figcaption {
   position: absolute; left: 8px; right: 8px; bottom: 8px; z-index: 1;
@@ -436,7 +438,7 @@ em { font-style: italic; color: var(--gold-light); }
 .banner {
   padding: clamp(6rem, 14vw, 10rem) 0; text-align: center; position: relative;
   background:
-    linear-gradient(rgba(10,10,11,.72), rgba(10,10,11,.8)),
+    linear-gradient(rgba(var(--bg-rgb), .72), rgba(var(--bg-rgb), .8)),
     url("images/mehndi-hands.jpg") center / cover fixed;
   border-block: 1px solid var(--line);
 }
@@ -451,7 +453,7 @@ em { font-style: italic; color: var(--gold-light); }
 .g-item figcaption {
   position: absolute; left: 0; right: 0; bottom: 0; padding: 2.4rem 1.2rem 1rem;
   font-size: .7rem; letter-spacing: .25em; text-transform: uppercase; color: var(--ivory);
-  background: linear-gradient(transparent, rgba(10,10,11,.9));
+  background: linear-gradient(transparent, rgba(var(--bg-rgb), .9));
   opacity: 0; transform: translateY(10px); transition: .5s var(--ease);
 }
 .g-item figcaption::before { content: ""; display: block; width: 24px; height: 1px; background: var(--blue); margin-bottom: .6rem; }
@@ -462,7 +464,7 @@ em { font-style: italic; color: var(--gold-light); }
 /* Lightbox */
 .lightbox {
   position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 2rem;
-  background: rgba(10,10,11,.94); backdrop-filter: blur(6px);
+  background: rgba(var(--bg-rgb), .94); backdrop-filter: blur(6px);
   opacity: 0; pointer-events: none; transition: opacity .4s;
 }
 .lightbox.open { opacity: 1; pointer-events: auto; }
@@ -478,7 +480,7 @@ em { font-style: italic; color: var(--gold-light); }
 .rating-badge {
   display: flex; align-items: center; gap: 1rem; width: fit-content; margin: -1.5rem auto 3.5rem;
   padding: .9rem 1.6rem; border: 1px solid var(--line); border-radius: 999px;
-  background: rgba(17,17,19,.7); backdrop-filter: blur(8px); transition: border-color .4s, transform .4s var(--ease);
+  background: rgba(39, 38, 44, .75); backdrop-filter: blur(8px); transition: border-color .4s, transform .4s var(--ease);
 }
 .rating-badge:hover { border-color: var(--gold); transform: translateY(-2px); }
 .rating-badge svg { width: 28px; height: 28px; }
@@ -491,7 +493,7 @@ em { font-style: italic; color: var(--gold-light); }
 .review {
   margin: 0; padding: 2.2rem 2rem 1.8rem; position: relative; overflow: hidden;
   display: flex; flex-direction: column; gap: 1.2rem;
-  background: linear-gradient(160deg, rgba(26,26,29,.92), rgba(12,12,13,.92));
+  background: linear-gradient(160deg, rgba(50, 49, 56, .92), rgba(var(--bg-rgb), .92));
   border: 1px solid var(--line); border-radius: var(--radius);
   transition: transform .5s var(--ease), border-color .5s, box-shadow .5s;
 }
@@ -513,7 +515,7 @@ em { font-style: italic; color: var(--gold-light); }
   width: 42px; height: 42px; flex-shrink: 0; display: grid; place-items: center; border-radius: 50%;
   background: var(--gold-grad); color: var(--black); font-family: var(--serif); font-size: 1.3rem; font-weight: 600;
 }
-.review-featured { grid-column: span 2; border-color: rgba(201,165,76,.5); background: linear-gradient(140deg, rgba(201,165,76,.14), rgba(12,12,13,.95) 55%, rgba(168,216,240,.08)); }
+.review-featured { grid-column: span 2; border-color: rgba(201,165,76,.5); background: linear-gradient(140deg, rgba(201,165,76,.14), rgba(var(--bg-rgb), .95) 55%, rgba(168,216,240,.08)); }
 .review-featured blockquote { font-size: clamp(1.4rem, 2.2vw, 1.75rem); font-style: italic; }
 .review-featured::before { font-size: 14rem; top: -2.6rem; color: rgba(201,165,76,.2); }
 .reviews-more { text-align: center; margin-top: 3rem; }
