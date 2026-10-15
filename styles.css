@@ -456,6 +456,7 @@ em { font-style: italic; color: var(--gold-light); }
 }
 .g-item figcaption::before { content: ""; display: block; width: 24px; height: 1px; background: var(--blue); margin-bottom: .6rem; }
 .g-item:hover img { transform: scale(1.05); filter: brightness(1); }
+.g-portrait img { aspect-ratio: 4 / 5; object-fit: cover; }
 .g-item:hover figcaption { opacity: 1; transform: none; }
 @media (hover: none) { .g-item figcaption { opacity: 1; transform: none; } }
 

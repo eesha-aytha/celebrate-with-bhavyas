@@ -10,7 +10,7 @@ Website for Celebrate with Bhavya's, a luxury event planning business. It's a pl
 
 ## Filling in your details
 
-Content (services, about, founders, contact details) and the photos in `images/` come from bhavyas.events. Reviews come from the business's Google listing.
+Content (services, about, founders, contact details) and the photos in `images/` come from bhavyas.events and the @celebratewithbhavyas Instagram (files starting with `ig-`, taken from reel covers at 360×640). Reviews come from the business's Google listing.
 
 - **Photos:** add new photos to `images/`, then copy a `<figure class="g-item">` line in the Gallery section of `index.html` and change its `src`, `alt` and caption.
 - **Reviews:** each review is a `<figure class="review">` in the Kind Words section; copy one to add another.
