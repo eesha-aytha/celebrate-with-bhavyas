@@ -118,14 +118,25 @@ em { font-style: italic; color: var(--gold-light); }
 }
 .nav { display: flex; align-items: center; justify-content: space-between; }
 
-.logo { display: flex; align-items: center; gap: .8rem; }
-.logo-mark {
-  width: 42px; height: 42px; display: grid; place-items: center;
-  font-family: var(--serif); font-size: 1.5rem; font-style: italic;
-  border: 1px solid var(--gold); border-radius: 50%; color: var(--gold-light);
+.logo { display: flex; align-items: center; gap: .85rem; }
+.logo-emblem { width: 52px; height: 52px; flex-shrink: 0; transition: transform .8s var(--ease); }
+.logo:hover .logo-emblem { transform: rotate(-8deg); }
+.logo-words { display: grid; justify-items: center; line-height: 1; font-family: "Cinzel", var(--serif); }
+.logo-top {
+  display: flex; align-items: center; gap: .45rem;
+  font-size: .52rem; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: var(--blue);
 }
-.logo-text { font-family: var(--serif); font-size: 1.35rem; letter-spacing: .02em; }
-.logo-text em { font-size: 1.1rem; color: var(--blue); }
+.logo-top::before, .logo-top::after { content: ""; width: 14px; height: 1px; background: var(--blue); }
+.logo-name {
+  font-size: 1.55rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin: .2rem 0 .25rem;
+  background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.logo-tag { font-size: .44rem; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--blue); }
+.site-header.scrolled .logo-emblem { width: 44px; height: 44px; }
+.logo-lg .logo-emblem { width: 64px; height: 64px; }
+.logo-lg .logo-name { font-size: 1.9rem; }
+.logo-lg .logo-top { font-size: .6rem; }
+.logo-lg .logo-tag { font-size: .52rem; }
 
 .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
 .nav-links a:not(.btn) {
@@ -323,7 +334,8 @@ em { font-style: italic; color: var(--gold-light); }
   .gallery-grid { columns: 1; }
   .banner { background-attachment: scroll; }
         .hero-stats { gap: 1.8rem; }
-  .logo-text { font-size: 1.1rem; }
+  .logo-emblem { width: 44px; height: 44px; }
+  .logo-name { font-size: 1.3rem; }
   .contact-list li { flex-direction: column; gap: .2rem; }
 }
 
@@ -500,4 +512,8 @@ em { font-style: italic; color: var(--gold-light); }
   .review-grid { grid-template-columns: 1fr; }
   .review-featured { grid-column: auto; }
   .rating-badge { margin-top: -1rem; }
+}
+@media (min-width: 861px) and (max-width: 1180px) {
+  .nav-links { gap: 1.3rem; }
+  .nav-links a:not(.btn) { letter-spacing: .12em; }
 }

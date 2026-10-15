@@ -7,7 +7,7 @@
   <meta name="description" content="Celebrate with Bhavya's creates unforgettable weddings, graduations, birthdays, cultural ceremonies and corporate events in Farmington Hills, Michigan.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,8 +16,18 @@
   <header class="site-header" id="top">
     <nav class="nav container">
       <a href="#top" class="logo" aria-label="Celebrate with Bhavya's home">
-        <span class="logo-mark">B</span>
-        <span class="logo-text">Celebrate <em>with</em> Bhavya's</span>
+        <svg class="logo-emblem" viewBox="0 0 100 100" aria-hidden="true">
+          <defs><linearGradient id="logo-gold-h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ecd48f"/><stop offset=".5" stop-color="#c9a54c"/><stop offset="1" stop-color="#9c7c2f"/></linearGradient></defs>
+          <circle cx="50" cy="50" r="47" fill="none" stroke="#a8d8f0" stroke-width="3.5"/>
+          <circle cx="50" cy="50" r="40" fill="url(#logo-gold-h)"/>
+          <text x="51" y="67" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="50" fill="#0a0a0b">B</text>
+          <path d="M27 76c9 6 20 4 29-1s17-6 23-1" fill="none" stroke="#0a0a0b" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-words">
+          <span class="logo-top">Celebrate with</span>
+          <span class="logo-name">Bhavya&rsquo;s</span>
+          <span class="logo-tag">We Create! You Celebrate!!</span>
+        </span>
       </a>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -335,11 +345,21 @@
   <!-- ===== Footer ===== -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <a href="#top" class="logo">
-        <span class="logo-mark">B</span>
-        <span class="logo-text">Celebrate <em>with</em> Bhavya's</span>
+      <a href="#top" class="logo logo-lg" aria-label="Celebrate with Bhavya's home">
+        <svg class="logo-emblem" viewBox="0 0 100 100" aria-hidden="true">
+          <defs><linearGradient id="logo-gold-f" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ecd48f"/><stop offset=".5" stop-color="#c9a54c"/><stop offset="1" stop-color="#9c7c2f"/></linearGradient></defs>
+          <circle cx="50" cy="50" r="47" fill="none" stroke="#a8d8f0" stroke-width="3.5"/>
+          <circle cx="50" cy="50" r="40" fill="url(#logo-gold-f)"/>
+          <text x="51" y="67" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="50" fill="#0a0a0b">B</text>
+          <path d="M27 76c9 6 20 4 29-1s17-6 23-1" fill="none" stroke="#0a0a0b" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-words">
+          <span class="logo-top">Celebrate with</span>
+          <span class="logo-name">Bhavya&rsquo;s</span>
+          <span class="logo-tag">We Create! You Celebrate!!</span>
+        </span>
       </a>
-      <p>We Create! You Celebrate!! &middot; &copy; <span id="year"></span> Celebrate with Bhavya's</p>
+      <p>&copy; <span id="year"></span> Celebrate with Bhavya's &middot; Farmington Hills, Michigan</p>
     </div>
   </footer>
 
