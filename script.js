@@ -31,7 +31,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // Contact form: opens the visitor's email app with the details filled in.
 // To receive submissions directly, connect a form service (see README).
-const CONTACT_EMAIL = 'celebratewithbhavyas@gmail.com';
+const CONTACT_EMAIL = 'hi@bhavyasevents.com';
 const form = document.getElementById('contact-form');
 form.addEventListener('submit', e => {
   e.preventDefault();
