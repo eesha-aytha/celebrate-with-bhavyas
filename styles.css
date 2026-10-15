@@ -124,7 +124,8 @@ em { font-style: italic; color: var(--gold-light); }
 .site-header.scrolled::before { opacity: 1; }
 .nav { display: flex; align-items: center; justify-content: space-between; }
 
-.logo { display: flex; align-items: center; gap: .85rem; }
+.logo { display: flex; align-items: center; gap: .85rem; flex-shrink: 0; }
+.nav-links a { white-space: nowrap; }
 .logo-emblem { width: 52px; height: 52px; flex-shrink: 0; transition: transform .8s var(--ease); }
 .logo:hover .logo-emblem { transform: rotate(-8deg); }
 .logo-words { display: grid; justify-items: center; line-height: 1; font-family: "Cinzel", var(--serif); }
@@ -146,7 +147,7 @@ em { font-style: italic; color: var(--gold-light); }
 
 .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
 .nav-links a:not(.btn) {
-  font-size: .8rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--ivory);
+  font-family: var(--serif); font-size: 1.08rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ivory);
   position: relative; padding: .3rem 0; transition: color .3s;
   text-shadow: 0 1px 12px rgba(0,0,0,.6);
 }
@@ -156,7 +157,7 @@ em { font-style: italic; color: var(--gold-light); }
 }
 .nav-links a:not(.btn):hover, .nav-links a.active { color: var(--gold-light); }
 .nav-links a:not(.btn):hover::after, .nav-links a.active::after { width: 100%; }
-.nav-links .btn-outline { font-weight: 600; border-width: 1.5px; }
+.nav-links .btn-outline { font-family: var(--serif); font-size: .92rem; font-weight: 600; letter-spacing: .16em; border-width: 1.5px; }
 
 .nav-toggle { display: none; background: none; border: 0; cursor: pointer; width: 32px; height: 24px; position: relative; }
 .nav-toggle span { position: absolute; left: 0; width: 100%; height: 1px; background: var(--gold-light); transition: .3s; }
@@ -318,8 +319,9 @@ em { font-style: italic; color: var(--gold-light); }
   .steps::before { display: none; }
 }
 
-@media (max-width: 860px) {
-  .nav-toggle { display: block; }
+/* Slide-out menu once the full menu no longer fits beside the logo */
+@media (max-width: 980px) {
+  .nav-toggle { display: block; z-index: 60; }
   .nav-links {
     position: fixed; inset: 0 0 0 auto; width: min(320px, 85vw);
     flex-direction: column; justify-content: center; gap: 2rem;
@@ -327,8 +329,11 @@ em { font-style: italic; color: var(--gold-light); }
     transform: translateX(100%); transition: transform .5s var(--ease);
   }
   .nav-links.open { transform: none; }
-  .nav-toggle { z-index: 60; }
+  .nav-links a:not(.btn) { font-size: 1.35rem; letter-spacing: .14em; }
+  .nav-links .btn-outline { padding: .6rem 1.2rem; font-size: .92rem; }
+}
 
+@media (max-width: 860px) {
   .about-grid, .contact-grid { grid-template-columns: 1fr; }
     .hero-glow { width: 320px; height: 320px; right: -160px; }
   .about-visual { max-width: 520px; }
@@ -519,9 +524,10 @@ em { font-style: italic; color: var(--gold-light); }
   .review-featured { grid-column: auto; }
   .rating-badge { margin-top: -1rem; }
 }
-@media (min-width: 861px) and (max-width: 1180px) {
-  .nav-links { gap: 1.3rem; }
-  .nav-links a:not(.btn) { letter-spacing: .12em; }
+@media (min-width: 981px) and (max-width: 1180px) {
+  .nav-links { gap: 1.1rem; }
+  .nav-links a:not(.btn) { font-size: .95rem; letter-spacing: .08em; }
+  .nav-links .btn-outline { padding: .55rem .9rem; font-size: .8rem; letter-spacing: .1em; }
 }
 
 /* Gallery columns on smaller screens (kept last so they win) */
