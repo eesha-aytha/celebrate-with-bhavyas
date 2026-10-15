@@ -10,10 +10,10 @@ Website for Celebrate with Bhavya's, a luxury event planning business. It's a pl
 
 ## Filling in your details
 
-Content (services, about, founders, testimonial, contact details) comes from bhavyas.events. What's still placeholder:
+Content (services, about, founders, contact details) and the photos in `images/` come from bhavyas.events. Reviews come from the business's Google listing.
 
-- **Photos:** the founders photo and gallery tiles are placeholders. To fill them, create an `images/` folder, add your photos, and replace each
-  `<div class="img-placeholder" ...></div>` with `<img src="images/your-photo.jpg" alt="Description">`.
+- **Photos:** add new photos to `images/`, then copy a `<figure class="g-item">` line in the Gallery section of `index.html` and change its `src`, `alt` and caption.
+- **Reviews:** each review is a `<figure class="review">` in the Kind Words section; copy one to add another.
 - **Form submissions:** the form currently opens the visitor's email app. To receive inquiries directly, sign up for a free form service such as Formspree and point the form at it.
 
 ## Publishing with GitHub Pages

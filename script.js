@@ -29,25 +29,6 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Testimonial slider
-const slides = document.querySelectorAll('.testimonial');
-const dots = document.querySelectorAll('.dot');
-let current = 0;
-const show = i => {
-  slides[current].classList.remove('active');
-  dots[current]?.classList.remove('active');
-  current = i;
-  slides[current].classList.add('active');
-  dots[current]?.classList.add('active');
-};
-dots.forEach((dot, i) => dot.addEventListener('click', () => { show(i); restart(); }));
-let timer;
-const restart = () => {
-  clearInterval(timer);
-  if (slides.length > 1) timer = setInterval(() => show((current + 1) % slides.length), 6000);
-};
-restart();
-
 // Contact form: opens the visitor's email app with the details filled in.
 // To receive submissions directly, connect a form service (see README).
 const CONTACT_EMAIL = 'celebratewithbhavyas@gmail.com';
@@ -69,5 +50,22 @@ form.addEventListener('submit', e => {
   window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   form.querySelector('.form-note').textContent = 'Thank you! Your email app should open so you can send your inquiry.';
 });
+
+// Gallery lightbox
+const lightbox = document.querySelector('.lightbox');
+const lbImg = lightbox.querySelector('img');
+const lbCap = lightbox.querySelector('p');
+document.querySelectorAll('.g-item').forEach(item =>
+  item.addEventListener('click', () => {
+    const img = item.querySelector('img');
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+    lbCap.textContent = item.querySelector('figcaption').textContent;
+    lightbox.classList.add('open');
+  })
+);
+const closeLightbox = () => lightbox.classList.remove('open');
+lightbox.addEventListener('click', e => { if (e.target !== lbImg) closeLightbox(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
 document.getElementById('year').textContent = new Date().getFullYear();
