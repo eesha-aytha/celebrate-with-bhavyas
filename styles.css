@@ -323,7 +323,6 @@ em { font-style: italic; color: var(--gold-light); }
 
   .about-grid, .contact-grid { grid-template-columns: 1fr; }
     .hero-glow { width: 320px; height: 320px; right: -160px; }
-  .gallery-grid { columns: 2; }
   .about-visual { max-width: 520px; }
 }
 
@@ -331,7 +330,6 @@ em { font-style: italic; color: var(--gold-light); }
   .container { width: calc(100% - 2rem); }
   .service-grid, .steps { grid-template-columns: 1fr; }
   .field-row { grid-template-columns: 1fr; }
-  .gallery-grid { columns: 1; }
   .banner { background-attachment: scroll; }
         .hero-stats { gap: 1.8rem; }
   .logo-emblem { width: 44px; height: 44px; }
@@ -517,3 +515,7 @@ em { font-style: italic; color: var(--gold-light); }
   .nav-links { gap: 1.3rem; }
   .nav-links a:not(.btn) { letter-spacing: .12em; }
 }
+
+/* Gallery columns on smaller screens (kept last so they win) */
+@media (max-width: 860px) { .gallery-grid { columns: 2; } }
+@media (max-width: 560px) { .gallery-grid { columns: 1; } }

@@ -18,6 +18,35 @@ links.querySelectorAll('a').forEach(a =>
   })
 );
 
+// In-page links: center the section's content in the space below the header.
+// Sections taller than that space start just under the header instead.
+const scrollToSection = target => {
+  // Center on the section's main block (e.g. About's story, not the mission below it)
+  const first = target.firstElementChild || target;
+  const last = first;
+  // offsetTop ignores the reveal animation's temporary shift
+  const pageTop = el => { let y = 0; for (; el; el = el.offsetParent) y += el.offsetTop; return y; };
+  const top = pageTop(first);
+  const bottom = pageTop(last) + last.offsetHeight;
+  const headerH = header.offsetHeight;
+  const space = window.innerHeight - headerH;
+  const height = bottom - top;
+  const y = height < space - 24
+    ? top - headerH - (space - height) / 2
+    : top - headerH - 24;
+  window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+};
+document.querySelectorAll('a[href^="#"]').forEach(link =>
+  link.addEventListener('click', e => {
+    const id = link.getAttribute('href').slice(1);
+    const target = id && document.getElementById(id);
+    if (!target || id === 'top') return;
+    e.preventDefault();
+    scrollToSection(target);
+    history.pushState(null, '', '#' + id);
+  })
+);
+
 // Reveal sections as they scroll into view
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
