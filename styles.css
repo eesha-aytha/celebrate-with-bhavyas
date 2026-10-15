@@ -121,14 +121,14 @@ em { font-style: italic; color: var(--gold-text); }
    would trap the fixed mobile menu inside the header's height */
 .site-header::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
-  background: rgba(var(--bg-rgb), .94); backdrop-filter: blur(12px);
-  box-shadow: 0 1px 0 var(--line);
+  background: rgba(18, 17, 20, .96); backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(201, 165, 76, .45);
 }
 .site-header.scrolled {
   padding: .8rem 0;
   border-bottom-color: var(--line);
 }
-.site-header.scrolled::before { box-shadow: 0 1px 0 var(--line), 0 10px 30px -20px rgba(31,29,34,.25); }
+.site-header.scrolled::before { box-shadow: 0 1px 0 rgba(201, 165, 76, .45), 0 10px 30px -18px rgba(18, 17, 20, .5); }
 .nav { display: flex; align-items: center; justify-content: space-between; }
 
 .logo { display: flex; align-items: center; gap: .85rem; flex-shrink: 0; }
@@ -550,4 +550,22 @@ em { font-style: italic; color: var(--gold-text); }
       linear-gradient(rgba(var(--bg-rgb), .9), rgba(var(--bg-rgb), .8) 60%, var(--bg)),
       url("images/floral-aisle.jpg") center 60% / cover;
   }
+}
+
+/* ---------- Black menu bar: light text and buttons ---------- */
+.site-header {
+  --hdr-text: #f5f0e6;
+  --hdr-gold: #e6cc85;
+  --hdr-blue: #a8d8f0;
+}
+.site-header .logo-name { background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; }
+.site-header .logo-top, .site-header .logo-tag { color: var(--hdr-blue); }
+.site-header .logo-top::before, .site-header .logo-top::after { background: var(--hdr-blue); }
+.site-header .nav-links a:not(.btn) { color: var(--hdr-text); }
+.site-header .nav-links a:not(.btn):hover, .site-header .nav-links a.active { color: var(--hdr-gold); }
+.site-header .btn-outline { border-color: var(--gold); color: var(--hdr-gold); background: transparent; }
+.site-header .btn-outline:hover { background: var(--gold-grad); color: var(--ink); border-color: var(--gold); }
+.site-header .nav-toggle span { background: var(--hdr-gold); }
+@media (max-width: 980px) {
+  .site-header .nav-links { background: #121114; border-left-color: rgba(201, 165, 76, .45); }
 }
