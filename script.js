@@ -106,9 +106,13 @@ const moreBtn = document.querySelector('.gallery-more button');
 if (galleryItems.length > GALLERY_START) {
   galleryItems.slice(GALLERY_START).forEach(item => item.classList.add('g-hidden'));
   moreBtn.hidden = false;
+  let expanded = false;
   moreBtn.addEventListener('click', () => {
-    galleryItems.forEach(item => item.classList.remove('g-hidden'));
-    moreBtn.hidden = true;
+    expanded = !expanded;
+    galleryItems.slice(GALLERY_START).forEach(item => item.classList.toggle('g-hidden', !expanded));
+    moreBtn.textContent = expanded ? 'Show less' : 'Show more photos';
+    // After collapsing, bring the gallery back into view so the page doesn't jump past it
+    if (!expanded) scrollToSection(document.getElementById('gallery'));
   });
 }
 
