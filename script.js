@@ -40,7 +40,14 @@ document.querySelectorAll('a[href^="#"]').forEach(link =>
   link.addEventListener('click', e => {
     const id = link.getAttribute('href').slice(1);
     const target = id && document.getElementById(id);
-    if (!target || id === 'top') return;
+    if (id === 'top') {
+      // Logo / company name: back to the top of the home page
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      history.pushState(null, '', location.pathname);
+      return;
+    }
+    if (!target) return;
     e.preventDefault();
     scrollToSection(target);
     history.pushState(null, '', '#' + id);
