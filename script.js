@@ -99,21 +99,54 @@ form.addEventListener('submit', e => {
   form.querySelector('.form-note').textContent = 'Thank you! Your email app should open so you can send your inquiry.';
 });
 
-// Gallery lightbox
+// Gallery: show the first 12 photos, with a button for the rest
+const GALLERY_START = 12;
+const galleryItems = [...document.querySelectorAll('.g-item')];
+const moreBtn = document.querySelector('.gallery-more button');
+if (galleryItems.length > GALLERY_START) {
+  galleryItems.slice(GALLERY_START).forEach(item => item.classList.add('g-hidden'));
+  moreBtn.hidden = false;
+  moreBtn.addEventListener('click', () => {
+    galleryItems.forEach(item => item.classList.remove('g-hidden'));
+    moreBtn.hidden = true;
+  });
+}
+
+// Gallery photo viewer: arrows, keyboard and swipe to flip through every photo
 const lightbox = document.querySelector('.lightbox');
 const lbImg = lightbox.querySelector('img');
 const lbCap = lightbox.querySelector('p');
-document.querySelectorAll('.g-item').forEach(item =>
-  item.addEventListener('click', () => {
-    const img = item.querySelector('img');
-    lbImg.src = img.src;
-    lbImg.alt = img.alt;
-    lbCap.textContent = item.querySelector('figcaption').textContent;
-    lightbox.classList.add('open');
-  })
+const lbCount = lightbox.querySelector('.lightbox-count');
+let lbIndex = 0;
+const showPhoto = i => {
+  lbIndex = (i + galleryItems.length) % galleryItems.length;
+  const item = galleryItems[lbIndex];
+  const img = item.querySelector('img');
+  lbImg.src = img.src;
+  lbImg.alt = img.alt;
+  lbCap.textContent = item.querySelector('figcaption').textContent;
+  lbCount.textContent = `${lbIndex + 1} / ${galleryItems.length}`;
+};
+galleryItems.forEach((item, i) =>
+  item.addEventListener('click', () => { showPhoto(i); lightbox.classList.add('open'); })
 );
 const closeLightbox = () => lightbox.classList.remove('open');
-lightbox.addEventListener('click', e => { if (e.target !== lbImg) closeLightbox(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+lightbox.querySelector('.lightbox-prev').addEventListener('click', () => showPhoto(lbIndex - 1));
+lightbox.querySelector('.lightbox-next').addEventListener('click', () => showPhoto(lbIndex + 1));
+lightbox.addEventListener('click', e => { if (e.target === lightbox || e.target.classList.contains('lightbox-close')) closeLightbox(); });
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') showPhoto(lbIndex - 1);
+  if (e.key === 'ArrowRight') showPhoto(lbIndex + 1);
+});
+let touchX = null;
+lightbox.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+lightbox.addEventListener('touchend', e => {
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 40) showPhoto(lbIndex + (dx < 0 ? 1 : -1));
+  touchX = null;
+});
 
 document.getElementById('year').textContent = new Date().getFullYear();
