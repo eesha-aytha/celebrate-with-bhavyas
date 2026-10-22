@@ -163,12 +163,19 @@ em { font-style: italic; color: var(--gold-text); }
   font-family: var(--serif); font-size: 1.08rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--text);
   position: relative; padding: .3rem 0; transition: color .3s;
 }
+/* Underline grows from the center and fades, so it can never be left as a sliver */
 .nav-links a:not(.btn)::after {
-  content: ""; position: absolute; left: 50%; bottom: -4px; width: 0; height: 2px; border-radius: 2px;
-  background: var(--gold-grad); transform: translateX(-50%); transition: width .35s var(--ease);
+  content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; border-radius: 2px;
+  background: var(--gold-grad); transform: scaleX(0); opacity: 0; transform-origin: center;
+  transition: transform .35s var(--ease), opacity .25s ease;
 }
-.nav-links a:not(.btn):hover, .nav-links a.active { color: var(--gold-text); }
-.nav-links a:not(.btn):hover::after, .nav-links a.active::after { width: 100%; }
+.nav-links a.active { color: var(--gold-text); }
+.nav-links a.active::after { transform: scaleX(1); opacity: 1; }
+/* Hover effect only on devices with a mouse (avoids "stuck" hover after a tap) */
+@media (hover: hover) {
+  .nav-links a:not(.btn):hover { color: var(--gold-text); }
+  .nav-links a:not(.btn):hover::after { transform: scaleX(1); opacity: 1; }
+}
 .nav-links .btn-outline { font-family: var(--serif); font-size: .92rem; font-weight: 600; letter-spacing: .16em; border-width: 1.5px; }
 
 .nav-toggle { display: none; background: none; border: 0; cursor: pointer; width: 32px; height: 24px; position: relative; }
@@ -566,7 +573,8 @@ em { font-style: italic; color: var(--gold-text); }
 .site-header .logo-top, .site-header .logo-tag { color: var(--hdr-blue); }
 .site-header .logo-top::before, .site-header .logo-top::after { background: var(--hdr-blue); }
 .site-header .nav-links a:not(.btn) { color: var(--hdr-text); }
-.site-header .nav-links a:not(.btn):hover, .site-header .nav-links a.active { color: var(--hdr-gold); }
+.site-header .nav-links a.active { color: var(--hdr-gold); }
+@media (hover: hover) { .site-header .nav-links a:not(.btn):hover { color: var(--hdr-gold); } }
 .site-header .btn-outline { border-color: var(--gold); color: var(--hdr-gold); background: transparent; }
 .site-header .btn-outline:hover { background: var(--gold-grad); color: var(--ink); border-color: var(--gold); }
 .site-header .nav-toggle span { background: var(--hdr-gold); }

@@ -54,17 +54,23 @@ document.querySelectorAll('a[href^="#"]').forEach(link =>
   })
 );
 
-// Highlight the menu link for the section currently on screen. Every section is
-// watched, so ones without a menu link (hero, banner, contact) clear the highlight.
+// Highlight the menu link for the section in the middle of the screen. It is
+// recalculated on every scroll, so fast scrolling can never leave one stuck;
+// sections without a menu link (hero, banner, contact) clear the highlight.
 const navLinks = [...document.querySelectorAll('.nav-links a:not(.btn)')];
-const spy = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    const hash = '#' + entry.target.id;
-    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === hash));
+const sections = [...document.querySelectorAll('main > section')];
+const updateActiveLink = () => {
+  const middle = window.innerHeight / 2;
+  const current = sections.find(s => {
+    const r = s.getBoundingClientRect();
+    return r.top <= middle && r.bottom > middle;
   });
-}, { rootMargin: '-45% 0px -50% 0px' });
-document.querySelectorAll('main > section').forEach(section => spy.observe(section));
+  const hash = current && current.id ? '#' + current.id : null;
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === hash));
+};
+window.addEventListener('scroll', updateActiveLink, { passive: true });
+window.addEventListener('resize', updateActiveLink);
+updateActiveLink();
 
 // Reveal sections as they scroll into view
 const observer = new IntersectionObserver(entries => {
