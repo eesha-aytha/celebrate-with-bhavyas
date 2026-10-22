@@ -47,21 +47,17 @@ document.querySelectorAll('a[href^="#"]').forEach(link =>
   })
 );
 
-// Highlight the menu link for the section currently on screen
+// Highlight the menu link for the section currently on screen. Every section is
+// watched, so ones without a menu link (hero, banner, contact) clear the highlight.
 const navLinks = [...document.querySelectorAll('.nav-links a:not(.btn)')];
 const spy = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
-    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+    const hash = '#' + entry.target.id;
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === hash));
   });
 }, { rootMargin: '-45% 0px -50% 0px' });
-navLinks.forEach(a => {
-  const section = document.querySelector(a.getAttribute('href'));
-  if (section) spy.observe(section);
-});
-document.querySelector('.hero') && new IntersectionObserver(([e]) => {
-  if (e.isIntersecting) navLinks.forEach(a => a.classList.remove('active'));
-}, { rootMargin: '-45% 0px -50% 0px' }).observe(document.querySelector('.hero'));
+document.querySelectorAll('main > section').forEach(section => spy.observe(section));
 
 // Reveal sections as they scroll into view
 const observer = new IntersectionObserver(entries => {
