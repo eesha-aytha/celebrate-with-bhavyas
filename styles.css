@@ -712,3 +712,19 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
   .extra-day label:first-child { grid-column: 1 / -1; }
   .form-step legend { font-size: 1.35rem; }
 }
+
+/* ---------- Top-bar "Get a Quote" button: rounded gold pill ---------- */
+.site-header .nav-cta {
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .7rem 1.4rem .7rem 1.6rem; border: 0; border-radius: 999px;
+  background: var(--gold-grad); color: var(--ink);
+  font-family: var(--sans); font-size: .74rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  box-shadow: 0 8px 22px -10px rgba(230, 204, 133, .75);
+  transition: transform .35s var(--ease), box-shadow .35s, filter .35s;
+}
+.site-header .nav-cta svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .35s var(--ease); }
+.site-header .nav-cta:hover { transform: translateY(-2px); filter: brightness(1.06); box-shadow: 0 14px 30px -12px rgba(230, 204, 133, .9); }
+.site-header .nav-cta:hover svg { transform: translateX(4px); }
+@media (min-width: 981px) and (max-width: 1180px) {
+  .site-header .nav-cta { padding: .6rem 1rem .6rem 1.2rem; font-size: .68rem; letter-spacing: .08em; }
+}
