@@ -5,7 +5,7 @@ Website for Celebrate with Bhavya's, a luxury event planning business. It's a pl
 ## Files
 
 - `index.html`: page content and sections
-- `styles.css`: white, gold and light-blue theme
+- `styles.css`: gold and light-blue theme on white, soft blue and champagne sections, with dark accent bands
 - `script.js`: menu, scroll animations, testimonial slider, contact form
 
 ## Filling in your details

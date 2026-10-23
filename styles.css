@@ -858,15 +858,49 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .avatar { font-family: var(--sans); font-size: 1rem; font-weight: 600; color: #fff; background: var(--gold-text-grad); }
 .review:hover { border-color: #e2d5b5; box-shadow: 0 26px 50px -30px rgba(143, 108, 30, .4); }
 
-/* Featured review: dark card so it stands out */
-.review-featured { background: #17161a; border-color: #17161a; }
-.review-featured blockquote { font-family: var(--sans); font-style: normal; font-size: clamp(1.05rem, 1.5vw, 1.2rem); font-weight: 400; line-height: 1.75; color: rgba(255, 255, 255, .92); }
-.review-featured .q-mark { background: rgba(212, 176, 98, .16); }
-.review-featured .q-mark svg { fill: #e6cc85; }
-.review-featured .review-tag { background: rgba(255, 255, 255, .1); color: #f5f0e6; }
-.review-featured .stars { color: #e6cc85; }
-.review-featured figcaption { border-top-color: rgba(255, 255, 255, .12); }
-.review-featured figcaption strong { color: #fff; }
-.review-featured figcaption small { color: rgba(255, 255, 255, .6); }
-.review-featured .avatar { background: var(--gold-grad); color: #17161a; }
-.review-featured:hover { border-color: #17161a; box-shadow: 0 30px 60px -28px rgba(18, 17, 20, .6); }
+
+/* ---------- Color rhythm: soft blue, cream and a dark accent band ---------- */
+:root {
+  --tint-blue: #e9f3f9;      /* soft light-blue section */
+  --tint-cream: #f8f2e4;     /* warm champagne section */
+  --night: #17161a;          /* dark accent, same as the menu bar */
+}
+.about { background: linear-gradient(180deg, var(--tint-blue), #f3f8fb); }
+.about .founders > div { background: #fff; }
+.services { background: #fff; }
+.full-service { background: var(--tint-cream); border-color: #eadfc4; box-shadow: none; }
+
+/* How It Works: dark band with gold */
+.process { background: radial-gradient(ellipse at 50% 0%, #2a2620, var(--night) 70%); border-top: 0 !important; }
+.process .section-head h2, .process .step h3 { color: #fff; }
+.process .eyebrow { --label: #a8d8f0; }
+.process .step p { color: rgba(255, 255, 255, .72); }
+.process .step-num { background: var(--night); border-color: #d4b062; color: #e6cc85; box-shadow: 0 0 0 6px rgba(212, 176, 98, .08); }
+.process .steps::before { background: linear-gradient(90deg, transparent, #d4b062, #a8d8f0, transparent); }
+.process + .banner { border-top: 0; }
+
+/* Gallery: crisp white so the photos lead; featured block in champagne */
+.gallery { background: #fff; }
+.g-feature { background: var(--tint-cream); border-color: #eadfc4; }
+
+/* Kind Words: soft blue, every card the same, gold accent on top */
+.testimonials { background: linear-gradient(180deg, var(--tint-blue), #f4f9fc); }
+.review { border-color: #dfeaf1; border-top: 3px solid #d4b062; }
+.review-featured { background: #fff; }
+.review-featured blockquote { font-size: clamp(1.02rem, 1.4vw, 1.12rem); }
+.review-tag { background: var(--tint-blue); color: var(--label); }
+.q-mark { background: #f6efdd; }
+
+/* Get a Quote: warm champagne behind the white form */
+.contact { background: linear-gradient(180deg, var(--tint-cream), #fbf7ee); }
+.contact-card { background: #fff; }
+
+/* Footer matches the dark menu bar */
+.site-footer { background: var(--night); border-top: 1px solid rgba(209, 160, 84, .25); }
+.site-footer p { color: rgba(255, 255, 255, .65); }
+.site-footer .logo-name { background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; }
+.site-footer .logo-top, .site-footer .logo-tag { color: #a8d8f0; }
+.site-footer .logo-top::before, .site-footer .logo-top::after { background: #a8d8f0; }
+.section + .section { border-top: 0; }
+.contact, .g-feature, .full-service { --gold-text: #7f5f17; }
+.step-num, .hero-stats strong { font-variant-numeric: lining-nums; }
