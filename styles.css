@@ -296,10 +296,6 @@ em { font-style: italic; color: var(--gold-text); }
 /* ---------- Contact ---------- */
 .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(3rem, 7vw, 6rem); align-items: start; }
 .contact-copy > p:not(.eyebrow) { color: var(--muted); }
-.contact-list { list-style: none; margin-top: 2.4rem; }
-.contact-list li { display: flex; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
-.contact-list span { width: 100px; flex-shrink: 0; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-text); padding-top: .2rem; }
-.contact-list a:hover { color: var(--gold-text); }
 
 .contact-form { background: var(--bg-alt); border: 1px solid var(--line); box-shadow: var(--shadow); padding: clamp(1.6rem, 4vw, 3rem); display: grid; gap: 1.3rem; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; }
@@ -365,8 +361,7 @@ em { font-style: italic; color: var(--gold-text); }
         .hero-stats { gap: 1.8rem; }
   .logo-emblem { width: 44px; height: 44px; }
   .logo-name { font-size: 1.3rem; }
-  .contact-list li { flex-direction: column; gap: .2rem; }
-}
+  }
 
 /* ---------- Founders, mission & full service list ---------- */
 .founders { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
@@ -384,7 +379,6 @@ em { font-style: italic; color: var(--gold-text); }
 .service-list li { break-inside: avoid; padding: .6rem 0 .6rem 1.4rem; position: relative; font-size: .92rem; color: var(--text); border-bottom: 1px solid rgba(201,165,76,.1); }
 .service-list li::before { content: "◆"; position: absolute; left: 0; top: .75rem; font-size: .55rem; color: var(--blue-text); }
 
-.socials { display: flex; gap: 1.2rem; width: auto; letter-spacing: normal; text-transform: none; font-size: 1rem; color: var(--text); padding: 0; }
 
 @media (max-width: 860px) { .service-list { columns: 2; } }
 @media (max-width: 560px) {
@@ -634,3 +628,36 @@ em { font-style: italic; color: var(--gold-text); }
 .contact-form select option { color: var(--text); }
 .char-count { justify-self: end; font-size: .72rem; letter-spacing: .05em; color: var(--muted); }
 .form-note.error { color: #b4232f; }
+
+/* ---------- Contact details: icon cards ---------- */
+.contact-cards { list-style: none; margin-top: 2.4rem; display: grid; gap: 1rem; }
+.contact-card {
+  display: flex; align-items: center; gap: 1.2rem; padding: 1.15rem 1.4rem;
+  background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--gold);
+  border-radius: var(--radius); box-shadow: var(--shadow); color: var(--text);
+  transition: transform .4s var(--ease), box-shadow .4s, border-color .4s;
+}
+a.contact-card:hover { transform: translateX(6px); border-color: var(--gold); box-shadow: 0 22px 44px -26px rgba(143, 108, 30, .45); }
+.ci-icon {
+  width: 50px; height: 50px; flex-shrink: 0; display: grid; place-items: center; border-radius: 50%;
+  background: var(--gold-grad); box-shadow: 0 6px 16px -6px rgba(156, 124, 47, .6);
+}
+.ci-icon svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.ci-text { display: grid; gap: .2rem; min-width: 0; }
+.ci-label { font-size: .7rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--label); }
+.ci-value { font-family: var(--serif); font-variant-numeric: lining-nums; font-size: 1.4rem; font-weight: 600; line-height: 1.25; color: var(--text); overflow-wrap: anywhere; }
+a.contact-card:hover .ci-value { color: var(--gold-text); }
+.ci-socials { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .3rem; }
+.ci-socials a {
+  display: inline-flex; align-items: center; gap: .45rem; padding: .45rem 1rem;
+  border: 1px solid var(--gold); border-radius: 999px; font-size: .78rem; font-weight: 600; letter-spacing: .08em;
+  color: var(--gold-text); transition: background .3s, color .3s;
+}
+.ci-socials svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ci-socials .dot { fill: currentColor; stroke: none; }
+.ci-socials a:hover { background: var(--gold-grad); color: var(--ink); }
+@media (max-width: 560px) {
+  .contact-card { padding: 1rem 1.1rem; gap: 1rem; }
+  .ci-icon { width: 44px; height: 44px; }
+  .ci-value { font-size: 1.2rem; }
+}
