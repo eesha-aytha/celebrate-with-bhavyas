@@ -787,12 +787,11 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 }
 .g-cat { font-size: .6rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #e6cc85; }
 .g-title { font-family: var(--serif); font-size: 1.2rem; line-height: 1.2; color: #fff; }
-.g-event { font-size: .7rem; letter-spacing: .04em; color: rgba(255, 255, 255, .78); }
 .g-item:hover img { transform: scale(1.05); }
 .g-item:hover figcaption, .g-item:focus-within figcaption { opacity: 1; transform: none; }
 @media (hover: none) {
   .g-item figcaption { opacity: 1; transform: none; padding: 2.2rem .8rem .7rem; }
-  .g-cat, .g-event { display: none; }
+  .g-cat { display: none; }
   .g-title { font-size: 1rem; }
 }
 

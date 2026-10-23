@@ -267,7 +267,7 @@ const showPhoto = i => {
   const img = item.querySelector('img');
   lbImg.src = img.src;
   lbImg.alt = img.alt;
-  lbCap.textContent = `${item.querySelector('.g-title').textContent} · ${item.querySelector('.g-event').textContent}`;
+  lbCap.textContent = item.querySelector('.g-title').textContent;
   lbCount.textContent = `${lbIndex + 1} / ${lbList.length}`;
 };
 galleryItems.forEach(item =>
