@@ -971,3 +971,6 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 
 /* "Send My Request": same rounded pill shape as the Get a Quote buttons */
 .quote-form button[type="submit"] { border-radius: 999px; border: 0; }
+
+/* Form field labels in the site's section-label blue */
+.contact-form .label-text { color: var(--label); font-weight: 600; }
