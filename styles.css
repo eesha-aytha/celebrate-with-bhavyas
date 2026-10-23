@@ -661,3 +661,54 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
   .ci-icon { width: 44px; height: 44px; }
   .ci-value { font-size: 1.2rem; }
 }
+
+/* ---------- Get a Quote form: steps, service chips, extra days ---------- */
+.quote-form { gap: 2rem; }
+.form-step { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 1.2rem; }
+.form-step legend {
+  display: flex; align-items: center; gap: .8rem; width: 100%; padding: 0 0 .9rem; margin-bottom: .4rem;
+  font-family: var(--serif); font-size: 1.55rem; font-weight: 600; color: var(--text);
+  border-bottom: 1px solid var(--line);
+}
+.step-no {
+  width: 34px; height: 34px; flex-shrink: 0; display: grid; place-items: center; border-radius: 50%;
+  background: var(--gold-grad); color: #fff; font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .05em;
+}
+.label-text { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.field-hint { font-size: .74rem; letter-spacing: .01em; text-transform: none; color: var(--muted); line-height: 1.5; }
+.chip-group, .extra-days { display: grid; gap: .5rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: .3rem; }
+.chip { cursor: pointer; display: inline-flex !important; }
+.chip input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.chip span {
+  display: inline-flex; align-items: center; gap: .4rem; padding: .5rem .95rem; border-radius: 999px;
+  border: 1px solid var(--border); background: #fdfcfa; color: var(--text);
+  font-size: .8rem; letter-spacing: .01em; text-transform: none; transition: all .25s;
+}
+.chip span::before { content: "+"; font-weight: 600; color: var(--gold-text); }
+.chip:hover span { border-color: var(--gold); }
+.chip input:checked + span { background: var(--gold-grad); border-color: var(--gold); color: var(--ink); font-weight: 600; }
+.chip input:checked + span::before { content: "✓"; color: var(--ink); }
+.chip input:focus-visible + span { outline: 2px solid var(--label); outline-offset: 2px; }
+.chip-group.invalid .chip span { border-color: #e4a8ad; }
+.extra-days-list { display: grid; gap: .8rem; }
+.extra-day { display: grid; grid-template-columns: 1fr 1fr auto; gap: .8rem; align-items: end; padding: .9rem; background: #fbf8f1; border: 1px dashed var(--line); border-radius: var(--radius); }
+.remove-day { width: 40px; height: 46px; border: 1px solid var(--border); background: #fff; border-radius: var(--radius); font-size: 1.4rem; color: var(--muted); cursor: pointer; }
+.remove-day:hover { color: #b4232f; border-color: #b4232f; }
+.add-day {
+  justify-self: start; padding: .55rem 1.1rem; border: 1px dashed var(--gold); border-radius: 999px; background: transparent;
+  font-family: var(--sans); font-size: .76rem; font-weight: 600; letter-spacing: .1em; color: var(--gold-text); cursor: pointer;
+}
+.add-day:hover { background: rgba(201, 165, 76, .1); }
+.form-alt { text-align: center; font-size: .85rem; color: var(--muted); margin-top: -1rem; }
+.form-alt a { color: var(--gold-text); font-weight: 600; }
+
+/* Long form: keep contact cards in view beside it on desktop */
+@media (min-width: 861px) {
+  .contact-copy { position: sticky; top: 110px; }
+}
+@media (max-width: 560px) {
+  .extra-day { grid-template-columns: 1fr auto; }
+  .extra-day label:first-child { grid-column: 1 / -1; }
+  .form-step legend { font-size: 1.35rem; }
+}

@@ -83,80 +83,142 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Contact form: checks every required field, then opens the visitor's email app
-// with the details filled in. To receive submissions directly, connect a form
-// service (see README).
+// Quote form: checks every required field, then opens the visitor's email app
+// with a summary of their request. To receive requests directly, connect a
+// form service (see README).
 const CONTACT_EMAIL = 'hi@bhavyasevents.com';
 const form = document.getElementById('contact-form');
+const DATE_MSGS = { valueMissing: 'Please choose your event date.', rangeUnderflow: 'Please choose a date from today onward.', rangeOverflow: 'Please choose a date within the next 3 years.' };
 const MESSAGES = {
-  name: { valueMissing: 'Please enter your name.', tooShort: 'Please enter at least 2 characters.' },
-  phone: { valueMissing: 'Please enter your phone number.', patternMismatch: 'Please enter a valid 10-digit US phone number, like (248) 555-0123.' },
+  name: { valueMissing: 'Please enter your full name.', tooShort: 'Please enter at least 2 characters.', customError: 'Please enter your full name.' },
   email: { valueMissing: 'Please enter your email address.', typeMismatch: 'Please enter a valid email address, like name@example.com.', patternMismatch: 'Please enter a valid email address, like name@example.com.' },
+  phone: { valueMissing: 'Please enter your mobile number.', patternMismatch: 'Please enter a valid 10-digit US phone number, like (248) 555-0123.' },
+  date: DATE_MSGS,
+  date_confirm: { ...DATE_MSGS, valueMissing: 'Please confirm your event date.', customError: "The two dates don't match. Please check them." },
+  start_time: { valueMissing: 'Please enter a start time.' },
+  end_time: { valueMissing: 'Please enter an end time.' },
+  venue: { valueMissing: "Please enter the venue name, or 'Not decided yet'." },
+  venue_address: { valueMissing: "Please enter the venue address, or 'Not decided yet'." },
   event: { valueMissing: 'Please choose an event type.' },
-  date: { valueMissing: 'Please choose your event date.', rangeUnderflow: 'Please choose a date from today onward.', rangeOverflow: 'Please choose a date within the next 3 years.' },
-  guests: { valueMissing: 'Please enter an estimated number of guests.', rangeUnderflow: 'Please enter at least 1 guest.', rangeOverflow: 'Please enter a number up to 2,000.', stepMismatch: 'Please enter a whole number.', badInput: 'Please enter a whole number.' }
+  guests: { valueMissing: 'Please choose a guest range.' },
+  heard: { valueMissing: 'Please let us know how you heard about us.' },
+  extra: { ...DATE_MSGS, valueMissing: 'Please choose a date, or remove this day.' }
 };
 
-// Event date: today through 3 years from now
+// Event dates: today through 3 years from now
 const isoDate = d => new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
 const today = new Date();
-form.date.min = isoDate(today);
-form.date.max = isoDate(new Date(today.getFullYear() + 3, today.getMonth(), today.getDate()));
+const MIN_DATE = isoDate(today);
+const MAX_DATE = isoDate(new Date(today.getFullYear() + 3, today.getMonth(), today.getDate()));
+[form.date, form.date_confirm].forEach(f => { f.min = MIN_DATE; f.max = MAX_DATE; });
 
 // Live character counter for the optional message
 const message = form.message;
 const counter = form.querySelector('.char-count');
-const updateCount = () => { counter.textContent = `${message.value.length} / ${message.maxLength}`; };
-message.addEventListener('input', updateCount);
+message.addEventListener('input', () => { counter.textContent = `${message.value.length} / ${message.maxLength}`; });
 
+const errorFor = el => (el.closest('label') || el.closest('.chip-group')).querySelector('.field-error');
 const checkField = field => {
-  if (field.name === 'name') field.setCustomValidity(field.value.trim() || !field.value ? '' : 'blank');
-  const error = field.closest('label').querySelector('.field-error');
+  const key = field.dataset.msg || field.name;
+  if (field.name === 'name') field.setCustomValidity(field.value && !field.value.trim() ? 'blank' : '');
+  if (field.name === 'date_confirm') field.setCustomValidity(field.value && form.date.value && field.value !== form.date.value ? 'mismatch' : '');
   let text = '';
   if (!field.validity.valid) {
-    const reasons = MESSAGES[field.name] || {};
-    const key = Object.keys(reasons).find(k => field.validity[k]);
-    text = key ? reasons[key] : (field.validity.customError ? MESSAGES[field.name].valueMissing : 'Please check this field.');
+    const reasons = MESSAGES[key] || {};
+    const reason = Object.keys(reasons).find(k => field.validity[k]);
+    text = reason ? reasons[reason] : 'Please check this field.';
   }
-  error.textContent = text;
+  errorFor(field).textContent = text;
   field.classList.toggle('invalid', !!text);
   field.setAttribute('aria-invalid', text ? 'true' : 'false');
   return !text;
 };
-const requiredFields = [...form.querySelectorAll('[required]')];
+
+// "Services needed": at least one box must be ticked
+const servicesGroup = form.querySelector('.chip-group');
+const checkServices = () => {
+  const ok = !!form.querySelector('input[name="services"]:checked');
+  errorFor(servicesGroup).textContent = ok ? '' : 'Please choose at least one service.';
+  servicesGroup.classList.toggle('invalid', !ok);
+  return ok;
+};
+
 let triedSubmit = false;
-requiredFields.forEach(field => {
+const watch = field => {
   field.addEventListener('blur', () => { if (field.value || triedSubmit) checkField(field); });
-  field.addEventListener(field.tagName === 'SELECT' ? 'change' : 'input', () => { if (triedSubmit || field.classList.contains('invalid')) checkField(field); });
+  field.addEventListener(field.tagName === 'SELECT' ? 'change' : 'input', () => {
+    if (triedSubmit || field.classList.contains('invalid')) checkField(field);
+    if (field.name === 'date' && form.date_confirm.value) checkField(form.date_confirm);
+  });
+};
+form.querySelectorAll('[required]').forEach(watch);
+form.querySelectorAll('input[name="services"]').forEach(box => box.addEventListener('change', () => { if (triedSubmit) checkServices(); }));
+
+// "Add another day": each extra day has a label (optional) and a date
+const daysList = form.querySelector('.extra-days-list');
+const addDayBtn = form.querySelector('.add-day');
+const MAX_EXTRA_DAYS = 6;
+addDayBtn.addEventListener('click', () => {
+  const row = document.createElement('div');
+  row.className = 'extra-day';
+  row.innerHTML = `
+    <label><span class="label-text">Which event?</span><input type="text" name="extra_label" maxlength="40" placeholder="e.g. Sangeet"></label>
+    <label><span class="label-text">Date <span class="req" aria-hidden="true">*</span></span><input type="date" name="extra_date" data-msg="extra" required min="${MIN_DATE}" max="${MAX_DATE}"><span class="field-error" aria-live="polite"></span></label>
+    <button type="button" class="remove-day" aria-label="Remove this day">&times;</button>`;
+  daysList.appendChild(row);
+  watch(row.querySelector('[required]'));
+  row.querySelector('.remove-day').addEventListener('click', () => { row.remove(); addDayBtn.hidden = daysList.children.length >= MAX_EXTRA_DAYS; });
+  addDayBtn.hidden = daysList.children.length >= MAX_EXTRA_DAYS;
+  row.querySelector('input').focus();
 });
+
+const time12 = t => { if (!t) return ''; const [h, m] = t.split(':').map(Number); return `${(h % 12) || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; };
 
 form.addEventListener('submit', e => {
   e.preventDefault();
   triedSubmit = true;
-  const results = requiredFields.map(checkField);           // check every field so all problems show at once
-  const firstInvalid = requiredFields[results.indexOf(false)];
+  const fields = [...form.querySelectorAll('[required]')];
+  const results = fields.map(checkField);                      // check every field so all problems show at once
+  const servicesOk = checkServices();
   const note = form.querySelector('.form-note');
-  if (firstInvalid) {
+  const firstBad = fields[results.indexOf(false)] || (!servicesOk && form.querySelector('input[name="services"]'));
+  if (firstBad) {
     note.textContent = 'Please fill in the highlighted fields.';
     note.classList.add('error');
-    firstInvalid.focus();
+    firstBad.focus();
     return;
   }
   note.classList.remove('error');
   const d = new FormData(form);
+  const extraDays = [...daysList.querySelectorAll('.extra-day')].map(row => {
+    const label = row.querySelector('[name="extra_label"]').value.trim();
+    return `  - ${label || 'Additional day'}: ${row.querySelector('[name="extra_date"]').value}`;
+  });
   const body = [
+    'YOUR DETAILS',
     `Name: ${d.get('name').trim()}`,
     `Email: ${d.get('email')}`,
-    `Phone: ${d.get('phone')}`,
-    `Event type: ${d.get('event')}`,
-    `Event date: ${d.get('date')}`,
-    `Estimated guests: ${d.get('guests')}`,
+    `Mobile: ${d.get('phone')}`,
     '',
-    d.get('message') || ''
+    'WHEN & WHERE',
+    `Event date: ${d.get('date')}`,
+    ...(extraDays.length ? ['More days:', ...extraDays] : []),
+    `Time: ${time12(d.get('start_time'))} to ${time12(d.get('end_time'))}`,
+    `Venue: ${d.get('venue').trim()}`,
+    `Venue address: ${d.get('venue_address').trim()}`,
+    '',
+    'THE EVENT',
+    `Event type: ${d.get('event')}`,
+    `Estimated guests: ${d.get('guests')}`,
+    `Services needed: ${d.getAll('services').join(', ')}`,
+    '',
+    'ANYTHING ELSE',
+    `Heard about us from: ${d.get('heard')}`,
+    `Vision: ${d.get('message').trim() || '(none)'}`
   ].join('\n');
-  const subject = `Event inquiry: ${d.get('event')}`;
+  const subject = `Quote request: ${d.get('event')} on ${d.get('date')}`;
   window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  note.textContent = 'Thank you! Your email app should open so you can send your inquiry.';
+  note.textContent = 'Thank you! Your email app should open so you can send your request.';
 });
 
 // Gallery: show the first 12 photos, with a button for the rest
