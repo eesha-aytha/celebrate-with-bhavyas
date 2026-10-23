@@ -323,15 +323,28 @@
             </li>
           </ul>
         </div>
-        <form class="contact-form reveal" id="contact-form">
+        <form class="contact-form reveal" id="contact-form" novalidate>
+          <p class="form-hint"><span class="req" aria-hidden="true">*</span> Required</p>
           <div class="field-row">
-            <label>Name<input type="text" name="name" required></label>
-            <label>Phone<input type="tel" name="phone"></label>
+            <label><span class="label-text">Name <span class="req" aria-hidden="true">*</span></span>
+              <input type="text" name="name" required minlength="2" maxlength="60" autocomplete="name">
+              <span class="field-error" aria-live="polite"></span>
+            </label>
+            <label><span class="label-text">Phone <span class="req" aria-hidden="true">*</span></span>
+              <input type="tel" name="phone" required maxlength="20" autocomplete="tel" placeholder="(248) 555-0123"
+                pattern="^(\+?1[\s.\-]?)?\(?[2-9]\d{2}\)?[\s.\-]?[2-9]\d{2}[\s.\-]?\d{4}$">
+              <span class="field-error" aria-live="polite"></span>
+            </label>
           </div>
-          <label>Email<input type="email" name="email" required></label>
+          <label><span class="label-text">Email <span class="req" aria-hidden="true">*</span></span>
+            <input type="email" name="email" required maxlength="100" autocomplete="email" placeholder="you@example.com"
+              pattern="^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$">
+            <span class="field-error" aria-live="polite"></span>
+          </label>
           <div class="field-row">
-            <label>Event Type
-              <select name="event">
+            <label><span class="label-text">Event Type <span class="req" aria-hidden="true">*</span></span>
+              <select name="event" required>
+                <option value="" disabled selected>Select an event type</option>
                 <option>Wedding</option>
                 <option>Graduation Party</option>
                 <option>Birthday / Anniversary</option>
@@ -339,11 +352,21 @@
                 <option>Corporate / Social Event</option>
                 <option>Other</option>
               </select>
+              <span class="field-error" aria-live="polite"></span>
             </label>
-            <label>Event Date<input type="date" name="date"></label>
+            <label><span class="label-text">Event Date <span class="req" aria-hidden="true">*</span></span>
+              <input type="date" name="date" required>
+              <span class="field-error" aria-live="polite"></span>
+            </label>
           </div>
-          <label>Estimated Guests<input type="number" name="guests" min="1" placeholder="e.g. 150"></label>
-          <label>Tell us about your vision<textarea name="message" rows="4"></textarea></label>
+          <label><span class="label-text">Estimated Guests <span class="req" aria-hidden="true">*</span></span>
+            <input type="number" name="guests" required min="1" max="2000" step="1" inputmode="numeric" placeholder="e.g. 150">
+            <span class="field-error" aria-live="polite"></span>
+          </label>
+          <label><span class="label-text">Tell us about your vision <span class="optional">(optional)</span></span>
+            <textarea name="message" rows="4" maxlength="1000" placeholder="Theme, colors, venue ideas, must-haves…"></textarea>
+            <span class="char-count" aria-live="polite">0 / 1000</span>
+          </label>
           <button type="submit" class="btn btn-gold btn-block">Send Inquiry</button>
           <p class="form-note" aria-live="polite"></p>
         </form>

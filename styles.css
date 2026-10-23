@@ -303,7 +303,7 @@ em { font-style: italic; color: var(--gold-text); }
 
 .contact-form { background: var(--bg-alt); border: 1px solid var(--line); box-shadow: var(--shadow); padding: clamp(1.6rem, 4vw, 3rem); display: grid; gap: 1.3rem; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; }
-.contact-form label { display: grid; gap: .5rem; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.contact-form label { display: grid; align-content: start; gap: .5rem; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
 .contact-form input, .contact-form select, .contact-form textarea {
   font: inherit; font-size: .95rem; letter-spacing: normal; text-transform: none;
   color: var(--text); background: #fdfcfa; border: 1px solid var(--border);
@@ -622,3 +622,15 @@ em { font-style: italic; color: var(--gold-text); }
   .eyebrow { font-size: .72rem; letter-spacing: .2em; gap: .6rem; white-space: nowrap; }
   .eyebrow::before, .eyebrow::after { width: 22px; }
 }
+
+/* ---------- Contact form: required marks, errors and counter ---------- */
+.contact-form .req { color: #b4232f; font-weight: 600; letter-spacing: 0; }
+.contact-form .optional { text-transform: none; letter-spacing: .02em; color: var(--muted); font-size: .72rem; }
+.form-hint { font-size: .72rem; color: var(--muted); margin-bottom: -.3rem; }
+.field-error { min-height: 0; font-size: .78rem; letter-spacing: .01em; text-transform: none; color: #b4232f; }
+.field-error:empty { display: none; }
+.contact-form .invalid { border-color: #b4232f; box-shadow: 0 0 0 3px rgba(180, 35, 47, .1); }
+.contact-form select:invalid { color: var(--muted); }
+.contact-form select option { color: var(--text); }
+.char-count { justify-self: end; font-size: .72rem; letter-spacing: .05em; color: var(--muted); }
+.form-note.error { color: #b4232f; }

@@ -83,26 +83,80 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Contact form: opens the visitor's email app with the details filled in.
-// To receive submissions directly, connect a form service (see README).
+// Contact form: checks every required field, then opens the visitor's email app
+// with the details filled in. To receive submissions directly, connect a form
+// service (see README).
 const CONTACT_EMAIL = 'hi@bhavyasevents.com';
 const form = document.getElementById('contact-form');
+const MESSAGES = {
+  name: { valueMissing: 'Please enter your name.', tooShort: 'Please enter at least 2 characters.' },
+  phone: { valueMissing: 'Please enter your phone number.', patternMismatch: 'Please enter a valid 10-digit US phone number, like (248) 555-0123.' },
+  email: { valueMissing: 'Please enter your email address.', typeMismatch: 'Please enter a valid email address, like name@example.com.', patternMismatch: 'Please enter a valid email address, like name@example.com.' },
+  event: { valueMissing: 'Please choose an event type.' },
+  date: { valueMissing: 'Please choose your event date.', rangeUnderflow: 'Please choose a date from today onward.', rangeOverflow: 'Please choose a date within the next 3 years.' },
+  guests: { valueMissing: 'Please enter an estimated number of guests.', rangeUnderflow: 'Please enter at least 1 guest.', rangeOverflow: 'Please enter a number up to 2,000.', stepMismatch: 'Please enter a whole number.', badInput: 'Please enter a whole number.' }
+};
+
+// Event date: today through 3 years from now
+const isoDate = d => new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+const today = new Date();
+form.date.min = isoDate(today);
+form.date.max = isoDate(new Date(today.getFullYear() + 3, today.getMonth(), today.getDate()));
+
+// Live character counter for the optional message
+const message = form.message;
+const counter = form.querySelector('.char-count');
+const updateCount = () => { counter.textContent = `${message.value.length} / ${message.maxLength}`; };
+message.addEventListener('input', updateCount);
+
+const checkField = field => {
+  if (field.name === 'name') field.setCustomValidity(field.value.trim() || !field.value ? '' : 'blank');
+  const error = field.closest('label').querySelector('.field-error');
+  let text = '';
+  if (!field.validity.valid) {
+    const reasons = MESSAGES[field.name] || {};
+    const key = Object.keys(reasons).find(k => field.validity[k]);
+    text = key ? reasons[key] : (field.validity.customError ? MESSAGES[field.name].valueMissing : 'Please check this field.');
+  }
+  error.textContent = text;
+  field.classList.toggle('invalid', !!text);
+  field.setAttribute('aria-invalid', text ? 'true' : 'false');
+  return !text;
+};
+const requiredFields = [...form.querySelectorAll('[required]')];
+let triedSubmit = false;
+requiredFields.forEach(field => {
+  field.addEventListener('blur', () => { if (field.value || triedSubmit) checkField(field); });
+  field.addEventListener(field.tagName === 'SELECT' ? 'change' : 'input', () => { if (triedSubmit || field.classList.contains('invalid')) checkField(field); });
+});
+
 form.addEventListener('submit', e => {
   e.preventDefault();
+  triedSubmit = true;
+  const results = requiredFields.map(checkField);           // check every field so all problems show at once
+  const firstInvalid = requiredFields[results.indexOf(false)];
+  const note = form.querySelector('.form-note');
+  if (firstInvalid) {
+    note.textContent = 'Please fill in the highlighted fields.';
+    note.classList.add('error');
+    firstInvalid.focus();
+    return;
+  }
+  note.classList.remove('error');
   const d = new FormData(form);
   const body = [
-    `Name: ${d.get('name')}`,
+    `Name: ${d.get('name').trim()}`,
     `Email: ${d.get('email')}`,
-    `Phone: ${d.get('phone') || 'N/A'}`,
+    `Phone: ${d.get('phone')}`,
     `Event type: ${d.get('event')}`,
-    `Event date: ${d.get('date') || 'TBD'}`,
-    `Estimated guests: ${d.get('guests') || 'TBD'}`,
+    `Event date: ${d.get('date')}`,
+    `Estimated guests: ${d.get('guests')}`,
     '',
     d.get('message') || ''
   ].join('\n');
   const subject = `Event inquiry: ${d.get('event')}`;
   window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  form.querySelector('.form-note').textContent = 'Thank you! Your email app should open so you can send your inquiry.';
+  note.textContent = 'Thank you! Your email app should open so you can send your inquiry.';
 });
 
 // Gallery: show the first 12 photos, with a button for the rest
