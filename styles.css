@@ -748,3 +748,17 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
   .hero-stats strong { font-size: clamp(1.5rem, 4vh, 2.2rem); }
   .scroll-cue { bottom: .9rem; }
 }
+
+/* "Read all reviews on Google" button */
+.reviews-btn {
+  display: inline-flex; align-items: center; gap: .75rem;
+  padding: .95rem 1.6rem .95rem 1.3rem; border-radius: 999px;
+  background: #fff; border: 1.5px solid var(--gold); color: var(--text);
+  font-size: .82rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  box-shadow: var(--shadow); transition: background .3s ease, color .3s ease, border-color .3s ease;
+}
+.reviews-btn .g-logo { width: 20px; height: 20px; flex-shrink: 0; }
+.reviews-btn .arrow { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s ease; }
+.reviews-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.reviews-btn:hover .arrow { transform: translateX(4px); }
+@media (max-width: 560px) { .reviews-btn { font-size: .72rem; letter-spacing: .08em; padding: .85rem 1.2rem .85rem 1rem; } }
