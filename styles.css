@@ -948,3 +948,10 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
   .footer-grid { grid-template-columns: 1fr; gap: 2.2rem; }
   .site-footer { padding-top: 3.5rem; }
 }
+
+/* Top-menu and footer "Get a Quote" pills: same gold gradient color as "Send My Request" */
+.site-header .nav-cta, .footer-cta { background: var(--gold-grad); border-color: transparent; color: var(--ink) !important; }
+.site-header .nav-cta:hover, .footer-cta:hover {
+  background: var(--gold-grad); border-color: transparent; color: var(--ink) !important;
+  box-shadow: 0 10px 26px -12px rgba(201, 165, 76, .7); filter: brightness(1.05);
+}
