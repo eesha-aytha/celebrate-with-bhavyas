@@ -307,4 +307,18 @@ document.querySelectorAll('.v-play').forEach(btn => btn.addEventListener('click'
 }));
 videos.forEach(v => v.addEventListener('play', () => videos.forEach(o => { if (o !== v) o.pause(); })));
 
+// Banner video loop: load and play only when the banner is near the screen,
+// pause when it scrolls away, and skip it for visitors who prefer less motion
+const bannerVideo = document.querySelector('.banner-video');
+if (bannerVideo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      if (!bannerVideo.src) bannerVideo.src = bannerVideo.dataset.src;
+      bannerVideo.play().catch(() => {});
+    } else {
+      bannerVideo.pause();
+    }
+  }, { rootMargin: '200px 0px' }).observe(bannerVideo);
+}
+
 document.getElementById('year').textContent = new Date().getFullYear();

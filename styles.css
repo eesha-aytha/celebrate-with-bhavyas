@@ -955,3 +955,16 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
   background: var(--gold-grad); border-color: transparent; color: var(--ink) !important;
   box-shadow: 0 10px 26px -12px rgba(201, 165, 76, .7); filter: brightness(1.05);
 }
+
+/* ---------- Banner: looping decor video behind the text ---------- */
+.banner { overflow: hidden; background: #17161a url("videos/banner-loop-poster.jpg") center / cover; border-block: 0; isolation: isolate; }
+.banner-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.banner::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(18, 17, 20, .45), rgba(18, 17, 20, .72) 75%),
+    linear-gradient(rgba(18, 17, 20, .25), rgba(18, 17, 20, .25));
+}
+.banner .eyebrow { --label: #bfe3f5; }
+.banner-text { color: #fff; text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
+.banner-text .gold { background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; }
