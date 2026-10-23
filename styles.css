@@ -974,3 +974,9 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 
 /* Form field labels in the site's section-label blue */
 .contact-form .label-text { color: var(--label); font-weight: 600; }
+
+/* Quote form sending states */
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.quote-form button[type="submit"]:disabled { opacity: .7; cursor: progress; transform: none; }
+.form-note.success { color: #2f7a4b; font-weight: 600; }
+.form-note a { color: inherit; font-weight: 600; text-decoration: underline; }

@@ -14,7 +14,7 @@ Content (services, about, founders, contact details) and the photos in `images/`
 
 - **Photos:** add new photos to `images/`, then copy a `<figure class="g-item">` block in the Gallery section of `index.html`; set `data-cat` (stages, ceremonies, couples, celebrations or details), the `src`, `alt`, title and event. Add `g-tall` or `g-wide` to the class for a larger tile.
 - **Reviews:** each review is a `<figure class="review">` in the Kind Words section; copy one to add another.
-- **Form submissions:** the form currently opens the visitor's email app. To receive inquiries directly, sign up for a free form service such as Formspree and point the form at it.
+- **Form submissions:** the Get a Quote form sends each request straight to hi@bhavyasevents.com through [FormSubmit](https://formsubmit.co) (free, no account). The very first submission sends a one-time **activation email** to that address; click the link in it, and every request after that is delivered. The address is set in `CONTACT_EMAIL` in `script.js`.
 
 ## Publishing with GitHub Pages
 

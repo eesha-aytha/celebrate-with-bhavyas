@@ -83,10 +83,12 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Quote form: checks every required field, then opens the visitor's email app
-// with a summary of their request. To receive requests directly, connect a
-// form service (see README).
+// Quote form: checks every required field, then sends the request straight to
+// the business inbox through FormSubmit (formsubmit.co), a free form-to-email
+// service. The first request ever sent triggers a one-time activation email to
+// CONTACT_EMAIL; click the link in it and every request after that is delivered.
 const CONTACT_EMAIL = 'hi@bhavyasevents.com';
+const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
 const form = document.getElementById('contact-form');
 const DATE_MSGS = { valueMissing: 'Please choose your event date.', rangeUnderflow: 'Please choose a date from today onward.', rangeOverflow: 'Please choose a date within the next 3 years.' };
 const MESSAGES = {
@@ -174,7 +176,8 @@ addDayBtn.addEventListener('click', () => {
 
 const time12 = t => { if (!t) return ''; const [h, m] = t.split(':').map(Number); return `${(h % 12) || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; };
 
-form.addEventListener('submit', e => {
+const submitBtn = form.querySelector('button[type="submit"]');
+form.addEventListener('submit', async e => {
   e.preventDefault();
   triedSubmit = true;
   const fields = [...form.querySelectorAll('[required]')];
@@ -184,41 +187,65 @@ form.addEventListener('submit', e => {
   const firstBad = fields[results.indexOf(false)] || (!servicesOk && form.querySelector('input[name="services"]'));
   if (firstBad) {
     note.textContent = 'Please fill in the highlighted fields.';
-    note.classList.add('error');
+    note.className = 'form-note error';
     firstBad.focus();
     return;
   }
-  note.classList.remove('error');
+  if (form.querySelector('[name="_honey"]').value) return;      // hidden field only bots fill in
+
   const d = new FormData(form);
   const extraDays = [...daysList.querySelectorAll('.extra-day')].map(row => {
     const label = row.querySelector('[name="extra_label"]').value.trim();
-    return `  - ${label || 'Additional day'}: ${row.querySelector('[name="extra_date"]').value}`;
+    return `${label || 'Additional day'}: ${row.querySelector('[name="extra_date"]').value}`;
   });
-  const body = [
-    'YOUR DETAILS',
-    `Name: ${d.get('name').trim()}`,
-    `Email: ${d.get('email')}`,
-    `Mobile: ${d.get('phone')}`,
-    '',
-    'WHEN & WHERE',
-    `Event date: ${d.get('date')}`,
-    ...(extraDays.length ? ['More days:', ...extraDays] : []),
-    `Time: ${time12(d.get('start_time'))} to ${time12(d.get('end_time'))}`,
-    `Venue: ${d.get('venue').trim()}`,
-    `Venue address: ${d.get('venue_address').trim()}`,
-    '',
-    'THE EVENT',
-    `Event type: ${d.get('event')}`,
-    `Estimated guests: ${d.get('guests')}`,
-    `Services needed: ${d.getAll('services').join(', ')}`,
-    '',
-    'ANYTHING ELSE',
-    `Heard about us from: ${d.get('heard')}`,
-    `Vision: ${d.get('message').trim() || '(none)'}`
-  ].join('\n');
-  const subject = `Quote request: ${d.get('event')} on ${d.get('date')}`;
-  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  note.textContent = 'Thank you! Your email app should open so you can send your request.';
+  // Field names become the row labels in the email, in this order
+  const payload = {
+    'Name': d.get('name').trim(),
+    'Email': d.get('email'),
+    'Mobile': d.get('phone'),
+    'Event date': d.get('date'),
+    'More days': extraDays.join(' · ') || '(none)',
+    'Time': `${time12(d.get('start_time'))} to ${time12(d.get('end_time'))}`,
+    'Venue': d.get('venue').trim(),
+    'Venue address': d.get('venue_address').trim(),
+    'Event type': d.get('event'),
+    'Estimated guests': d.get('guests'),
+    'Services needed': d.getAll('services').join(', '),
+    'Heard about us from': d.get('heard'),
+    'Vision': d.get('message').trim() || '(none)',
+    _subject: `New quote request: ${d.get('event')} on ${d.get('date')}`,
+    _replyto: d.get('email'),
+    _template: 'table',
+    _captcha: 'false'
+  };
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending…';
+  note.className = 'form-note';
+  note.textContent = '';
+  try {
+    const res = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || String(data.success) === 'false') throw new Error(data.message || `HTTP ${res.status}`);
+    form.reset();
+    daysList.innerHTML = '';
+    addDayBtn.hidden = false;
+    counter.textContent = `0 / ${message.maxLength}`;
+    triedSubmit = false;
+    form.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+    note.className = 'form-note success';
+    note.textContent = "Thank you! Your request has been sent. We'll be in touch shortly.";
+  } catch (err) {
+    note.className = 'form-note error';
+    note.innerHTML = 'Sorry, something went wrong sending your request. Please try again, or call <a href="tel:+12487164603">(248) 716-4603</a>.';
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send My Request';
+  }
 });
 
 // Gallery: category filters, live count, "Show more" (All view only)
