@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /videos/banner-src/
+
+Sitemap: https://bhavyasevents.com/sitemap.xml
