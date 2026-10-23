@@ -645,7 +645,7 @@ a.contact-card:hover { transform: translateX(6px); border-color: var(--gold); bo
 .ci-icon svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .ci-text { display: grid; gap: .2rem; min-width: 0; }
 .ci-label { font-size: .7rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--label); }
-.ci-value { font-family: var(--serif); font-variant-numeric: lining-nums; font-size: 1.4rem; font-weight: 600; line-height: 1.25; color: var(--text); overflow-wrap: anywhere; }
+.ci-value { font-family: var(--sans); font-size: 1.08rem; font-weight: 500; letter-spacing: .01em; line-height: 1.45; color: var(--text); overflow-wrap: anywhere; }
 a.contact-card:hover .ci-value { color: var(--gold-text); }
 .ci-socials { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .3rem; }
 .ci-socials a {
@@ -659,7 +659,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 @media (max-width: 560px) {
   .contact-card { padding: 1rem 1.1rem; gap: 1rem; }
   .ci-icon { width: 44px; height: 44px; }
-  .ci-value { font-size: 1.2rem; }
+  .ci-value { font-size: 1rem; }
 }
 
 /* ---------- Get a Quote form: steps, service chips, extra days ---------- */
