@@ -968,3 +968,6 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .banner .eyebrow { --label: #bfe3f5; }
 .banner-text { color: #fff; text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
 .banner-text .gold { background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; }
+
+/* "Send My Request": same rounded pill shape as the Get a Quote buttons */
+.quote-form button[type="submit"] { border-radius: 999px; border: 0; }
