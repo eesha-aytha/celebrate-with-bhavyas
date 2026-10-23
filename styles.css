@@ -228,9 +228,19 @@ em { font-style: italic; color: var(--gold-text); }
 .hero-stats strong { display: block; font-family: var(--serif); font-size: 2.4rem; font-weight: 500; color: var(--gold-text); line-height: 1; }
 .hero-stats span { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
 
-.scroll-cue { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); width: 24px; height: 40px; border: 1px solid var(--line); border-radius: 12px; }
-.scroll-cue span { position: absolute; left: 50%; top: 8px; width: 2px; height: 8px; background: var(--gold); transform: translateX(-50%); animation: cue 2s infinite; }
-@keyframes cue { 0% { opacity: 1; top: 8px; } 100% { opacity: 0; top: 24px; } }
+/* Scroll-down chevron at the bottom of the hero */
+.scroll-cue {
+  position: absolute; bottom: 1.6rem; left: 50%; z-index: 2; transform: translateX(-50%);
+  display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+  color: rgba(255, 255, 255, .9); transition: color .3s ease;
+}
+.scroll-cue svg {
+  width: 34px; height: 34px; fill: none; stroke: currentColor; stroke-width: 1.8; filter: drop-shadow(0 1px 4px rgba(0, 0, 0, .45)); stroke-linecap: round; stroke-linejoin: round;
+  animation: cue-float 2.2s ease-in-out infinite;
+}
+.scroll-cue:hover { color: #e6cc85; }
+.scroll-cue:focus-visible { outline: 2px solid #e6cc85; outline-offset: 2px; }
+@keyframes cue-float { 0%, 100% { transform: translateY(-3px); } 50% { transform: translateY(4px); } }
 
 /* ---------- Sections ---------- */
 .section { padding: clamp(5rem, 10vw, 8rem) 0; position: relative; scroll-margin-top: calc(2.5rem - clamp(5rem, 10vw, 8rem)); }
@@ -588,7 +598,6 @@ em { font-style: italic; color: var(--gold-text); }
 .hero-stats span { color: rgba(255, 255, 255, .88); }
 .hero .btn-ghost { border-color: rgba(255, 255, 255, .7); color: #fff; background: rgba(18, 17, 20, .25); }
 .hero .btn-ghost:hover { border-color: #e6cc85; color: #e6cc85; }
-.hero .scroll-cue { border-color: rgba(255, 255, 255, .5); }
 .hero-glow { border-color: rgba(230, 204, 133, .35); }
 
 /* ---------- Gallery: show more + photo viewer arrows ---------- */
@@ -724,4 +733,16 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 @media (min-width: 981px) and (max-width: 1180px) {
   .site-header .nav-cta { padding: .62rem 1rem .62rem 1.15rem; font-size: .66rem; letter-spacing: .1em; }
 }
+
+/* Shorter screens (most laptops): tighten the hero so the scroll arrow stays in view */
+@media (max-height: 900px) and (min-width: 561px) {
+  .hero { padding: 6.6rem 0 4.6rem; }
+  .hero h1 { font-size: clamp(2.3rem, 7.6vh, 4.4rem); margin-bottom: 2vh; }
+  .hero .eyebrow { margin-bottom: 1.4vh; }
+  .hero-sub { font-size: clamp(.95rem, 2vh, 1.1rem); line-height: 1.6; margin-bottom: 3vh; }
+  .hero-actions { margin-bottom: 4vh; }
+  .hero .btn { padding: clamp(.75rem, 1.7vh, 1rem) 2rem; }
+  .hero-stats { padding-top: 2vh; gap: 2.4rem; }
+  .hero-stats strong { font-size: clamp(1.5rem, 4vh, 2.2rem); }
+  .scroll-cue { bottom: .9rem; }
 }
