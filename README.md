@@ -10,9 +10,9 @@ Website for Celebrate with Bhavya's, a luxury event planning business. It's a pl
 
 ## Filling in your details
 
-Content (services, about, founders, contact details) and the photos in `images/` come from bhavyas.events and the @celebratewithbhavyas Instagram (files starting with `ig-`: full-size post photos and reel frames, lightly color-corrected and resized to 1600px). Reviews come from the business's Google listing.
+Content (services, about, founders, contact details) and the photos in `images/` come from bhavyas.events and the @celebratewithbhavyas Instagram (files starting with `ig-`), and professional event photos by Miles To Go Photos (files starting with `ev-`, resized to 1600px). Highlight clips in `videos/` are 24-second cuts from the photographer's event films. Reviews come from the business's Google listing.
 
-- **Photos:** add new photos to `images/`, then copy a `<figure class="g-item">` line in the Gallery section of `index.html` and change its `src`, `alt` and caption.
+- **Photos:** add new photos to `images/`, then copy a `<figure class="g-item">` block in the Gallery section of `index.html`; set `data-cat` (stages, ceremonies, couples, celebrations or details), the `src`, `alt`, title and event. Add `g-tall` or `g-wide` to the class for a larger tile.
 - **Reviews:** each review is a `<figure class="review">` in the Kind Words section; copy one to add another.
 - **Form submissions:** the form currently opens the visitor's email app. To receive inquiries directly, sign up for a free form service such as Formspree and point the form at it.
 

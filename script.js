@@ -221,40 +221,61 @@ form.addEventListener('submit', e => {
   note.textContent = 'Thank you! Your email app should open so you can send your request.';
 });
 
-// Gallery: show the first 12 photos, with a button for the rest
-const GALLERY_START = 12;
+// Gallery: category filters, live count, "Show more" (All view only)
+const GALLERY_START = 18;
 const galleryItems = [...document.querySelectorAll('.g-item')];
+const filterBtns = [...document.querySelectorAll('.g-filter')];
+const countEl = document.querySelector('.g-count');
 const moreBtn = document.querySelector('.gallery-more button');
-if (galleryItems.length > GALLERY_START) {
-  galleryItems.slice(GALLERY_START).forEach(item => item.classList.add('g-hidden'));
-  moreBtn.hidden = false;
-  let expanded = false;
-  moreBtn.addEventListener('click', () => {
-    expanded = !expanded;
-    galleryItems.slice(GALLERY_START).forEach(item => item.classList.toggle('g-hidden', !expanded));
-    moreBtn.textContent = expanded ? 'Show less' : 'Show more photos';
-    // After collapsing, bring the gallery back into view so the page doesn't jump past it
-    if (!expanded) scrollToSection(document.getElementById('gallery'));
+let activeFilter = 'all';
+let expanded = false;
+const visibleItems = () => galleryItems.filter(item => !item.classList.contains('g-hidden'));
+const renderGallery = () => {
+  const matches = galleryItems.filter(item => activeFilter === 'all' || item.dataset.cat === activeFilter);
+  const limit = activeFilter === 'all' && !expanded ? GALLERY_START : Infinity;
+  galleryItems.forEach(item => item.classList.add('g-hidden'));
+  matches.forEach((item, i) => {
+    if (i < limit) { item.classList.remove('g-hidden'); item.classList.add('visible'); }
   });
-}
+  countEl.textContent = `Showing ${Math.min(matches.length, limit)} of ${matches.length} photographs`;
+  moreBtn.hidden = !(activeFilter === 'all' && matches.length > GALLERY_START);
+  moreBtn.textContent = expanded ? 'Show less' : 'Show more photos';
+};
+filterBtns.forEach(btn => btn.addEventListener('click', () => {
+  activeFilter = btn.dataset.filter;
+  filterBtns.forEach(b => { const on = b === btn; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', on); });
+  renderGallery();
+}));
+moreBtn.addEventListener('click', () => {
+  expanded = !expanded;
+  renderGallery();
+  // After collapsing, bring the gallery back into view so the page doesn't jump past it
+  if (!expanded) scrollToSection(document.getElementById('gallery'));
+});
+renderGallery();
 
-// Gallery photo viewer: arrows, keyboard and swipe to flip through every photo
+// Photo viewer: arrows, keyboard and swipe through the photos currently shown
 const lightbox = document.querySelector('.lightbox');
 const lbImg = lightbox.querySelector('img');
 const lbCap = lightbox.querySelector('p');
 const lbCount = lightbox.querySelector('.lightbox-count');
+let lbList = [];
 let lbIndex = 0;
 const showPhoto = i => {
-  lbIndex = (i + galleryItems.length) % galleryItems.length;
-  const item = galleryItems[lbIndex];
+  lbIndex = (i + lbList.length) % lbList.length;
+  const item = lbList[lbIndex];
   const img = item.querySelector('img');
   lbImg.src = img.src;
   lbImg.alt = img.alt;
-  lbCap.textContent = item.querySelector('figcaption').textContent;
-  lbCount.textContent = `${lbIndex + 1} / ${galleryItems.length}`;
+  lbCap.textContent = `${item.querySelector('.g-title').textContent} · ${item.querySelector('.g-event').textContent}`;
+  lbCount.textContent = `${lbIndex + 1} / ${lbList.length}`;
 };
-galleryItems.forEach((item, i) =>
-  item.addEventListener('click', () => { showPhoto(i); lightbox.classList.add('open'); })
+galleryItems.forEach(item =>
+  item.addEventListener('click', () => {
+    lbList = visibleItems();
+    showPhoto(lbList.indexOf(item));
+    lightbox.classList.add('open');
+  })
 );
 const closeLightbox = () => lightbox.classList.remove('open');
 lightbox.querySelector('.lightbox-prev').addEventListener('click', () => showPhoto(lbIndex - 1));
@@ -274,5 +295,16 @@ lightbox.addEventListener('touchend', e => {
   if (Math.abs(dx) > 40) showPhoto(lbIndex + (dx < 0 ? 1 : -1));
   touchX = null;
 });
+
+// Highlight videos: tap to play with sound; only one plays at a time
+const videos = [...document.querySelectorAll('.v-card video')];
+document.querySelectorAll('.v-play').forEach(btn => btn.addEventListener('click', () => {
+  const video = btn.parentElement.querySelector('video');
+  videos.forEach(v => { if (v !== video) v.pause(); });
+  btn.hidden = true;
+  video.hidden = false;
+  video.play();
+}));
+videos.forEach(v => v.addEventListener('play', () => videos.forEach(o => { if (o !== v) o.pause(); })));
 
 document.getElementById('year').textContent = new Date().getFullYear();
