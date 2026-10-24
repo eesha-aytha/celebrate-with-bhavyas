@@ -58,7 +58,10 @@ document.querySelectorAll('a[href^="#"]').forEach(link =>
 // Highlight the menu link for the section in the middle of the screen. It is
 // recalculated on every scroll, so fast scrolling can never leave one stuck;
 // sections without a menu link (hero, banner, contact) clear the highlight.
-const navLinks = [...document.querySelectorAll('.nav-links a:not(.btn)')].filter(a => a.getAttribute('href').startsWith('#'));
+// Each link's section: its #hash, or data-section for links that open another page
+// (Gallery opens the full gallery page but still lights up over the home page preview)
+const navLinks = [...document.querySelectorAll('.nav-links a:not(.btn)')].filter(a => a.getAttribute('href').startsWith('#') || a.dataset.section);
+const sectionOf = a => a.dataset.section ? '#' + a.dataset.section : a.getAttribute('href');
 const sections = [...document.querySelectorAll('main > section')];
 const updateActiveLink = () => {
   const middle = window.innerHeight / 2;
@@ -67,7 +70,7 @@ const updateActiveLink = () => {
     return r.top <= middle && r.bottom > middle;
   });
   const hash = current && current.id ? '#' + current.id : null;
-  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === hash));
+  navLinks.forEach(a => a.classList.toggle('active', sectionOf(a) === hash));
 };
 window.addEventListener('scroll', updateActiveLink, { passive: true });
 window.addEventListener('resize', updateActiveLink);
