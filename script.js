@@ -335,4 +335,19 @@ if (bannerVideo && !window.matchMedia('(prefers-reduced-motion: reduce)').matche
   }, { rootMargin: '200px 0px' }).observe(bannerVideo);
 }
 
+// Phones: show the Call / Get a Quote bar after the first screen, and hide it
+// while the quote form itself is on screen so it never covers the form
+const mobileCta = document.querySelector('.mobile-cta');
+if (mobileCta) {
+  const quoteForm = document.getElementById('contact-form');
+  const updateCta = () => {
+    const r = quoteForm && quoteForm.getBoundingClientRect();
+    const formOnScreen = r && r.top < window.innerHeight && r.bottom > 0;
+    mobileCta.classList.toggle('show', window.scrollY > window.innerHeight * 0.6 && !formOnScreen);
+  };
+  window.addEventListener('scroll', updateCta, { passive: true });
+  window.addEventListener('resize', updateCta);
+  updateCta();
+}
+
 document.getElementById('year').textContent = new Date().getFullYear();

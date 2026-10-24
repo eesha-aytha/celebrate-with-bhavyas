@@ -1007,3 +1007,46 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .page-cta p:not(.eyebrow) { color: var(--muted); max-width: 520px; margin: 0 auto 2rem; }
 .subpage .nav-links a.active { color: var(--hdr-gold); }
 .subpage .nav-links a.active::after { transform: scaleX(1); opacity: 1; }
+
+/* ---------- Instagram strip ---------- */
+.ig-strip { padding: clamp(4rem, 8vw, 6rem) 0; background: #fff; }
+.ig-head { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1.2rem 2rem; margin-bottom: 2rem; }
+.ig-head h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
+.ig-head h2 em { white-space: nowrap; }
+.ig-head .eyebrow { margin-bottom: .6rem; }
+.ig-btn-icon { width: 17px !important; height: 17px !important; }
+.ig-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(.4rem, 1vw, .8rem); }
+.ig-tile { position: relative; display: block; aspect-ratio: 1; overflow: hidden; border-radius: 8px; background: #f3efe6; }
+.ig-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease); }
+.ig-hover {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  background: rgba(23, 22, 26, .45); opacity: 0; transition: opacity .35s ease;
+}
+.ig-hover svg, .ig-head .btn svg { width: 30px; height: 30px; fill: none; stroke: #fff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.ig-hover .dot { fill: #fff; stroke: none; }
+.ig-head .btn svg { stroke: currentColor; }
+.ig-head .btn .dot { fill: currentColor; }
+.ig-tile:hover img { transform: scale(1.06); }
+.ig-tile:hover .ig-hover, .ig-tile:focus-visible .ig-hover { opacity: 1; }
+@media (max-width: 860px) { .ig-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* ---------- Phones: sticky Call / Get a Quote bar ---------- */
+.mobile-cta { display: none; }
+@media (max-width: 640px) {
+  .mobile-cta {
+    position: fixed; left: .75rem; right: .75rem; bottom: calc(.75rem + env(safe-area-inset-bottom)); z-index: 45;
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: .5rem; padding: .45rem;
+    background: rgba(23, 22, 26, .94); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    border: 1px solid rgba(212, 176, 98, .35); border-radius: 999px; box-shadow: 0 14px 34px -14px rgba(0, 0, 0, .55);
+    transform: translateY(160%); transition: transform .45s var(--ease);
+  }
+  .mobile-cta.show { transform: none; }
+  .mobile-cta a {
+    display: flex; align-items: center; justify-content: center; gap: .5rem; padding: .8rem .9rem; border-radius: 999px;
+    font-size: .74rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  }
+  .mobile-cta svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+  .mobile-cta-call { color: #f5f0e6; border: 1px solid rgba(255, 255, 255, .22); }
+  .mobile-cta-quote { background: var(--gold-grad); color: var(--ink); }
+  .site-footer { padding-bottom: 5.5rem; }
+}
