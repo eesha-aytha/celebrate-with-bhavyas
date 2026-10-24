@@ -1031,7 +1031,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 
 /* ---------- Luxury touches ---------- */
 /* Small gold flourish under centered section headings, like a printed invitation */
-.section-head h2::after, .page-hero h1::after, .page-cta h2::after {
+.closing-cta h2::after, .section-head h2::after, .page-hero h1::after, .page-cta h2::after {
   content: ""; display: block; width: 160px; height: 16px; margin: 1.1rem auto 0;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 16'%3E%3Cdefs%3E%3ClinearGradient id='g' gradientUnits='userSpaceOnUse' x1='0' y1='8' x2='160' y2='8'%3E%3Cstop offset='0' stop-color='%23c9a54c' stop-opacity='0'/%3E%3Cstop offset='.4' stop-color='%23c9a54c'/%3E%3Cstop offset='.6' stop-color='%23c9a54c'/%3E%3Cstop offset='1' stop-color='%23c9a54c' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M2 8h62M96 8h62' stroke='url%28%23g%29' stroke-width='1.3'/%3E%3Cpath d='M80 1.5 86.5 8 80 14.5 73.5 8z' fill='none' stroke='%23c9a54c' stroke-width='1.3'/%3E%3Ccircle cx='80' cy='8' r='2' fill='%23c9a54c'/%3E%3Ccircle cx='68.5' cy='8' r='1.3' fill='%23c9a54c'/%3E%3Ccircle cx='91.5' cy='8' r='1.3' fill='%23c9a54c'/%3E%3C/svg%3E") center / contain no-repeat;
 }
@@ -1046,3 +1046,18 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .service-img img { transition: transform 1.4s cubic-bezier(.22, .61, .36, 1); }
 .service-card:hover .service-img img { transform: scale(1.06); }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+/* ---------- Home: closing call-to-action band ---------- */
+.closing-cta { padding: clamp(5rem, 10vw, 7.5rem) 0; text-align: center; background: radial-gradient(ellipse at 50% 0%, #2a2620, #17161a 70%); }
+.closing-cta .eyebrow { justify-content: center; --label: #a8d8f0; }
+.closing-cta h2 { color: #fff; font-size: clamp(2.2rem, 4.6vw, 3.6rem); }
+.closing-cta h2 em { color: #e6cc85; }
+.closing-cta-inner > p:not(.eyebrow) { color: rgba(255, 255, 255, .75); max-width: 540px; margin: 1.2rem auto 2.2rem; }
+.closing-cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; }
+.closing-call { color: #f5f0e6; border: 1px solid rgba(255, 255, 255, .3); background: transparent; }
+.closing-call:hover { border-color: #e6cc85; color: #e6cc85; }
+
+/* ---------- Get a Quote page ---------- */
+.quote-page { padding-top: clamp(3.5rem, 6vw, 5rem); }
+.quote-side-title { font-size: clamp(1.6rem, 2.6vw, 2.1rem); margin-bottom: 1rem; }
+@media (min-width: 861px) { .quote-page .contact-copy { position: static; } }
