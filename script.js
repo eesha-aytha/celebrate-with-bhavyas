@@ -1,6 +1,7 @@
 // Header background on scroll
 const header = document.querySelector('.site-header');
-const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+const isSubpage = document.body.classList.contains('subpage');
+const onScroll = () => header.classList.toggle('scrolled', isSubpage || window.scrollY > 40);
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
@@ -57,7 +58,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link =>
 // Highlight the menu link for the section in the middle of the screen. It is
 // recalculated on every scroll, so fast scrolling can never leave one stuck;
 // sections without a menu link (hero, banner, contact) clear the highlight.
-const navLinks = [...document.querySelectorAll('.nav-links a:not(.btn)')];
+const navLinks = [...document.querySelectorAll('.nav-links a:not(.btn)')].filter(a => a.getAttribute('href').startsWith('#'));
 const sections = [...document.querySelectorAll('main > section')];
 const updateActiveLink = () => {
   const middle = window.innerHeight / 2;
@@ -90,6 +91,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 const CONTACT_EMAIL = 'hi@bhavyasevents.com';
 const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
 const form = document.getElementById('contact-form');
+if (form) {
 const DATE_MSGS = { valueMissing: 'Please choose your event date.', rangeUnderflow: 'Please choose a date from today onward.', rangeOverflow: 'Please choose a date within the next 3 years.' };
 const MESSAGES = {
   name: { valueMissing: 'Please enter your full name.', tooShort: 'Please enter at least 2 characters.', customError: 'Please enter your full name.' },
@@ -247,39 +249,24 @@ form.addEventListener('submit', async e => {
     submitBtn.textContent = 'Send My Request';
   }
 });
+} // end quote form
 
-// Gallery: category filters, live count, "Show more" (All view only)
-const GALLERY_START = 18;
+// Gallery page: category filters and live count (the home page shows a fixed preview)
 const galleryItems = [...document.querySelectorAll('.g-item')];
 const filterBtns = [...document.querySelectorAll('.g-filter')];
 const countEl = document.querySelector('.g-count');
-const moreBtn = document.querySelector('.gallery-more button');
-let activeFilter = 'all';
-let expanded = false;
 const visibleItems = () => galleryItems.filter(item => !item.classList.contains('g-hidden'));
-const renderGallery = () => {
-  const matches = galleryItems.filter(item => activeFilter === 'all' || item.dataset.cat === activeFilter);
-  const limit = activeFilter === 'all' && !expanded ? GALLERY_START : Infinity;
-  galleryItems.forEach(item => item.classList.add('g-hidden'));
-  matches.forEach((item, i) => {
-    if (i < limit) { item.classList.remove('g-hidden'); item.classList.add('visible'); }
-  });
-  countEl.textContent = `Showing ${Math.min(matches.length, limit)} of ${matches.length} photographs`;
-  moreBtn.hidden = !(activeFilter === 'all' && matches.length > GALLERY_START);
-  moreBtn.textContent = expanded ? 'Show less' : 'Show more photos';
+const filterGallery = filter => {
+  const matches = galleryItems.filter(item => filter === 'all' || item.dataset.cat === filter);
+  galleryItems.forEach(item => item.classList.toggle('g-hidden', !matches.includes(item)));
+  matches.forEach(item => item.classList.add('visible'));
+  if (countEl) countEl.textContent = `Showing ${matches.length} of ${galleryItems.length} photographs`;
 };
 filterBtns.forEach(btn => btn.addEventListener('click', () => {
-  activeFilter = btn.dataset.filter;
   filterBtns.forEach(b => { const on = b === btn; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', on); });
-  renderGallery();
+  filterGallery(btn.dataset.filter);
 }));
-moreBtn.addEventListener('click', () => {
-  expanded = !expanded;
-  renderGallery();
-  // After collapsing, bring the gallery back into view so the page doesn't jump past it
-  if (!expanded) scrollToSection(document.getElementById('gallery'));
-});
-renderGallery();
+if (filterBtns.length) filterGallery('all');
 
 // Photo viewer: arrows, keyboard and swipe through the photos currently shown
 const lightbox = document.querySelector('.lightbox');
