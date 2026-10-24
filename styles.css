@@ -1079,3 +1079,20 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
   ::view-transition-old(root), ::view-transition-new(root), ::view-transition-group(*) { animation: none; }
   main { animation: none; }
 }
+
+/* ---------- Privacy page ---------- */
+.legal { padding-top: clamp(3rem, 6vw, 4.5rem); }
+.legal-inner { max-width: 760px; }
+.legal-lead { font-size: 1.08rem; color: var(--text); margin-bottom: 1rem; }
+.legal h2 { font-family: var(--sans); font-size: .82rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--label); margin: 2.4rem 0 .8rem; }
+.legal h2::after { content: none; }
+.legal p, .legal li { color: #3a3740; line-height: 1.8; }
+.legal p + p { margin-top: .8rem; }
+.legal ul { padding-left: 1.2rem; display: grid; gap: .4rem; }
+.legal ul.legal-contact { list-style: none; padding-left: 0; }
+.legal a { color: var(--gold-text); text-decoration: underline; text-underline-offset: 3px; }
+.footer-sep { margin: 0 .35rem; opacity: .5; }
+.site-footer .footer-legal { color: rgba(255, 255, 255, .75); text-decoration: underline; text-underline-offset: 3px; }
+.site-footer .footer-legal:hover { color: #e6cc85; }
+.form-privacy { text-align: center; font-size: .78rem; color: var(--muted); margin-top: -1.4rem; }
+.form-privacy a { color: var(--gold-text); text-decoration: underline; }
