@@ -301,7 +301,7 @@ em { font-style: italic; color: var(--gold-text); }
 .testimonials {
   background:
     linear-gradient(rgba(var(--bg-rgb), .88), rgba(var(--bg-rgb), .94)),
-    url("images/floral-stage.jpg") center / cover fixed;
+    url("images/webp/floral-stage-1000.webp") center / cover fixed;
 }
 
 /* ---------- Contact ---------- */
@@ -403,7 +403,7 @@ em { font-style: italic; color: var(--gold-text); }
     linear-gradient(180deg, rgba(10, 10, 10, .6) 0, rgba(10, 10, 10, 0) 170px),
     linear-gradient(90deg, rgba(18, 17, 20, .86) 0%, rgba(18, 17, 20, .75) 42%, rgba(18, 17, 20, .66) 62%, rgba(18, 17, 20, .2) 100%),
     linear-gradient(0deg, rgba(18, 17, 20, .55) 0%, transparent 40%),
-    url("images/floral-aisle.jpg") center 60% / cover;
+    url("images/webp/floral-aisle-960.webp") center 60% / cover;
   animation: slowzoom 30s ease-in-out infinite alternate;
 }
 @keyframes slowzoom { from { transform: scale(1); } to { transform: scale(1.08); } }
@@ -460,7 +460,7 @@ em { font-style: italic; color: var(--gold-text); }
   padding: clamp(6rem, 14vw, 10rem) 0; text-align: center; position: relative;
   background:
     linear-gradient(rgba(var(--bg-rgb), .8), rgba(var(--bg-rgb), .86)),
-    url("images/mehndi-hands.jpg") center / cover fixed;
+    url("images/webp/mehndi-hands-960.webp") center / cover fixed;
   border-block: 1px solid var(--line);
 }
 .banner .eyebrow { justify-content: center; }
@@ -543,7 +543,7 @@ em { font-style: italic; color: var(--gold-text); }
   .hero-bg {
     background:
       linear-gradient(rgba(10, 10, 10, .85), rgba(18, 17, 20, .62) 25%, rgba(18, 17, 20, .6) 60%, rgba(18, 17, 20, .75)),
-      url("images/floral-aisle.jpg") center 60% / cover;
+      url("images/webp/floral-aisle-960.webp") center 60% / cover;
   }
 }
 
@@ -957,7 +957,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 }
 
 /* ---------- Banner: looping decor video behind the text ---------- */
-.banner { overflow: hidden; background: #17161a url("videos/banner-loop-poster.jpg") center / cover; border-block: 0; isolation: isolate; }
+.banner { overflow: hidden; background: #17161a url("videos/webp/banner-loop-poster-960.webp") center / cover; border-block: 0; isolation: isolate; }
 .banner-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
 .banner::before {
   content: ""; position: absolute; inset: 0; z-index: -1;

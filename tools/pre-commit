@@ -1,0 +1,11 @@
+#!/bin/sh
+# Before every commit: create WebP versions of any new or changed photos and
+# point the pages at them, then include those changes in the commit.
+# Install once with: sh tools/install-hooks.sh
+if ! command -v cwebp >/dev/null 2>&1; then
+  echo "pre-commit: cwebp not found (brew install webp); skipping image optimization" >&2
+  exit 0
+fi
+python3 tools/optimize-images.py || exit 1
+git add images/webp videos/webp ./*.html styles.css 2>/dev/null
+exit 0

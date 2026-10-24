@@ -17,6 +17,18 @@ Content (services, about, founders, contact details) and the photos in `images/`
 - **Reviews:** each review is a `<figure class="review">` in the Kind Words section; copy one to add another.
 - **Form submissions:** the Get a Quote form sends each request straight to hi@bhavyasevents.com through [FormSubmit](https://formsubmit.co) (free, no account). The very first submission sends a one-time **activation email** to that address; click the link in it, and every request after that is delivered. The address is set in `CONTACT_EMAIL` in `script.js`.
 
+## Fast photos (WebP)
+
+Every photo is served as WebP in three sizes (480, 960 and 1600px wide) from `images/webp/` and `videos/webp/`; phones download the small ones and the photo viewer uses the large one. The original JPG/PNG files stay in `images/` as the master copies and fallback.
+
+After adding or replacing photos, run:
+
+```bash
+python3 tools/optimize-images.py
+```
+
+It only converts new or changed photos and updates the pages automatically (needs `brew install webp`). To have it run by itself before every commit, install the hook once with `sh tools/install-hooks.sh`.
+
 ## Publishing with GitHub Pages
 
 In the GitHub repo: **Settings → Pages → Source: Deploy from a branch → `main` / root**. The site will be live at `https://<username>.github.io/<repo-name>/`.

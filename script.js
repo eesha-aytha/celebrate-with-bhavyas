@@ -279,7 +279,7 @@ const showPhoto = i => {
   lbIndex = (i + lbList.length) % lbList.length;
   const item = lbList[lbIndex];
   const img = item.querySelector('img');
-  lbImg.src = img.src;
+  lbImg.src = img.dataset.full || img.currentSrc || img.src;   // largest version for the full-screen viewer
   lbImg.alt = img.alt;
   lbCap.textContent = item.querySelector('.g-title').textContent;
   lbCount.textContent = `${lbIndex + 1} / ${lbList.length}`;
@@ -327,7 +327,7 @@ const bannerVideo = document.querySelector('.banner-video');
 if (bannerVideo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   new IntersectionObserver(([entry]) => {
     if (entry.isIntersecting) {
-      if (!bannerVideo.src) bannerVideo.src = bannerVideo.dataset.src;
+      if (!bannerVideo.src) bannerVideo.src = window.innerWidth <= 860 && bannerVideo.dataset.srcSmall ? bannerVideo.dataset.srcSmall : bannerVideo.dataset.src;
       bannerVideo.play().catch(() => {});
     } else {
       bannerVideo.pause();
