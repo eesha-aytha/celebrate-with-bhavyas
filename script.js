@@ -355,41 +355,4 @@ if (mobileCta) {
   updateCta();
 }
 
-// Page-to-page transition: when a link opens another page of the site, glide
-// back up to the top while the page softly fades, then open the new page,
-// which fades in. Skipped for visitors who prefer less motion.
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const easeInOut = t => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-const glideToTop = duration => new Promise(done => {
-  const start = window.scrollY, t0 = performance.now();
-  if (start <= 0) return done();
-  document.documentElement.style.scrollBehavior = 'auto';
-  let finished = false;
-  const step = () => {
-    if (finished) return;
-    const t = Math.min((performance.now() - t0) / duration, 1);
-    window.scrollTo(0, start * (1 - easeInOut(t)));
-    if (t < 1) { requestAnimationFrame(step); } else { finished = true; done(); }
-  };
-  requestAnimationFrame(step);
-  const timer = setInterval(() => { step(); if (finished) clearInterval(timer); }, 16);
-});
-document.addEventListener('click', e => {
-  const link = e.target.closest('a[href]');
-  if (!link || reduceMotion || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || link.target === '_blank') return;
-  const url = new URL(link.href, location.href);
-  const samePage = url.pathname === location.pathname;
-  if (url.origin !== location.origin || samePage || !/\.html$|\/$/.test(url.pathname)) return;
-  e.preventDefault();
-  const far = Math.min(window.scrollY / window.innerHeight, 6);       // longer glide from further down
-  document.body.classList.add('page-leaving');
-  const duration = far ? 420 + far * 90 : 0;
-  let gone = false;
-  const go = () => { if (!gone) { gone = true; location.href = link.href; } };
-  glideToTop(duration).then(() => setTimeout(go, 160));
-  setTimeout(go, duration + 450);       // always open the page on time, even if animation frames are paused
-});
-// Coming back with the Back button: undo the fade
-window.addEventListener('pageshow', () => document.body.classList.remove('page-leaving'));
-
 document.getElementById('year').textContent = new Date().getFullYear();
