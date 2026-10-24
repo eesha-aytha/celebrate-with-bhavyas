@@ -1008,28 +1008,6 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .subpage .nav-links a.active { color: var(--hdr-gold); }
 .subpage .nav-links a.active::after { transform: scaleX(1); opacity: 1; }
 
-/* ---------- Instagram strip ---------- */
-.ig-strip { padding: clamp(4rem, 8vw, 6rem) 0; background: #fff; }
-.ig-head { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1.2rem 2rem; margin-bottom: 2rem; }
-.ig-head h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
-.ig-head h2 em { white-space: nowrap; }
-.ig-head .eyebrow { margin-bottom: .6rem; }
-.ig-btn-icon { width: 17px !important; height: 17px !important; }
-.ig-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(.4rem, 1vw, .8rem); }
-.ig-tile { position: relative; display: block; aspect-ratio: 1; overflow: hidden; border-radius: 8px; background: #f3efe6; }
-.ig-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease); }
-.ig-hover {
-  position: absolute; inset: 0; display: grid; place-items: center;
-  background: rgba(23, 22, 26, .45); opacity: 0; transition: opacity .35s ease;
-}
-.ig-hover svg, .ig-head .btn svg { width: 30px; height: 30px; fill: none; stroke: #fff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.ig-hover .dot { fill: #fff; stroke: none; }
-.ig-head .btn svg { stroke: currentColor; }
-.ig-head .btn .dot { fill: currentColor; }
-.ig-tile:hover img { transform: scale(1.06); }
-.ig-tile:hover .ig-hover, .ig-tile:focus-visible .ig-hover { opacity: 1; }
-@media (max-width: 860px) { .ig-grid { grid-template-columns: repeat(3, 1fr); } }
-
 /* ---------- Phones: sticky Call / Get a Quote bar ---------- */
 .mobile-cta { display: none; }
 @media (max-width: 640px) {
