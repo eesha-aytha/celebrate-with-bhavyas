@@ -1096,3 +1096,8 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .site-footer .footer-legal:hover { color: #e6cc85; }
 .form-privacy { text-align: center; font-size: .78rem; color: var(--muted); margin-top: -1.4rem; }
 .form-privacy a { color: var(--gold-text); text-decoration: underline; }
+
+/* ---------- One button shape everywhere: rounded pill ---------- */
+.btn { border-radius: 999px; }
+/* Gold buttons: paint the gradient under the (invisible) border too, so there's no thin edge line */
+.btn-gold { background-origin: border-box; }
