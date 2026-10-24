@@ -82,6 +82,11 @@ const observer = new IntersectionObserver(entries => {
     }
   });
 }, { threshold: 0.15 });
+// Stagger items that sit side by side (cards, steps, reviews, photos) so they fade in one after another
+document.querySelectorAll('.service-grid, .steps, .review-grid, .gallery-grid, .founders, .contact-cards').forEach(group =>
+  [...group.querySelectorAll(':scope > .reveal, :scope > li > .reveal, :scope > *')].filter(el => el.classList.contains('reveal'))
+    .forEach((el, i) => el.style.setProperty('--d', `${Math.min(i % 4, 3) * 0.12}s`))
+);
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // Quote form: checks every required field, then sends the request straight to
