@@ -254,7 +254,7 @@ em { font-style: italic; color: var(--gold-text); }
 .about { background: var(--bg-alt); }
 .about-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(3rem, 7vw, 6rem); align-items: center; }
 .about-visual { position: relative; }
-.about-copy p:not(.eyebrow) { color: var(--text); max-width: 34em; line-height: 1.95; letter-spacing: .015em; margin-bottom: 1.4rem; }
+.about-copy p:not(.eyebrow) { color: #000; font-weight: 400; max-width: 34em; line-height: 1.95; letter-spacing: .015em; margin-bottom: 1.4rem; }
 
 /* ---------- Services ---------- */
 .service-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
