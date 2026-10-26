@@ -254,7 +254,8 @@ em { font-style: italic; color: var(--gold-text); }
 .about { background: var(--bg-alt); }
 .about-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(3rem, 7vw, 6rem); align-items: center; }
 .about-visual { position: relative; }
-.about-copy p:not(.eyebrow) { color: var(--muted); margin-bottom: 1.2rem; }
+.about-copy p:not(.eyebrow) { color: var(--text); font-size: 1.02rem; line-height: 1.8; margin-bottom: 1.2rem; }
+.about-copy .divider + p { font-family: var(--serif); font-size: clamp(1.3rem, 2vw, 1.55rem); line-height: 1.5; padding-left: 1.2rem; border-left: 2px solid var(--gold); margin-bottom: 1.5rem; }
 
 /* ---------- Services ---------- */
 .service-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
