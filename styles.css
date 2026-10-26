@@ -1042,14 +1042,14 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
 /* ---------- Home: closing call-to-action band ---------- */
-.closing-cta { padding: clamp(5rem, 10vw, 7.5rem) 0; text-align: center; background: radial-gradient(ellipse at 50% 0%, #2a2620, #17161a 70%); }
-.closing-cta .eyebrow { justify-content: center; --label: #a8d8f0; }
-.closing-cta h2 { color: #fff; font-size: clamp(2.2rem, 4.6vw, 3.6rem); }
-.closing-cta h2 em { color: #e6cc85; }
-.closing-cta-inner > p:not(.eyebrow) { color: rgba(255, 255, 255, .75); max-width: 540px; margin: 1.2rem auto 2.2rem; }
+.closing-cta { padding: clamp(5rem, 10vw, 7.5rem) 0; text-align: center; background: radial-gradient(ellipse at 50% 0%, #fdf8ec, #f3e6c6 75%); border-top: 1px solid #eadcb8; --gold-text: #7a5a14; }
+.closing-cta .eyebrow { justify-content: center; }
+.closing-cta h2 { color: var(--text); font-size: clamp(2.2rem, 4.6vw, 3.6rem); }
+.closing-cta h2 em { color: var(--gold-text); }
+.closing-cta-inner > p:not(.eyebrow) { color: #3a3740; max-width: 540px; margin: 1.2rem auto 2.2rem; }
 .closing-cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; }
-.closing-call { color: #f5f0e6; border: 1px solid rgba(255, 255, 255, .3); background: transparent; }
-.closing-call:hover { border-color: #e6cc85; color: #e6cc85; }
+.closing-call { color: var(--text); border: 1px solid rgba(31, 29, 34, .45); background: transparent; }
+.closing-call:hover { border-color: var(--text); background: var(--text); color: #fff; }
 
 /* ---------- Get a Quote page ---------- */
 .quote-page { padding-top: clamp(3.5rem, 6vw, 5rem); }
