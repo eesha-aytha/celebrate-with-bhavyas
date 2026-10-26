@@ -1,7 +1,6 @@
 // Header background on scroll
 const header = document.querySelector('.site-header');
-const isSubpage = document.body.classList.contains('subpage');
-const onScroll = () => header.classList.toggle('scrolled', isSubpage || window.scrollY > 40);
+const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
