@@ -428,10 +428,10 @@ em { font-style: italic; color: var(--gold-text); }
   position: absolute; left: 8px; right: 8px; bottom: 8px; z-index: 1;
   padding: 0 1.1rem 1.1rem; display: grid; gap: .2rem;
 }
-.portrait-name { font-family: var(--serif); font-size: clamp(1.1rem, 1.8vw, 1.4rem); color: var(--text); line-height: 1.2; }
+.portrait-name { font-family: var(--serif); font-size: clamp(1.15rem, 1.8vw, 1.45rem); font-weight: 600; color: var(--text); line-height: 1.2; }
 .portrait-role {
   display: inline-flex; align-items: center; gap: .55rem;
-  font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-text);
+  font-size: .64rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-text);
 }
 .portrait-role::before { content: ""; width: 18px; height: 1px; background: var(--blue); }
 .portrait:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 40px 70px -30px rgba(201,165,76,.4); }
