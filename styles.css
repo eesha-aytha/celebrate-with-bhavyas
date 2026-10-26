@@ -452,7 +452,7 @@ em { font-style: italic; color: var(--gold-text); }
 
 /* Banner */
 .banner {
-  padding: clamp(6rem, 14vw, 10rem) 0; text-align: center; position: relative;
+  padding: calc(clamp(6rem, 14vw, 10rem) + 47px) 0; text-align: center; position: relative;
   background:
     linear-gradient(rgba(var(--bg-rgb), .8), rgba(var(--bg-rgb), .86)),
     url("images/webp/mehndi-hands-960.webp") center / cover fixed;
