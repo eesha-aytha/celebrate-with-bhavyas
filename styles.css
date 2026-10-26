@@ -459,7 +459,7 @@ em { font-style: italic; color: var(--gold-text); }
   border-block: 1px solid var(--line);
 }
 .banner .eyebrow { justify-content: center; }
-.banner-text { font-family: var(--serif); font-size: clamp(2.4rem, 6vw, 4.6rem); line-height: 1.1; margin-bottom: 2.4rem; }
+.banner-text { font-family: var(--serif); font-size: clamp(2.4rem, 6vw, 4.6rem); line-height: 1.1; }
 
 /* Lightbox */
 .lightbox {
