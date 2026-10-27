@@ -108,6 +108,7 @@
           </ul>
         </div>
         <form class="contact-form quote-form reveal" id="contact-form" novalidate>
+          <p class="quote-quick">Prefer to talk? <a href="tel:+12487164603">Call us</a><a href="mailto:hi@bhavyasevents.com">Email us</a></p>
           <p class="form-hint"><span class="req" aria-hidden="true">*</span> Required</p>
 
           <fieldset class="form-step">
@@ -139,7 +140,6 @@
             </label>
             <label><span class="label-text">Confirm Event Date <span class="req" aria-hidden="true">*</span></span>
               <input type="date" name="date_confirm" required>
-              <span class="field-hint">Entered twice so a wrong date never slips through.</span>
               <span class="field-error" aria-live="polite"></span>
             </label>
             </div>
@@ -149,16 +149,16 @@
               <div class="extra-days-list"></div>
               <button type="button" class="add-day">+ Add another day</button>
             </div>
+            <div class="field-row">
             <label><span class="label-text">Venue Name <span class="req" aria-hidden="true">*</span></span>
-              <input type="text" name="venue" required maxlength="100">
-              <span class="field-hint">If undecided, enter 'Not decided yet'.</span>
+              <input type="text" name="venue" required maxlength="100" placeholder="Or 'Not decided yet'">
               <span class="field-error" aria-live="polite"></span>
             </label>
             <label><span class="label-text">Venue Address <span class="req" aria-hidden="true">*</span></span>
-              <input type="text" name="venue_address" required maxlength="160" autocomplete="street-address" placeholder="Street, city, state, ZIP">
-              <span class="field-hint">Enter 'Not decided yet' if you don't have a venue.</span>
+              <input type="text" name="venue_address" required maxlength="160" autocomplete="street-address" placeholder="Street, city, ZIP">
               <span class="field-error" aria-live="polite"></span>
             </label>
+            </div>
           </fieldset>
 
           <fieldset class="form-step">
@@ -271,7 +271,6 @@
           <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button type="submit" class="btn btn-gold btn-block">Send My Request</button>
           <p class="form-note" aria-live="polite"></p>
-          <p class="form-alt">Prefer to talk? <a href="tel:+12487164603">(248) 716-4603</a></p>
           <p class="form-privacy">We only use your details to respond to your request. See our <a href="privacy.html">Privacy Policy</a>.</p>
         </form>
       </div>
