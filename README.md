@@ -6,6 +6,7 @@ Website for Celebrate with Bhavya's, a luxury event planning business. It's a pl
 
 - `index.html`: home page (planning + decor offer, event types and services, process, gallery preview, reviews, about, closing call to action)
 - `quote.html`: Get a Quote page with the request form and contact details
+- `faq.html`: frequently asked questions, written for search engines too (Google can show them in results)
 - `privacy.html`: privacy policy (update it if you add analytics, ads or another form service)
 - `gallery.html`: full gallery page with category filters, photo viewer and highlight videos
 - `styles.css`: gold and light-blue theme on white, soft blue and champagne sections, with dark accent bands
@@ -16,6 +17,7 @@ Website for Celebrate with Bhavya's, a luxury event planning business. It's a pl
 Content (services, about, founders, contact details) and the photos in `images/` come from bhavyas.events and the @celebratewithbhavyas Instagram (files starting with `ig-`), and professional event photos by Miles To Go Photos (files starting with `ev-`, resized to 1600px). Highlight clips in `videos/` are 24-second cuts from the photographer's event films. Reviews come from the business's Google listing.
 
 - **Photos:** add new photos to `images/`, then copy a `<figure class="g-item">` block in `gallery.html` (and in the home page preview in `index.html` if it should be featured there); set `data-cat` (stages, entrances, tables, details, ceremonies, couples or celebrations) and update the count on that tab's button, the `src`, `alt`, title and event. Add `g-tall` or `g-wide` to the class for a larger tile.
+- **FAQ:** edit the questions and answers in `tools/faq_content.py`, then run `python3 tools/build_faq.py`. It updates the page and the matching Google FAQ data together so they never drift apart.
 - **Reviews:** each review is a `<figure class="review">` in the Kind Words section; copy one to add another.
 - **Form submissions:** the Get a Quote form sends each request straight to hi@bhavyasevents.com through [FormSubmit](https://formsubmit.co) (free, no account). The very first submission sends a one-time **activation email** to that address; click the link in it, and every request after that is delivered. The address is set in `CONTACT_EMAIL` in `script.js`.
 
