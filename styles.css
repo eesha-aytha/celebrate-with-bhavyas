@@ -1096,3 +1096,40 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .btn { border-radius: 999px; }
 /* Gold buttons: paint the gradient under the (invisible) border too, so there's no thin edge line */
 .btn-gold { background-origin: border-box; }
+
+/* ---------- What We Do: planning + decor ---------- */
+.offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.offer-card { background: #fff; border: 1px solid #eadfc4; overflow: hidden; display: flex; flex-direction: column; transition: transform .6s cubic-bezier(.22, .61, .36, 1), box-shadow .6s; }
+.offer-card:hover { transform: translateY(-6px); box-shadow: 0 28px 56px -32px rgba(143, 108, 30, .45); }
+.offer-img { aspect-ratio: 16 / 9; overflow: hidden; }
+.offer-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.22, .61, .36, 1); }
+.offer-card:hover .offer-img img { transform: scale(1.05); }
+.offer-body { padding: clamp(1.6rem, 3vw, 2.4rem); }
+.offer-num { font-family: var(--sans); font-size: .7rem; font-weight: 600; letter-spacing: .25em; color: var(--label); margin-bottom: .4rem; }
+.offer-body h3 { font-size: clamp(1.7rem, 2.6vw, 2.1rem); margin-bottom: .7rem; }
+.offer-body > p:not(.offer-num) { color: #3a3740; margin-bottom: 1.2rem; }
+.offer-list { list-style: none; display: grid; gap: .1rem; }
+.offer-list li { position: relative; padding: .5rem 0 .5rem 1.4rem; font-size: .92rem; color: var(--text); border-bottom: 1px solid rgba(201, 165, 76, .15); }
+.offer-list li:last-child { border-bottom: 0; }
+.offer-list li::before { content: "◆"; position: absolute; left: 0; top: .7rem; font-size: .55rem; color: var(--gold); }
+.offer-together { margin-top: 2rem; display: flex; align-items: center; gap: 1.5rem 2.5rem; padding: clamp(1.6rem, 3vw, 2.2rem) clamp(1.6rem, 4vw, 3rem); background: radial-gradient(ellipse at 0% 50%, #fdf8ec, #f3e6c6 85%); border: 1px solid #eadcb8; }
+.offer-together-label { flex: none; font-family: var(--serif); font-style: italic; font-size: clamp(1.5rem, 2.4vw, 1.9rem); color: #7a5a14; line-height: 1.1; }
+.offer-together-text { flex: 1; color: #3a3740; }
+.offer-together-text strong { color: var(--text); }
+.offer-together .btn { flex: none; }
+.section-head-sub { margin-top: clamp(5rem, 9vw, 7rem); }
+
+/* Full service list, grouped */
+.service-groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem 2.5rem; }
+.service-groups .service-list { columns: 1; }
+.service-group h4 { font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--label); margin-bottom: .4rem; }
+.service-group .service-list + h4 { margin-top: 1.8rem; }
+
+@media (max-width: 860px) {
+  .offer-grid { grid-template-columns: 1fr; }
+  .offer-together { flex-direction: column; text-align: center; }
+  .service-groups { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .service-groups { grid-template-columns: 1fr; }
+}
