@@ -107,12 +107,11 @@ const MESSAGES = {
   phone: { valueMissing: 'Please enter your mobile number.', patternMismatch: 'Please enter a valid 10-digit US phone number, like (248) 555-0123.' },
   date: DATE_MSGS,
   date_confirm: { ...DATE_MSGS, valueMissing: 'Please confirm your event date.', customError: "The two dates don't match. Please check them." },
-  start_time: { valueMissing: 'Please enter a start time.' },
-  end_time: { valueMissing: 'Please enter an end time.' },
   venue: { valueMissing: "Please enter the venue name, or 'Not decided yet'." },
   venue_address: { valueMissing: "Please enter the venue address, or 'Not decided yet'." },
   event: { valueMissing: 'Please choose an event type.' },
   guests: { valueMissing: 'Please choose a guest range.' },
+  budget: { valueMissing: 'Please choose a budget range.' },
   heard: { valueMissing: 'Please let us know how you heard about us.' },
   extra: { ...DATE_MSGS, valueMissing: 'Please choose a date, or remove this day.' }
 };
@@ -146,14 +145,44 @@ const checkField = field => {
   return !text;
 };
 
-// "Services needed": at least one box must be ticked
+// "Services needed": at least one box must be ticked (skipped when it isn't shown)
 const servicesGroup = form.querySelector('.chip-group');
 const checkServices = () => {
-  const ok = !!form.querySelector('input[name="services"]:checked');
+  const ok = servicesGroup.hidden || !!form.querySelector('input[name="services"]:checked');
   errorFor(servicesGroup).textContent = ok ? '' : 'Please choose at least one service.';
   servicesGroup.classList.toggle('invalid', !ok);
   return ok;
 };
+
+// "What are you looking for?": decor only skips the services list and asks for a budget;
+// planning only hides the decor services; both shows every service and asks for a budget
+const lookingGroup = form.querySelector('.choice-group');
+const budgetField = form.querySelector('.budget-field');
+const decorChips = [...servicesGroup.querySelectorAll('[data-decor]')];
+const lookingFor = () => (form.querySelector('input[name="looking_for"]:checked') || {}).value || '';
+const checkLooking = () => {
+  const ok = !!lookingFor();
+  lookingGroup.querySelector('.field-error').textContent = ok ? '' : 'Please choose decor, event planning or both.';
+  lookingGroup.classList.toggle('invalid', !ok);
+  return ok;
+};
+const updateLooking = () => {
+  const choice = lookingFor();
+  const decorOnly = choice === 'Decor only';
+  const planningOnly = choice === 'Event planning only';
+  servicesGroup.hidden = !choice || decorOnly;
+  if (decorOnly) servicesGroup.querySelectorAll('input:checked').forEach(box => { box.checked = false; });
+  decorChips.forEach(chip => {
+    chip.classList.toggle('is-off', planningOnly);
+    if (planningOnly) chip.querySelector('input').checked = false;
+  });
+  const askBudget = decorOnly || choice === 'Both planning and decor';
+  budgetField.hidden = !askBudget;
+  form.budget.disabled = !askBudget;
+  if (!askBudget) { errorFor(form.budget).textContent = ''; form.budget.classList.remove('invalid'); }
+  if (triedSubmit) { checkLooking(); checkServices(); }
+};
+form.querySelectorAll('input[name="looking_for"]').forEach(radio => radio.addEventListener('change', updateLooking));
 
 let triedSubmit = false;
 const watch = field => {
@@ -184,17 +213,19 @@ addDayBtn.addEventListener('click', () => {
   row.querySelector('input').focus();
 });
 
-const time12 = t => { if (!t) return ''; const [h, m] = t.split(':').map(Number); return `${(h % 12) || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; };
-
 const submitBtn = form.querySelector('button[type="submit"]');
 form.addEventListener('submit', async e => {
   e.preventDefault();
   triedSubmit = true;
-  const fields = [...form.querySelectorAll('[required]')];
+  const fields = [...form.querySelectorAll('[required]')].filter(field => !field.disabled);
   const results = fields.map(checkField);                      // check every field so all problems show at once
+  const lookingOk = checkLooking();
   const servicesOk = checkServices();
   const note = form.querySelector('.form-note');
-  const firstBad = fields[results.indexOf(false)] || (!servicesOk && form.querySelector('input[name="services"]'));
+  const bad = fields.filter((field, i) => !results[i]);
+  if (!lookingOk) bad.push(form.querySelector('input[name="looking_for"]'));
+  if (!servicesOk) bad.push(form.querySelector('input[name="services"]'));
+  const firstBad = bad.sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1))[0];
   if (firstBad) {
     note.textContent = 'Please fill in the highlighted fields.';
     note.className = 'form-note error';
@@ -215,15 +246,16 @@ form.addEventListener('submit', async e => {
     'Mobile': d.get('phone'),
     'Event date': d.get('date'),
     'More days': extraDays.join(' · ') || '(none)',
-    'Time': `${time12(d.get('start_time'))} to ${time12(d.get('end_time'))}`,
     'Venue': d.get('venue').trim(),
     'Venue address': d.get('venue_address').trim(),
     'Event type': d.get('event'),
     'Estimated guests': d.get('guests'),
-    'Services needed': d.getAll('services').join(', '),
+    'Looking for': d.get('looking_for'),
+    'Services needed': d.get('looking_for') === 'Decor only' ? '(decor only)' : d.getAll('services').join(', '),
+    'Budget': d.get('budget') || '(not asked)',
     'Heard about us from': d.get('heard'),
     'Vision': d.get('message').trim() || '(none)',
-    _subject: `New quote request: ${d.get('event')} on ${d.get('date')}`,
+    _subject: `New quote request (${d.get('looking_for')}): ${d.get('event')} on ${d.get('date')}`,
     _replyto: d.get('email'),
     _template: 'table',
     _captcha: 'false'
@@ -246,6 +278,7 @@ form.addEventListener('submit', async e => {
     addDayBtn.hidden = false;
     counter.textContent = `0 / ${message.maxLength}`;
     triedSubmit = false;
+    updateLooking();
     form.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
     note.className = 'form-note success';
     note.textContent = "Thank you! Your request has been sent. We'll be in touch shortly.";
