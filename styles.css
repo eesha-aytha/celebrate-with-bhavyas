@@ -78,10 +78,7 @@ em { font-style: italic; color: var(--gold-text); }
   margin-bottom: 1.2rem;
   display: inline-flex;
   align-items: center;
-  gap: 0.9rem;
-}
-.eyebrow::before, .eyebrow::after {
-  content: ""; width: 48px; height: 2px; border-radius: 2px; background: var(--gold-grad);
+  margin-right: -.24em;            /* cancel the trailing letter-space so centered labels sit truly centered */
 }
 
 .divider { width: 64px; height: 1px; background: var(--gold-grad); margin: 1.8rem 0; }
@@ -555,7 +552,6 @@ em { font-style: italic; color: var(--gold-text); }
 .hero h1 { color: #fff; text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
 .hero .gold { background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; }
 .hero .eyebrow { --label: #d6effa; text-shadow: 0 1px 12px rgba(0, 0, 0, .45); }
-@media (max-width: 560px) { .hero .eyebrow::after { display: none; } }
 .hero-sub { color: rgba(255, 255, 255, .95); }
 .hero-stats { border-top-color: rgba(230, 204, 133, .45); }
 .hero-stats strong { color: #e6cc85; }
@@ -585,8 +581,7 @@ em { font-style: italic; color: var(--gold-text); }
 
 /* Phones: keep section labels on one line */
 @media (max-width: 560px) {
-  .eyebrow { font-size: .9rem; letter-spacing: .16em; gap: .7rem; white-space: nowrap; }
-  .eyebrow::before, .eyebrow::after { width: 24px; }
+  .eyebrow { font-size: .9rem; letter-spacing: .16em; margin-right: -.16em; white-space: nowrap; }
 }
 
 /* ---------- Contact form: required marks, errors and counter ---------- */
