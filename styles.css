@@ -794,7 +794,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .v-head { text-align: center; margin: 5rem auto 2.2rem; max-width: 640px; }
 .v-head .eyebrow { justify-content: center; }
 .v-head h3 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
-.v-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+.v-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
 .v-card { background: #fff; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); }
 .v-media { position: relative; aspect-ratio: 16 / 9; background: #121114; }
 .v-media video, .v-play, .v-play img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
