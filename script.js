@@ -154,8 +154,8 @@ const checkServices = () => {
   return ok;
 };
 
-// "What are you looking for?": decor only skips the services list and asks for a budget;
-// planning only hides the decor services; both shows every service and asks for a budget
+// "What are you looking for?": every choice asks for a budget; decor only skips the services
+// list, planning only hides the decor services and both shows every service
 const lookingGroup = form.querySelector('.choice-group');
 const budgetField = form.querySelector('.budget-field');
 const decorChips = [...servicesGroup.querySelectorAll('[data-decor]')];
@@ -176,7 +176,7 @@ const updateLooking = () => {
     chip.classList.toggle('is-off', planningOnly);
     if (planningOnly) chip.querySelector('input').checked = false;
   });
-  const askBudget = decorOnly || choice === 'Both planning and decor';
+  const askBudget = !!choice;
   budgetField.hidden = !askBudget;
   form.budget.disabled = !askBudget;
   if (!askBudget) { errorFor(form.budget).textContent = ''; form.budget.classList.remove('invalid'); }
@@ -252,7 +252,7 @@ form.addEventListener('submit', async e => {
     'Estimated guests': d.get('guests'),
     'Looking for': d.get('looking_for'),
     'Services needed': d.get('looking_for') === 'Decor only' ? '(decor only)' : d.getAll('services').join(', '),
-    'Budget': d.get('budget') || '(not asked)',
+    'Budget': d.get('budget'),
     'Heard about us from': d.get('heard'),
     'Vision': d.get('message').trim() || '(none)',
     _subject: `New quote request (${d.get('looking_for')}): ${d.get('event')} on ${d.get('date')}`,
