@@ -20,8 +20,8 @@ links.querySelectorAll('a').forEach(a =>
 );
 
 // In-page links: center the section's content in the space below the header.
-// Sections taller than that space start just under the header instead.
-const scrollToSection = target => {
+// Sections taller than that space, or marked data-scroll-top, start just under the header instead.
+const scrollToSection = (target, behavior = 'smooth') => {
   // Center on the section's main block (e.g. About's story, not the mission below it)
   const first = target.firstElementChild || target;
   const last = first;
@@ -32,10 +32,10 @@ const scrollToSection = target => {
   const headerH = header.offsetHeight;
   const space = window.innerHeight - headerH;
   const height = bottom - top;
-  const y = height < space - 24
+  const y = height < space - 24 && !target.hasAttribute('data-scroll-top')
     ? top - headerH - (space - height) / 2
     : top - headerH - 24;
-  window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  window.scrollTo({ top: Math.max(0, y), behavior });
 };
 document.querySelectorAll('a[href^="#"]').forEach(link =>
   link.addEventListener('click', e => {
@@ -54,6 +54,12 @@ document.querySelectorAll('a[href^="#"]').forEach(link =>
     history.pushState(null, '', '#' + id);
   })
 );
+// Arriving from another page with a #section link (e.g. "Watch our highlight videos"):
+// once the page has loaded, line it up the same way
+window.addEventListener('load', () => {
+  const target = location.hash && document.getElementById(location.hash.slice(1));
+  if (target) scrollToSection(target, 'instant');
+});
 
 // Highlight the menu link for the section in the middle of the screen. It is
 // recalculated on every scroll, so fast scrolling can never leave one stuck;
