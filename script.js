@@ -278,56 +278,88 @@ if (filterBtns.length) filterGallery('all');
 
 // Photo viewer: arrows, keyboard and swipe through the photos currently shown
 const lightbox = document.querySelector('.lightbox');
-const lbImg = lightbox.querySelector('img');
-const lbCap = lightbox.querySelector('p');
-const lbCount = lightbox.querySelector('.lightbox-count');
-let lbList = [];
-let lbIndex = 0;
-const showPhoto = i => {
-  lbIndex = (i + lbList.length) % lbList.length;
-  const item = lbList[lbIndex];
-  const img = item.querySelector('img');
-  lbImg.src = img.dataset.full || img.currentSrc || img.src;   // largest version for the full-screen viewer
-  lbImg.alt = img.alt;
-  lbCap.textContent = item.querySelector('.g-title').textContent;
-  lbCount.textContent = `${lbIndex + 1} / ${lbList.length}`;
-};
-galleryItems.forEach(item =>
-  item.addEventListener('click', () => {
-    lbList = visibleItems();
-    showPhoto(lbList.indexOf(item));
-    lightbox.classList.add('open');
-  })
-);
-const closeLightbox = () => lightbox.classList.remove('open');
-lightbox.querySelector('.lightbox-prev').addEventListener('click', () => showPhoto(lbIndex - 1));
-lightbox.querySelector('.lightbox-next').addEventListener('click', () => showPhoto(lbIndex + 1));
-lightbox.addEventListener('click', e => { if (e.target === lightbox || e.target.classList.contains('lightbox-close')) closeLightbox(); });
-document.addEventListener('keydown', e => {
-  if (!lightbox.classList.contains('open')) return;
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowLeft') showPhoto(lbIndex - 1);
-  if (e.key === 'ArrowRight') showPhoto(lbIndex + 1);
-});
-let touchX = null;
-lightbox.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
-lightbox.addEventListener('touchend', e => {
-  if (touchX === null) return;
-  const dx = e.changedTouches[0].clientX - touchX;
-  if (Math.abs(dx) > 40) showPhoto(lbIndex + (dx < 0 ? 1 : -1));
-  touchX = null;
-});
+if (lightbox) {
+  const lbImg = lightbox.querySelector('img');
+  const lbCap = lightbox.querySelector('p');
+  const lbCount = lightbox.querySelector('.lightbox-count');
+  let lbList = [];
+  let lbIndex = 0;
+  const showPhoto = i => {
+    lbIndex = (i + lbList.length) % lbList.length;
+    const item = lbList[lbIndex];
+    const img = item.querySelector('img');
+    lbImg.src = img.dataset.full || img.currentSrc || img.src;   // largest version for the full-screen viewer
+    lbImg.alt = img.alt;
+    lbCap.textContent = item.querySelector('.g-title').textContent;
+    lbCount.textContent = `${lbIndex + 1} / ${lbList.length}`;
+  };
+  galleryItems.forEach(item =>
+    item.addEventListener('click', () => {
+      lbList = visibleItems();
+      showPhoto(lbList.indexOf(item));
+      lightbox.classList.add('open');
+    })
+  );
+  const closeLightbox = () => lightbox.classList.remove('open');
+  lightbox.querySelector('.lightbox-prev').addEventListener('click', () => showPhoto(lbIndex - 1));
+  lightbox.querySelector('.lightbox-next').addEventListener('click', () => showPhoto(lbIndex + 1));
+  lightbox.addEventListener('click', e => { if (e.target === lightbox || e.target.classList.contains('lightbox-close')) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showPhoto(lbIndex - 1);
+    if (e.key === 'ArrowRight') showPhoto(lbIndex + 1);
+  });
+  let touchX = null;
+  lightbox.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  lightbox.addEventListener('touchend', e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) showPhoto(lbIndex + (dx < 0 ? 1 : -1));
+    touchX = null;
+  });
+}
 
-// Highlight videos: tap to play with sound; only one plays at a time
-const videos = [...document.querySelectorAll('.v-card video')];
-document.querySelectorAll('.v-play').forEach(btn => btn.addEventListener('click', () => {
-  const video = btn.parentElement.querySelector('video');
-  videos.forEach(v => { if (v !== video) v.pause(); });
-  btn.hidden = true;
-  video.hidden = false;
-  video.play();
-}));
-videos.forEach(v => v.addEventListener('play', () => videos.forEach(o => { if (o !== v) o.pause(); })));
+// Highlight videos: tap a tile to watch it with sound in a pop-up player
+const vModal = document.querySelector('.v-modal');
+if (vModal) {
+  const vPlayer = vModal.querySelector('video');
+  let lastTile = null;
+  const closeVideo = () => {
+    vPlayer.pause();
+    vPlayer.removeAttribute('src');
+    vPlayer.load();
+    vModal.hidden = true;
+    document.body.style.overflow = '';
+    if (lastTile) lastTile.focus();
+  };
+  document.querySelectorAll('.v-play').forEach(btn => btn.addEventListener('click', () => {
+    lastTile = btn;
+    vPlayer.poster = btn.dataset.poster;
+    vPlayer.src = btn.dataset.video;
+    vModal.querySelector('.v-modal-event').textContent = btn.querySelector('.v-event').textContent;
+    vModal.querySelector('.v-modal-title').textContent = btn.querySelector('.v-title').textContent;
+    vModal.querySelector('.v-modal-desc').textContent = btn.dataset.desc;
+    vModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    vModal.querySelector('.v-modal-close').focus();
+    vPlayer.play().catch(() => {});
+  }));
+  vModal.addEventListener('click', e => { if (e.target === vModal || e.target.classList.contains('v-modal-close')) closeVideo(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !vModal.hidden) closeVideo(); });
+}
+
+// Long video lists: show the first 8, with a button for the rest
+const vGrid = document.querySelector('.v-grid');
+const VIDEOS_SHOWN = 8;
+if (vGrid && vGrid.children.length > VIDEOS_SHOWN) {
+  [...vGrid.children].slice(VIDEOS_SHOWN).forEach(card => card.classList.add('is-extra'));
+  const wrap = document.createElement('div');
+  wrap.className = 'v-more';
+  wrap.innerHTML = `<button type="button" class="btn btn-ghost">Show all ${vGrid.children.length} videos</button>`;
+  wrap.querySelector('button').addEventListener('click', () => { vGrid.classList.add('show-all'); wrap.remove(); });
+  vGrid.after(wrap);
+}
 
 // Banner video loop: load and play only when the banner is near the screen,
 // pause when it scrolls away, and skip it for visitors who prefer less motion

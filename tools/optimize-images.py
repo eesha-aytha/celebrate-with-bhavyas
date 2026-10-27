@@ -52,7 +52,7 @@ def sizes_for(tag, before):
     if 'g-item' in fig:    return '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw'
     if 'portrait' in fig:  return '(max-width: 560px) 50vw, (max-width: 860px) 260px, 22vw'
     if 'service-img' in before[before.rfind('<div'):]: return '(max-width: 560px) 100vw, (max-width: 1024px) 50vw, 25vw'
-    if 'v-play' in before[before.rfind('<button'):]:      return '(max-width: 640px) 100vw, 50vw'
+    if 'v-play' in before[before.rfind('<button'):]:      return '(max-width: 860px) 50vw, 25vw'
     if before.rfind('g-feature-mosaic') > before.rfind('</div>'): return '(max-width: 860px) 60vw, 30vw'
     return '(max-width: 860px) 100vw, 50vw'
 
