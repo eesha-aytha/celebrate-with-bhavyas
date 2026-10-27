@@ -1,0 +1,8 @@
+# Netlify settings. The site itself is plain HTML (no build step);
+# netlify/functions/quote.mjs sends the quote emails from hi@bhavyasevents.com.
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"

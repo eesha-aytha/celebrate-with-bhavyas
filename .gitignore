@@ -3,3 +3,7 @@
 # Never upload secrets (API keys, passwords) if a .env file is ever added
 .env
 .env.*
+!.env.example
+
+# Server-side packages (installed automatically by Netlify)
+node_modules/

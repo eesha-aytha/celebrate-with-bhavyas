@@ -99,12 +99,32 @@ document.querySelectorAll('.service-grid, .steps, .review-grid, .gallery-grid, .
 );
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Quote form: checks every required field, then sends the request straight to
-// the business inbox through FormSubmit (formsubmit.co), a free form-to-email
-// service. The first request ever sent triggers a one-time activation email to
-// CONTACT_EMAIL; click the link in it and every request after that is delivered.
+// Quote form: checks every required field, then sends the request to our own email
+// function (netlify/functions/quote.mjs), which emails it to the business inbox and
+// sends the customer a thank-you, both from hi@bhavyasevents.com. Until the site is on
+// Netlify with email set up, requests go through FormSubmit (formsubmit.co) instead;
+// its first request triggers a one-time activation email to CONTACT_EMAIL.
 const CONTACT_EMAIL = 'hi@bhavyasevents.com';
+const QUOTE_ENDPOINT = '/api/quote';
 const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+const postJson = (url, body) => fetch(url, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+  body: JSON.stringify(body)
+});
+// Our function's answer, or null when it isn't available here (not deployed or not set up yet)
+const sendViaFunction = async payload => {
+  try {
+    const res = await postJson(QUOTE_ENDPOINT, payload);
+    if ([404, 405, 501, 503].includes(res.status)) return null;
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    return data;
+  } catch (err) {
+    if (err instanceof TypeError) return null;                  // network error: try FormSubmit
+    throw err;
+  }
+};
 const form = document.getElementById('contact-form');
 if (form) {
 const DATE_MSGS = { valueMissing: 'Please choose your event date.', rangeUnderflow: 'Please choose a date from today onward.', rangeOverflow: 'Please choose a date within the next 3 years.' };
@@ -267,13 +287,11 @@ form.addEventListener('submit', async e => {
   note.className = 'form-note';
   note.textContent = '';
   try {
-    const res = await fetch(FORM_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok || String(data.success) === 'false') throw new Error(data.message || `HTTP ${res.status}`);
+    if (!(await sendViaFunction(payload))) {
+      const res = await postJson(FORM_ENDPOINT, payload);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || String(data.success) === 'false') throw new Error(data.message || `HTTP ${res.status}`);
+    }
     form.reset();
     daysList.innerHTML = '';
     addDayBtn.hidden = false;

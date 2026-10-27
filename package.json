@@ -1,0 +1,9 @@
+{
+  "name": "celebrate-with-bhavyas",
+  "private": true,
+  "type": "module",
+  "description": "Static site; the only code that runs on a server is the quote email function in netlify/functions.",
+  "dependencies": {
+    "nodemailer": "6.9.16"
+  }
+}
