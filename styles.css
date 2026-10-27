@@ -566,7 +566,13 @@ em { font-style: italic; color: var(--gold-text); }
 .hero::before { opacity: .12; }
 .hero h1 { color: #fff; text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
 .hero .gold { background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; }
-.hero .eyebrow { --label: #bfe3f5; }
+.hero .eyebrow { --label: #d6effa; font-size: clamp(.95rem, 1.5vw, 1.2rem); letter-spacing: .24em; text-shadow: 0 1px 12px rgba(0, 0, 0, .45); }
+.hero .eyebrow::before, .hero .eyebrow::after { width: 48px; }
+@media (max-width: 560px) {
+  .hero .eyebrow { font-size: .9rem; letter-spacing: .16em; gap: .7rem; }
+  .hero .eyebrow::before { width: 24px; }
+  .hero .eyebrow::after { display: none; }
+}
 .hero-sub { color: rgba(255, 255, 255, .95); }
 .hero-stats { border-top-color: rgba(230, 204, 133, .45); }
 .hero-stats strong { color: #e6cc85; }
