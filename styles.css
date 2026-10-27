@@ -864,7 +864,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .services { background: #fff; }
 .services.offer { background: linear-gradient(180deg, var(--tint-blue), #f3f8fb); }
 .offer .section-sub { color: #000; font-weight: 400; }
-.full-service { background: var(--tint-cream); border-color: #eadfc4; box-shadow: none; }
+.full-service { background: radial-gradient(ellipse at 0% 50%, #fdf8ec, #f3e6c6 85%); border-color: #eadcb8; box-shadow: none; --gold-text: #7a5a14; }
 
 /* How It Works: dark band with gold */
 .process { background: radial-gradient(ellipse at 50% 0%, #2a2620, var(--night) 70%); border-top: 0 !important; }
