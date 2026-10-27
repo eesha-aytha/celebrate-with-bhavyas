@@ -398,7 +398,7 @@ em { font-style: italic; color: var(--gold-text); }
     linear-gradient(180deg, rgba(10, 10, 10, .6) 0, rgba(10, 10, 10, 0) 170px),
     linear-gradient(90deg, rgba(18, 17, 20, .86) 0%, rgba(18, 17, 20, .75) 42%, rgba(18, 17, 20, .66) 62%, rgba(18, 17, 20, .2) 100%),
     linear-gradient(0deg, rgba(18, 17, 20, .55) 0%, transparent 40%),
-    url("images/webp/floral-aisle-960.webp") center 60% / cover;
+    url("images/webp/hero-mandap-celebration-1600.webp") center 35% / cover;
   animation: slowzoom 30s ease-in-out infinite alternate;
 }
 @keyframes slowzoom { from { transform: scale(1); } to { transform: scale(1.08); } }
@@ -538,7 +538,7 @@ em { font-style: italic; color: var(--gold-text); }
   .hero-bg {
     background:
       linear-gradient(rgba(10, 10, 10, .85), rgba(18, 17, 20, .62) 25%, rgba(18, 17, 20, .6) 60%, rgba(18, 17, 20, .75)),
-      url("images/webp/floral-aisle-960.webp") center 60% / cover;
+      url("images/webp/mandap-celebration-960.webp") center 40% / cover;
   }
 }
 
