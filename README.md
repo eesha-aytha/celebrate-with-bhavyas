@@ -4,7 +4,7 @@ Website for Celebrate with Bhavya's, a luxury event planning business. It's a pl
 
 ## Files
 
-- `index.html`: home page (about, planning + decor offer, services, process, gallery preview, reviews, closing call to action)
+- `index.html`: home page (planning + decor offer, about, event types and services, process, gallery preview, reviews, closing call to action)
 - `quote.html`: Get a Quote page with the request form and contact details
 - `privacy.html`: privacy policy (update it if you add analytics, ads or another form service)
 - `gallery.html`: full gallery page with category filters, photo viewer and highlight videos

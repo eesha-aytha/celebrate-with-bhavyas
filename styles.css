@@ -1117,7 +1117,6 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .offer-together-text { flex: 1; color: #3a3740; }
 .offer-together-text strong { color: var(--text); }
 .offer-together .btn { flex: none; }
-.section-head-sub { margin-top: clamp(5rem, 9vw, 7rem); }
 
 /* Full service list, grouped */
 .service-groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem 2.5rem; }
