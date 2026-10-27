@@ -1214,3 +1214,8 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .gallery-more .btn-ghost svg { fill: currentColor; stroke: none; }
 .gallery-more .btn-ghost { border: 1px solid var(--gold); background: #fff; color: var(--text); }
 .gallery-more .btn-ghost:hover { background: var(--tint-cream); border-color: var(--gold-dark); color: var(--gold-text); }
+
+/* Gallery: a large, centered showcase photo at the top of the grid */
+.g-feature-tile { grid-column: 2 / span 2; grid-row: span 2; }
+.g-feature-tile img { object-position: center 55%; }
+@media (max-width: 1024px) { .g-feature-tile { grid-column: 1 / -1; } }

@@ -48,6 +48,7 @@ def sizes_for(tag, before):
     """Pick a sensible 'sizes' hint from where the photo sits on the page."""
     o, c = before.rfind('<figure'), before.rfind('</figure>')
     fig = before[o:before.find('>', o) + 1] if o > c else ''          # the open <figure ...> tag around this photo
+    if 'g-feature-tile' in fig: return '(max-width: 1024px) 100vw, 50vw'
     if 'g-wide' in fig:    return '(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 50vw'
     if 'g-item' in fig:    return '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw'
     if 'portrait' in fig:  return '(max-width: 560px) 50vw, (max-width: 860px) 260px, 22vw'
