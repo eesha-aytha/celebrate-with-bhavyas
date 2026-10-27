@@ -150,54 +150,17 @@
               <button type="button" class="add-day">+ Add another day</button>
             </div>
             <div class="field-row">
-            <label><span class="label-text">Venue Name <span class="req" aria-hidden="true">*</span></span>
-              <input type="text" name="venue" required maxlength="100" placeholder="Or 'Not decided yet'">
-              <span class="field-error" aria-live="polite"></span>
+            <label><span class="label-text">Venue Name <span class="optional">(optional)</span></span>
+              <input type="text" name="venue" maxlength="100" placeholder="If you have one">
             </label>
-            <label><span class="label-text">Venue Address <span class="req" aria-hidden="true">*</span></span>
-              <input type="text" name="venue_address" required maxlength="160" autocomplete="street-address" placeholder="Street, city, ZIP">
-              <span class="field-error" aria-live="polite"></span>
+            <label><span class="label-text">Venue Address <span class="optional">(optional)</span></span>
+              <input type="text" name="venue_address" maxlength="160" autocomplete="street-address" placeholder="Street, city, ZIP">
             </label>
             </div>
           </fieldset>
 
           <fieldset class="form-step">
             <legend><span class="step-no">03</span>The event</legend>
-            <div class="field-row">
-            <label><span class="label-text">Event Type <span class="req" aria-hidden="true">*</span></span>
-              <select name="event" required>
-                  <option value="" disabled selected>Choose one</option>
-                  <option>Wedding</option>
-                  <option>Reception</option>
-                  <option>Engagement</option>
-                  <option>Sangeet</option>
-                  <option>Mehndi</option>
-                  <option>Haldi</option>
-                  <option>Pooja / Religious Ceremony</option>
-                  <option>Dhoti / Half Saree Ceremony</option>
-                  <option>Baby Shower</option>
-                  <option>Birthday Party</option>
-                  <option>Graduation Party</option>
-                  <option>Housewarming</option>
-                  <option>Anniversary</option>
-                  <option>Corporate Event</option>
-                  <option>Other</option>
-                </select>
-              <span class="field-error" aria-live="polite"></span>
-            </label>
-            <label><span class="label-text">Estimated Guests <span class="req" aria-hidden="true">*</span></span>
-              <select name="guests" required>
-                  <option value="" disabled selected>Choose a range</option>
-                  <option>Less than 50</option>
-                  <option>50–100</option>
-                  <option>100–250</option>
-                  <option>250–350</option>
-                  <option>350–500</option>
-                  <option>500+</option>
-                </select>
-              <span class="field-error" aria-live="polite"></span>
-            </label>
-            </div>
             <div class="choice-group" role="radiogroup" aria-labelledby="looking-label" aria-required="true">
               <p class="label-text" id="looking-label">What are you looking for? <span class="req" aria-hidden="true">*</span></p>
               <div class="choices">
