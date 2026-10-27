@@ -1111,9 +1111,8 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .offer-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.22, .61, .36, 1); }
 .offer-card:hover .offer-img img { transform: scale(1.05); }
 .offer-body { padding: clamp(1.6rem, 3vw, 2.4rem); }
-.offer-num { font-family: var(--sans); font-size: .7rem; font-weight: 600; letter-spacing: .25em; color: var(--label); margin-bottom: .4rem; }
 .offer-body h3 { font-size: clamp(1.7rem, 2.6vw, 2.1rem); margin-bottom: .7rem; }
-.offer-body > p:not(.offer-num) { color: #3a3740; margin-bottom: 1.2rem; }
+.offer-body > p { color: #3a3740; margin-bottom: 1.2rem; }
 .offer-list { list-style: none; display: grid; gap: .1rem; }
 .offer-list li { position: relative; padding: .5rem 0 .5rem 1.4rem; font-size: .92rem; color: var(--text); border-bottom: 1px solid rgba(201, 165, 76, .15); }
 .offer-list li:last-child { border-bottom: 0; }
