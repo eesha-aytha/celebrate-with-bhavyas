@@ -10,7 +10,7 @@
 | Email | hi@bhavyasevents.com |
 | Website | https://bhavyasevents.com |
 | Category | Event planner (also: Wedding planner, Event decorator) |
-| Short description | Luxury event planning and decor in Farmington Hills, MI: Indian weddings, haldi, sangeet, pooja, receptions, graduations and birthdays. |
+| Short description | Luxury event planning and decor in Farmington Hills, MI for weddings of every culture, showers, birthdays, graduations, cultural ceremonies and corporate events. |
 
 ## Right after the site goes live
 

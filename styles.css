@@ -1,3 +1,13 @@
+/* Fonts are hosted with the site (free, open-licensed) so text shows sooner and nothing waits on Google */
+@font-face { font-family: "Cinzel"; src: url("fonts/cinzel.woff2") format("woff2"); font-weight: 400 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("fonts/cormorant-garamond.woff2") format("woff2"); font-weight: 300 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("fonts/cormorant-garamond-italic.woff2") format("woff2"); font-weight: 300 700; font-style: italic; font-display: swap; }
+/* Georgia, scaled to take up the same space as Cormorant Garamond, shows while the real font loads,
+   so headings don't rewrap and shift the page when it arrives */
+@font-face { font-family: "Cormorant Fallback"; src: local("Georgia"); font-style: normal; size-adjust: 88.5%; ascent-override: 104%; descent-override: 33%; line-gap-override: 0%; }
+@font-face { font-family: "Cormorant Fallback"; src: local("Georgia Italic"), local("Georgia-Italic"); font-style: italic; size-adjust: 78%; ascent-override: 118%; descent-override: 37%; line-gap-override: 0%; }
+@font-face { font-family: "Montserrat"; src: url("fonts/montserrat.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+
 /* ==========================================================
    Celebrate with Bhavya's: white, gold & light-blue theme
    ========================================================== */
@@ -22,7 +32,7 @@
   --line: rgba(201, 165, 76, 0.35);
   --shadow: 0 18px 40px -26px rgba(31, 29, 34, .28);
 
-  --serif: "Cormorant Garamond", Georgia, serif;
+  --serif: "Cormorant Garamond", "Cormorant Fallback", Georgia, serif;
   --sans: "Montserrat", system-ui, sans-serif;
 
   --gold-grad: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 45%, var(--gold-dark) 100%);
@@ -354,7 +364,7 @@ em { font-style: italic; color: var(--gold-text); }
   .service-grid, .steps { grid-template-columns: 1fr; }
   .field-row { grid-template-columns: 1fr; }
   .banner { background-attachment: scroll; }
-  .hero-stats { gap: 1.8rem; }
+  .hero-stats { display: grid; grid-template-columns: repeat(2, max-content); gap: 1.4rem 2.4rem; }  /* fixed 2 rows, so the late-loading font never reflows it */
   .logo-emblem { width: 44px; height: 44px; }
   .logo-name { font-size: 1.3rem; }
   }
@@ -729,7 +739,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
   background: #fbf8f1; border: 1px solid var(--line); border-radius: 10px;
 }
 .g-feature-kicker { font-size: .72rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--label); margin-bottom: .8rem; }
-.g-feature h3 { font-size: clamp(2rem, 3.4vw, 2.8rem); margin-bottom: .5rem; }
+.g-feature h2 { font-size: clamp(2rem, 3.4vw, 2.8rem); margin-bottom: .5rem; }
 .g-feature-lede { font-family: var(--serif); font-style: italic; font-size: 1.35rem; color: var(--gold-text); margin-bottom: 1rem; line-height: 1.4; }
 .g-feature-text > p:not(.g-feature-kicker):not(.g-feature-lede) { color: var(--muted); }
 .g-feature-tags { list-style: none; display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.4rem; }
@@ -776,7 +786,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 /* Highlight videos */
 .v-head { text-align: center; margin: 5rem auto 2.2rem; max-width: 640px; }
 .v-head .eyebrow { justify-content: center; }
-.v-head h3 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
+.v-head h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
 .v-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
 .v-card { margin: 0; }
 .v-card.is-extra { display: none; }
@@ -938,8 +948,8 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .footer-social .dot { fill: currentColor; stroke: none; }
 .footer-social a[aria-label="Google reviews"] svg { fill: currentColor; stroke: none; }
 .footer-social a:hover { background: #d4b062; border-color: #d4b062; color: #17161a; }
-.footer-col h4 {
-  font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase;
+.footer-col .footer-title {
+  font-family: var(--sans); font-size: .72rem; font-weight: 600; line-height: 1.4; letter-spacing: .24em; text-transform: uppercase;
   color: #e6cc85; margin-bottom: 1.2rem;
 }
 .footer-col ul { list-style: none; display: grid; gap: .7rem; }
