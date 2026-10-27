@@ -48,9 +48,18 @@ ${inner}
 </td></tr></table>
 </body></html>`;
 
-const thankYouHtml = firstName => frame(`
+// A short "here's what we received" box so customers can see their details came through
+const summaryHtml = summary => !summary.length ? '' : `
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:6px 0 26px;background:#f8f2e4;border:1px solid #eadcb8;">
+        <tr><td style="padding:18px 22px 6px;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:#1d6890;">Here's what we received</td></tr>
+${summary.map(([label, value]) => `        <tr><td style="padding:6px 22px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#1f1d22;"><span style="color:#8a8379;">${escapeHtml(label)}:</span> ${escapeHtml(value)}</td></tr>`).join('\n')}
+        <tr><td style="height:12px;line-height:12px;font-size:0;">&nbsp;</td></tr>
+      </table>`;
+
+const thankYouHtml = (firstName, summary = []) => frame(`
       <p style="margin:0 0 18px;font-size:26px;line-height:1.3;color:#1f1d22;">Hi ${escapeHtml(firstName)},</p>
       <p style="margin:0 0 16px;font-size:17px;line-height:1.7;">Thank you for reaching out to <strong>Celebrate with Bhavya's</strong>! We've received your request and are so excited to hear about your celebration.</p>
+${summaryHtml(summary)}
       <p style="margin:0 0 16px;font-size:17px;line-height:1.7;">Our team will review your details and get back to you shortly. If your event is coming up soon or you'd like to talk sooner, call us anytime at <a href="tel:+12487164603" style="color:#8f6c1e;font-weight:bold;text-decoration:none;">${PHONE}</a>.</p>
       <p style="margin:0 0 28px;font-size:17px;line-height:1.7;">In the meantime, you can see more of our work on Instagram.</p>
       <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 30px;"><tr><td bgcolor="#c9a54c" style="background:#c9a54c;border-radius:999px;">
@@ -59,10 +68,10 @@ const thankYouHtml = firstName => frame(`
       <p style="margin:0;font-size:17px;line-height:1.6;">Warm regards,<br><span style="font-size:20px;color:#8f6c1e;">Bharathi &amp; Divya</span><br><span style="font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#1d6890;">Celebrate with Bhavya's</span></p>`,
   "We've received your request and will be in touch shortly.");
 
-const thankYouText = firstName => `Hi ${firstName},
+const thankYouText = (firstName, summary = []) => `Hi ${firstName},
 
 Thank you for reaching out to Celebrate with Bhavya's! We've received your request and are so excited to hear about your celebration.
-
+${summary.length ? `\nHere's what we received:\n${summary.map(([k, v]) => `  ${k}: ${v}`).join('\n')}\n` : ''}
 Our team will review your details and get back to you shortly. If your event is coming up soon or you'd like to talk sooner, call us anytime at ${PHONE}.
 
 In the meantime, you can see more of our work on Instagram: ${INSTAGRAM}
@@ -114,7 +123,13 @@ export default async req => {
   const date = field('Event date');
   const lookingFor = field('Looking for');
   const firstName = name.split(/\s+/)[0];
-  const shownRows = rows.map(([k, v]) => [k, k === 'Event date' ? longDate(v) : v]);
+  // Dates read naturally everywhere: "2027-01-25" -> "January 25, 2027"
+  const shownRows = rows.map(([k, v]) => [k, v.replace(/\b\d{4}-\d{2}-\d{2}\b/g, longDate)]);
+  // What the customer sees back: only what they told us, skipping anything blank
+  const blank = v => !v || /^\((none|not given|not asked)\)$/.test(v);
+  const summary = [['Event date', 'Event date'], ['More days', 'Additional days'], ['Looking for', 'Looking for'], ['Services needed', 'Services'], ['Budget', 'Budget'], ['Venue', 'Venue']]
+    .map(([key, label]) => [label, (shownRows.find(([k]) => k === key) || [])[1]])
+    .filter(([, value]) => !blank(value) && value !== '(decor only)');
 
   try {
     await transporter.sendMail({
@@ -134,8 +149,8 @@ export default async req => {
     await transporter.sendMail({
       from, to: `${name} <${email}>`, replyTo: to,
       subject: "Thank you for reaching out to Celebrate with Bhavya's",
-      text: thankYouText(firstName),
-      html: thankYouHtml(firstName),
+      text: thankYouText(firstName, summary),
+      html: thankYouHtml(firstName, summary),
       attachments: [logo]
     });
   } catch (err) {
