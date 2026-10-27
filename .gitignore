@@ -1,1 +1,5 @@
 .DS_Store
+
+# Never upload secrets (API keys, passwords) if a .env file is ever added
+.env
+.env.*
