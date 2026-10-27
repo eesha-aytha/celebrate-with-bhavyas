@@ -868,6 +868,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .about { background: #fff; }
 .services { background: #fff; }
 .services.offer { background: linear-gradient(180deg, var(--tint-blue), #f3f8fb); }
+.offer .section-sub { color: #000; font-weight: 400; }
 .full-service { background: var(--tint-cream); border-color: #eadfc4; box-shadow: none; }
 
 /* How It Works: dark band with gold */
