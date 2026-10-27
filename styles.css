@@ -863,6 +863,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .about { background: #fff; }
 .services { background: #fff; }
 .services.offer { background: linear-gradient(180deg, var(--tint-blue), #f3f8fb); }
+#celebrate { padding-top: clamp(3.5rem, 6.5vw, 5rem); }
 .offer .section-sub { color: #000; font-weight: 400; }
 .full-service { background: radial-gradient(ellipse at 0% 50%, #fdf8ec, #f3e6c6 85%); border-color: #eadcb8; box-shadow: none; --gold-text: #7a5a14; }
 
