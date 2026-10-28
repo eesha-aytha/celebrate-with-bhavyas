@@ -38,7 +38,7 @@ FAQ = [
   ("Do you plan weddings of every culture?",
    "Yes. We plan traditional, modern and fusion weddings for couples of every background, and we understand the details of multi-day Indian and South Asian weddings too, from the haldi, mehndi and sangeet to the baraat, ceremony and reception."),
   ("Do you plan destination weddings?",
-   "Yes. We love destination weddings, whether it's a lakeside weekend up north in Michigan, another state or overseas. We plan, coordinate and design your celebration from home, then travel to set up the decor and run the day, so you get the same personal touch wherever you say \"I do.\" Share your location and date and we'll put together a plan and quote."),
+   "Yes. We love destination weddings, whether it's a lakeside weekend up north in Michigan, another state, Mexico and the Caribbean, South America, Europe or India. We plan, coordinate and design your celebration from home, then travel to set up the decor and run the day, so you get the same personal touch wherever you say \"I do.\" Share your location and date and we'll put together a plan and quote. See our Destination Weddings page for more."),
   ("Do you plan multi-day weddings and celebrations?",
    "Yes. We plan and style every event of a multi-day celebration, such as a welcome dinner, mehndi or rehearsal dinner, the ceremony and the reception, each with its own look and a timeline that keeps every day running smoothly."),
   ("Do you plan corporate events and parties?",
