@@ -437,8 +437,8 @@ em { font-style: italic; color: var(--gold-text); }
 }
 
 /* Service card photos */
-.service-img { margin: 0 -1.8rem; height: 190px; overflow: hidden; position: relative; }
-.service-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 40%, var(--bg-alt)); }
+.service-img { margin: 0 -1.8rem; height: 200px; overflow: hidden; position: relative; }
+.service-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 68%, rgba(var(--bg-rgb), .55) 86%, var(--bg-alt)); }
 .service-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
 .service-card:hover .service-img img { transform: scale(1.08); }
 .service-card::before { z-index: 2; }
@@ -1397,4 +1397,3 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .hero-stats span { color: #fff; }
 .banner-text .gold, .dest-band h2 em { background: linear-gradient(135deg, #f6e3a6 0%, #e6c66f 50%, #cfa649 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 2px 8px rgba(6, 10, 18, .6)); }
 .hero .gold, .banner-text .gold, .dest-band h2 em { text-shadow: none; }  /* the dark heading shadow would show through the see-through gold letters */
-.service-img:has(img[src*="grad-candle-card"])::after { background: linear-gradient(transparent 68%, var(--bg-alt)); }
