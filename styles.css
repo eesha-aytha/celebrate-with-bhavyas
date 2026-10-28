@@ -1292,8 +1292,8 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .dest-checks li { display: flex; align-items: center; gap: .7rem; padding: .95rem 1.1rem; background: #fff; border: 1px solid #dfe8ee; border-radius: 12px; font-size: .92rem; color: var(--text); }
 .dest-checks li::before { content: "\2713"; flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--gold-grad); color: var(--ink); font-size: .7rem; font-weight: 700; }
 
-.dest-steps { background: var(--tint-cream); }
-.dest-steps .step-num { background: var(--tint-cream); }
+.dest-steps { background: #fff; }
+.dest-steps .step-num { background: #fff; }
 .dest-faq-link-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem 3rem; padding: clamp(2rem, 4vw, 3rem) clamp(1.6rem, 4vw, 3.2rem); border: 1px solid #eadcb8; border-radius: 16px; background: radial-gradient(ellipse at 0% 50%, #fdf8ec, #f3e6c6 90%); }
 .dest-faq-link h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: .6rem; }
 .dest-faq-link h2::after { content: none; }
@@ -1331,3 +1331,15 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
   .nav-links a:not(.btn) { font-size: .86rem; letter-spacing: .05em; }
   .site-header .logo-words { transform: scale(.92); transform-origin: left center; }
 }
+
+/* Destinations: end on the same champagne band as the home page, distinct from the cream FAQ box above */
+.dest-cta { background: radial-gradient(ellipse at 50% 0%, #fdf8ec, #f3e6c6 75%); border-top: 1px solid #eadcb8; --gold-text: #7a5a14; }
+.dest-cta .page-cta-inner > p:not(.eyebrow) { color: #3a3740; }
+.dest-faq-link { background: #fff; }
+.dest-faq-link-inner { background: radial-gradient(ellipse at 0% 0%, #2a2620, #17161a 75%); border-color: #3a3124; }
+.dest-faq-link .eyebrow { --label: #a8d8f0; }
+.dest-faq-link h2 { color: #fff; }
+.dest-faq-link h2 em { color: #e6cc85; }
+.dest-faq-link-inner p:not(.eyebrow) { color: rgba(255, 255, 255, .78); }
+.dest-faq-btn { border-color: #e6cc85; color: #e6cc85; }
+.dest-faq-btn:hover { background: #e6cc85; color: var(--ink); border-color: #e6cc85; }
