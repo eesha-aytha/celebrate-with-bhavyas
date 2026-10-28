@@ -1397,3 +1397,4 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .hero-stats span { color: #fff; }
 .banner-text .gold, .dest-band h2 em { background: linear-gradient(135deg, #f6e3a6 0%, #e6c66f 50%, #cfa649 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 2px 8px rgba(6, 10, 18, .6)); }
 .hero .gold, .banner-text .gold, .dest-band h2 em { text-shadow: none; }  /* the dark heading shadow would show through the see-through gold letters */
+.service-img:has(img[src*="grad-candle-card"])::after { background: linear-gradient(transparent 68%, var(--bg-alt)); }
