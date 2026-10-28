@@ -1188,7 +1188,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 
 /* ---------- Gallery: videos first, with shortcuts to them ---------- */
 .g-videos { scroll-margin-top: 90px; }
-.g-videos .v-head { margin-top: clamp(3.5rem, 7vw, 5rem); }
+.g-videos .v-head { margin-top: 0; }
 .g-photos-head { margin-top: clamp(4.5rem, 8vw, 6rem); }
 .page-hero-link { display: inline-flex; align-items: center; gap: .45rem; margin-top: 1.6rem; padding-bottom: .25rem; border-bottom: 1px solid rgba(230, 204, 133, .6); font-family: var(--sans); font-size: .74rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #e6cc85; transition: color .3s, border-color .3s; }
 .page-hero-link svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
