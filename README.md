@@ -6,6 +6,7 @@ Website for Celebrate with Bhavya's, a luxury event planning business. It's a pl
 
 - `index.html`: home page (planning + decor offer, event types and services, process, gallery preview, reviews, about, closing call to action)
 - `quote.html`: Get a Quote page with the request form and contact details
+- `destination-weddings.html`: destination wedding planning and decor (Michigan, US and abroad), with its own FAQ and structured data
 - `faq.html`: frequently asked questions, written for search engines too (Google can show them in results)
 - `netlify/functions/quote.mjs`: sends the quote emails (the only code that runs on a server)
 - `privacy.html`: privacy policy (update it if you add analytics, ads or another form service)
