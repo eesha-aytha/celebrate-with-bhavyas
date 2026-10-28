@@ -49,3 +49,7 @@ Do this once the site is on Netlify. Nothing secret goes in the code; the mailbo
 3. **Deploys → Trigger deploy**. Send yourself a test request from the Get a Quote page: you should get the request email, and the address you entered gets the thank-you.
 
 If those settings are missing, the form automatically falls back to FormSubmit, so requests are never lost.
+
+## Photo credits
+
+- `images/beach-mandap-destination.jpg` (Destinations page): free stock photo from Unsplash, [unsplash.com/photos/_D1rKHYi9lc](https://unsplash.com/photos/_D1rKHYi9lc), used under the Unsplash License (no credit required). Replace it with a photo from one of our own destination weddings when we have one. Every other photo is from our own events.
