@@ -6,3 +6,47 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+
+# ---------- Old site: send everything on bhavyas.events to bhavyasevents.com ----------
+# The old Wix pages map to their closest page here; anything else goes to the home page.
+# (Takes effect once bhavyas.events is added in Netlify as a domain alias.)
+[[redirects]]
+  from = "https://bhavyas.events/about-1"
+  to = "https://bhavyasevents.com/#about"
+  status = 301
+  force = true
+[[redirects]]
+  from = "https://bhavyas.events/services-1"
+  to = "https://bhavyasevents.com/#services"
+  status = 301
+  force = true
+[[redirects]]
+  from = "https://bhavyas.events/events"
+  to = "https://bhavyasevents.com/#celebrate"
+  status = 301
+  force = true
+[[redirects]]
+  from = "https://bhavyas.events/gallery"
+  to = "https://bhavyasevents.com/gallery.html"
+  status = 301
+  force = true
+[[redirects]]
+  from = "https://bhavyas.events/booking"
+  to = "https://bhavyasevents.com/quote.html"
+  status = 301
+  force = true
+[[redirects]]
+  from = "https://bhavyas.events/contact"
+  to = "https://bhavyasevents.com/quote.html"
+  status = 301
+  force = true
+[[redirects]]
+  from = "https://bhavyas.events/*"
+  to = "https://bhavyasevents.com/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "https://www.bhavyas.events/*"
+  to = "https://bhavyas.events/:splat"
+  status = 301
+  force = true

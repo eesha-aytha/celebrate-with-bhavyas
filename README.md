@@ -36,9 +36,9 @@ python3 tools/optimize-images.py
 
 It only converts new or changed photos and updates the pages automatically (needs `brew install webp`). To have it run by itself before every commit, install the hook once with `sh tools/install-hooks.sh`.
 
-## Publishing with GitHub Pages
+## Publishing (Netlify)
 
-In the GitHub repo: **Settings → Pages → Source: Deploy from a branch → `main` / root**. The site will be live at `https://<username>.github.io/<repo-name>/`.
+The site is hosted on Netlify and served at **bhavyasevents.com**. Every push to `main` on GitHub publishes automatically. The old domain **bhavyas.events** is added in Netlify as a domain alias, and `netlify.toml` sends its old Wix pages to the matching pages here. Both domains are registered at GoDaddy; bhavyasevents.com keeps GoDaddy DNS because its Zoho email records live there.
 
 ## Sending quote emails from hi@bhavyasevents.com (Netlify)
 
