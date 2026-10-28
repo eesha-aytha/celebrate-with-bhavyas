@@ -21,7 +21,7 @@ links.querySelectorAll('a').forEach(a =>
 
 // In-page links: center the section's content in the space below the header.
 // Sections taller than that space, or marked data-scroll-top, start just under the header instead.
-const scrollToSection = (target, behavior = 'smooth') => {
+const sectionY = target => {
   // Center on the section's main block (e.g. About's story, not the mission below it)
   const first = target.firstElementChild || target;
   const last = first;
@@ -35,8 +35,9 @@ const scrollToSection = (target, behavior = 'smooth') => {
   const y = height < space - 24 && !target.hasAttribute('data-scroll-top')
     ? top - headerH - (space - height) / 2
     : top - headerH - 24;
-  window.scrollTo({ top: Math.max(0, y), behavior });
+  return Math.max(0, Math.round(y));
 };
+const scrollToSection = (target, behavior = 'smooth') => window.scrollTo({ top: sectionY(target), behavior });
 document.querySelectorAll('a[href^="#"]').forEach(link =>
   link.addEventListener('click', e => {
     const id = link.getAttribute('href').slice(1);
@@ -54,12 +55,19 @@ document.querySelectorAll('a[href^="#"]').forEach(link =>
     history.pushState(null, '', '#' + id);
   })
 );
-// Arriving from another page with a #section link (e.g. "Watch our highlight videos"):
-// once the page has loaded, line it up the same way
-window.addEventListener('load', () => {
-  const target = location.hash && document.getElementById(location.hash.slice(1));
-  if (target) scrollToSection(target, 'instant');
-});
+// Arriving from another page with a #section link (e.g. "Read the destination FAQ"):
+// show that section straight away and line it up in one step, with no smooth scroll,
+// then only nudge it once everything has loaded if something actually moved
+const arrivalTarget = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+if (arrivalTarget) {
+  const root = document.documentElement;
+  root.style.scrollBehavior = 'auto';
+  [arrivalTarget, ...arrivalTarget.querySelectorAll('.reveal')].forEach(el => el.classList.add('visible'));
+  const lineUp = () => { const y = sectionY(arrivalTarget); if (Math.abs(window.scrollY - y) > 4) window.scrollTo(0, y); };
+  lineUp();
+  requestAnimationFrame(lineUp);
+  window.addEventListener('load', () => { lineUp(); setTimeout(() => { root.style.scrollBehavior = ''; }, 100); }, { once: true });
+}
 
 // Highlight the menu link for the section in the middle of the screen. It is
 // recalculated on every scroll, so fast scrolling can never leave one stuck;
