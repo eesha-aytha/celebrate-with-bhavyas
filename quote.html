@@ -25,7 +25,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preload" href="fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=22c56780">
+  <link rel="stylesheet" href="styles.css?v=c6104eec">
 </head>
 <body class="subpage">
 
@@ -143,6 +143,19 @@
               <div class="extra-days-list"></div>
               <button type="button" class="add-day">+ Add another day</button>
             </div>
+            <div class="choice-group location-group" role="radiogroup" aria-labelledby="location-label" aria-required="true">
+              <p class="label-text" id="location-label">Where is your event? <span class="req" aria-hidden="true">*</span></p>
+              <div class="choices choices-row">
+                <label class="choice"><input type="radio" name="location_type" value="Local (Michigan)"><span><strong>Local</strong><small>Metro Detroit and Michigan</small></span></label>
+                <label class="choice"><input type="radio" name="location_type" value="Destination"><span><strong>Destination</strong><small>Out of state or abroad</small></span></label>
+              </div>
+              <span class="field-error" aria-live="polite"></span>
+            </div>
+            <label class="destination-field" hidden><span class="label-text">Destination <span class="req" aria-hidden="true">*</span></span>
+              <input type="text" name="destination" maxlength="120" required disabled placeholder="e.g. Cancún, Mexico or Lake Como, Italy">
+              <span class="field-hint">Not sure yet? Tell us the places you're considering.</span>
+              <span class="field-error" aria-live="polite"></span>
+            </label>
             <div class="field-row">
             <label><span class="label-text">Venue Name <span class="optional">(optional)</span></span>
               <input type="text" name="venue" maxlength="100" placeholder="If you have one">
@@ -291,6 +304,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=d3460067"></script>
+  <script src="script.js?v=1663907c"></script>
 </body>
 </html>

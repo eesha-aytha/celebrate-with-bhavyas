@@ -135,6 +135,7 @@ const MESSAGES = {
   date: DATE_MSGS,
   date_confirm: { ...DATE_MSGS, valueMissing: 'Please confirm your event date.', customError: "The two dates don't match. Please check them." },
   budget: { valueMissing: 'Please choose a budget range.' },
+  destination: { valueMissing: 'Please tell us where, or the places you are considering.' },
   heard: { valueMissing: 'Please let us know how you heard about us.' },
   extra: { ...DATE_MSGS, valueMissing: 'Please choose a date, or remove this day.' }
 };
@@ -177,9 +178,11 @@ const checkServices = () => {
   return ok;
 };
 
+let triedSubmit = false;
+
 // "What are you looking for?": every choice asks for a budget; decor only skips the services
 // list, planning only hides the decor services and both shows every service
-const lookingGroup = form.querySelector('.choice-group');
+const lookingGroup = form.querySelector('input[name="looking_for"]').closest('.choice-group');
 const budgetField = form.querySelector('.budget-field');
 const decorChips = [...servicesGroup.querySelectorAll('[data-decor]')];
 const lookingFor = () => (form.querySelector('input[name="looking_for"]:checked') || {}).value || '';
@@ -207,7 +210,30 @@ const updateLooking = () => {
 };
 form.querySelectorAll('input[name="looking_for"]').forEach(radio => radio.addEventListener('change', updateLooking));
 
-let triedSubmit = false;
+// "Where is your event?": a destination event asks where (required)
+const locationGroup = form.querySelector('.location-group');
+const destinationField = form.querySelector('.destination-field');
+const locationType = () => (form.querySelector('input[name="location_type"]:checked') || {}).value || '';
+const checkLocation = () => {
+  const ok = !!locationType();
+  locationGroup.querySelector('.field-error').textContent = ok ? '' : 'Please choose local or destination.';
+  locationGroup.classList.toggle('invalid', !ok);
+  return ok;
+};
+const updateLocation = () => {
+  const isDestination = locationType() === 'Destination';
+  destinationField.hidden = !isDestination;
+  form.destination.disabled = !isDestination;
+  if (!isDestination) { errorFor(form.destination).textContent = ''; form.destination.classList.remove('invalid'); }
+  if (triedSubmit) checkLocation();
+};
+form.querySelectorAll('input[name="location_type"]').forEach(radio => radio.addEventListener('change', updateLocation));
+// Arriving from the Destinations page (quote.html?destination) picks Destination for them
+if (new URLSearchParams(location.search).has('destination')) {
+  form.querySelector('input[name="location_type"][value="Destination"]').checked = true;
+  updateLocation();
+}
+
 const watch = field => {
   field.addEventListener('blur', () => { if (field.value || triedSubmit) checkField(field); });
   field.addEventListener(field.tagName === 'SELECT' ? 'change' : 'input', () => {
@@ -242,10 +268,12 @@ form.addEventListener('submit', async e => {
   triedSubmit = true;
   const fields = [...form.querySelectorAll('[required]')].filter(field => !field.disabled);
   const results = fields.map(checkField);                      // check every field so all problems show at once
+  const locationOk = checkLocation();
   const lookingOk = checkLooking();
   const servicesOk = checkServices();
   const note = form.querySelector('.form-note');
   const bad = fields.filter((field, i) => !results[i]);
+  if (!locationOk) bad.push(form.querySelector('input[name="location_type"]'));
   if (!lookingOk) bad.push(form.querySelector('input[name="looking_for"]'));
   if (!servicesOk) bad.push(form.querySelector('input[name="services"]'));
   const firstBad = bad.sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1))[0];
@@ -269,6 +297,7 @@ form.addEventListener('submit', async e => {
     'Mobile': d.get('phone'),
     'Event date': d.get('date'),
     'More days': extraDays.join(' · ') || '(none)',
+    'Location': d.get('location_type') === 'Destination' ? `Destination: ${d.get('destination').trim()}` : d.get('location_type'),
     'Venue': d.get('venue').trim() || '(not given)',
     'Venue address': d.get('venue_address').trim() || '(not given)',
     'Looking for': d.get('looking_for'),
@@ -276,7 +305,7 @@ form.addEventListener('submit', async e => {
     'Budget': d.get('budget'),
     'Heard about us from': d.get('heard'),
     'Vision': d.get('message').trim() || '(none)',
-    _subject: `New quote request (${d.get('looking_for')}): event on ${d.get('date')}`,
+    _subject: `New quote request (${d.get('looking_for')}${d.get('location_type') === 'Destination' ? ', destination' : ''}): event on ${d.get('date')}`,
     _replyto: d.get('email'),
     _template: 'table',
     _captcha: 'false'
@@ -298,6 +327,7 @@ form.addEventListener('submit', async e => {
     counter.textContent = `0 / ${message.maxLength}`;
     triedSubmit = false;
     updateLooking();
+    updateLocation();
     form.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
     note.className = 'form-note success';
     note.textContent = "Thank you! Your request has been sent. We'll be in touch shortly.";

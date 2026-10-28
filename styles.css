@@ -1343,3 +1343,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .dest-faq-link-inner p:not(.eyebrow) { color: rgba(255, 255, 255, .78); }
 .dest-faq-btn { border-color: #e6cc85; color: #e6cc85; }
 .dest-faq-btn:hover { background: #e6cc85; color: var(--ink); border-color: #e6cc85; }
+
+/* Quote form: local or destination */
+.choices-row { grid-template-columns: 1fr 1fr; }
+@media (max-width: 480px) { .choices-row { grid-template-columns: 1fr; } }

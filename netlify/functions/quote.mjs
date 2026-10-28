@@ -127,14 +127,14 @@ export default async req => {
   const shownRows = rows.map(([k, v]) => [k, v.replace(/\b\d{4}-\d{2}-\d{2}\b/g, longDate)]);
   // What the customer sees back: only what they told us, skipping anything blank
   const blank = v => !v || /^\((none|not given|not asked)\)$/.test(v);
-  const summary = [['Event date', 'Event date'], ['More days', 'Additional days'], ['Looking for', 'Looking for'], ['Services needed', 'Services'], ['Budget', 'Budget'], ['Venue', 'Venue']]
+  const summary = [['Event date', 'Event date'], ['More days', 'Additional days'], ['Location', 'Location'], ['Looking for', 'Looking for'], ['Services needed', 'Services'], ['Budget', 'Budget'], ['Venue', 'Venue']]
     .map(([key, label]) => [label, (shownRows.find(([k]) => k === key) || [])[1]])
     .filter(([, value]) => !blank(value) && value !== '(decor only)');
 
   try {
     await transporter.sendMail({
       from, to, replyTo: `${name} <${email}>`,
-      subject: `New quote request${lookingFor ? ` (${lookingFor})` : ''}: ${name}${date ? `, ${longDate(date)}` : ''}`,
+      subject: `New quote request${lookingFor ? ` (${lookingFor}${field('Location').startsWith('Destination') ? ', destination' : ''})` : ''}: ${name}${date ? `, ${longDate(date)}` : ''}`,
       text: shownRows.map(([k, v]) => `${k}: ${v}`).join('\n'),
       html: requestHtml(shownRows),
       attachments: [logo]
