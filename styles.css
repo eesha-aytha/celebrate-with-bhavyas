@@ -1224,7 +1224,8 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 /* ---------- Destination Weddings page ---------- */
 .dest-hero { position: relative; overflow: hidden; color: #fff; background: #17161a; padding: clamp(10rem, 18vw, 13rem) 0 0; text-align: center; }
 .dest-hero-bg { position: absolute; inset: 0; z-index: 0;
-  background: linear-gradient(180deg, rgba(14, 13, 16, .66) 0%, rgba(14, 13, 16, .4) 42%, rgba(14, 13, 16, .74) 100%),
+  background: radial-gradient(ellipse 62% 48% at 50% 46%, rgba(8, 11, 18, .62) 0%, rgba(8, 11, 18, .38) 55%, rgba(8, 11, 18, 0) 100%),
+    linear-gradient(180deg, rgba(14, 13, 16, .66) 0%, rgba(14, 13, 16, .32) 42%, rgba(14, 13, 16, .74) 100%),
     url("images/webp/cliffside-floral-arch-1600.webp") 58% 55% / cover; }
 .dest-hero-inner { position: relative; z-index: 1; max-width: 820px; padding-bottom: clamp(4rem, 8vw, 6rem); }
 .dest-hero .eyebrow { --label: #bfe3f5; justify-content: center; }
@@ -1291,7 +1292,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
   .dest-places-grid, .dest-why-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 860px) {
-  .dest-hero-bg { background-image: linear-gradient(180deg, rgba(14, 13, 16, .7), rgba(14, 13, 16, .46) 45%, rgba(14, 13, 16, .8)), url("images/webp/cliffside-floral-arch-960.webp"); background-position: 66% 60%; }
+  .dest-hero-bg { background-image: linear-gradient(180deg, rgba(10, 12, 18, .74), rgba(10, 12, 18, .58) 45%, rgba(10, 12, 18, .82)), url("images/webp/cliffside-floral-arch-960.webp"); background-position: 66% 60%; }
   .dest-grid, .dest-guests-inner { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
@@ -1349,4 +1350,8 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 }
 .dest-faq-link .btn-line { flex: none; }
 .gallery-more .btn-line svg[viewBox] path[d^="M8 5.5"] { fill: currentColor; stroke: none; }
-.dest-hero h1, .dest-hero-sub, .dest-hero .eyebrow { text-shadow: 0 2px 18px rgba(8, 12, 20, .55); }
+/* Words over the sea photo: a soft dark glow behind them, brighter and slightly heavier type */
+.dest-hero h1 { font-weight: 500; text-shadow: 0 2px 4px rgba(6, 10, 18, .35), 0 6px 30px rgba(6, 10, 18, .6); }
+.dest-hero h1 em { color: #f1d991; }
+.dest-hero .eyebrow { --label: #e3f4fc; text-shadow: 0 1px 3px rgba(6, 10, 18, .5), 0 4px 18px rgba(6, 10, 18, .55); }
+.dest-hero-sub { color: #fff; font-weight: 400; text-shadow: 0 1px 3px rgba(6, 10, 18, .55), 0 4px 20px rgba(6, 10, 18, .6); }
