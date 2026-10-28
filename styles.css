@@ -1336,7 +1336,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
    Clear with a thin outline: charcoal on light sections, white on dark ones.
    Every one fills with the site's gold on hover. */
 .btn-line { --line: var(--text); }
-.hero .btn-line, .dest-hero .btn-line, .dest-faq-link .btn-line, .dest-weekend .btn-line { --line: #fff; }
+.hero .btn-line, .dest-band .btn-line, .dest-hero .btn-line, .dest-faq-link .btn-line, .dest-weekend .btn-line { --line: #fff; }
 .btn-line.btn-line {
   display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
   border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--line);
@@ -1355,3 +1355,16 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .dest-hero h1 em { color: #f1d991; }
 .dest-hero .eyebrow { --label: #e3f4fc; text-shadow: 0 1px 3px rgba(6, 10, 18, .5), 0 4px 18px rgba(6, 10, 18, .55); }
 .dest-hero-sub { color: #fff; font-weight: 400; text-shadow: 0 1px 3px rgba(6, 10, 18, .55), 0 4px 20px rgba(6, 10, 18, .6); }
+
+/* ---------- Home: Destination Weddings band ---------- */
+.dest-band { position: relative; overflow: hidden; isolation: isolate; color: #fff; text-align: center; padding: clamp(5.5rem, 11vw, 8.5rem) 0; background: #17161a; }
+.dest-band-bg { position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(8, 11, 18, .62), rgba(8, 11, 18, .3) 70%, rgba(8, 11, 18, .15)),
+    linear-gradient(180deg, rgba(10, 12, 18, .35), rgba(10, 12, 18, .5)),
+    url("images/webp/cliffside-floral-arch-1600.webp") 58% 55% / cover; }
+.dest-band-inner { max-width: 760px; }
+.dest-band .eyebrow { justify-content: center; --label: #e3f4fc; text-shadow: 0 1px 3px rgba(6, 10, 18, .5), 0 4px 18px rgba(6, 10, 18, .55); }
+.dest-band h2 { color: #fff; font-size: clamp(2.3rem, 5vw, 3.8rem); text-shadow: 0 2px 4px rgba(6, 10, 18, .35), 0 6px 30px rgba(6, 10, 18, .6); }
+.dest-band h2 em { color: #f1d991; }
+.dest-band-text { margin: 1.2rem auto 2.2rem; max-width: 560px; color: #fff; font-weight: 500; line-height: 1.75; text-shadow: 0 1px 3px rgba(6, 10, 18, .55), 0 4px 20px rgba(6, 10, 18, .6); }
+@media (max-width: 860px) { .dest-band-bg { background-image: linear-gradient(180deg, rgba(10, 12, 18, .6), rgba(10, 12, 18, .66)), url("images/webp/cliffside-floral-arch-960.webp"); background-position: 66% 60%; } }
