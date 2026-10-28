@@ -1378,7 +1378,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
     linear-gradient(90deg, rgba(14, 13, 18, .8) 0%, rgba(14, 13, 18, .72) 34%, rgba(14, 13, 18, .6) 52%, rgba(14, 13, 18, .22) 64%, rgba(14, 13, 18, 0) 74%),
     linear-gradient(0deg, rgba(18, 17, 20, .45) 0%, transparent 30%),
     url("images/webp/hero-mandap-celebration-1600.webp") center 35% / cover;
-  filter: saturate(1.15) brightness(1.06) contrast(1.05);
+  filter: none;   /* the home photo stays true to life; its colors are already rich */
 }
 .hero h1 { text-shadow: 0 2px 4px rgba(6, 10, 18, .35), 0 6px 30px rgba(6, 10, 18, .55); }
 .hero .eyebrow, .hero-stats span { text-shadow: 0 1px 3px rgba(6, 10, 18, .55), 0 4px 16px rgba(6, 10, 18, .5); }
