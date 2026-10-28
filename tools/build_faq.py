@@ -15,7 +15,7 @@ for key, title, items in FAQ:
             <div class="faq-a"><p>{esc(a)}</p></div>
           </details>
 ''' for q, a in items)
-    groups.append(f'''        <div class="faq-group reveal" id="{key}">
+    groups.append(f'''        <div class="faq-group reveal" id="{key}" data-scroll-top>
           <h2>{esc(title)}</h2>
 {qs}        </div>
 ''')

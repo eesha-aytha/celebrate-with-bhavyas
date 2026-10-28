@@ -1294,8 +1294,13 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 
 .dest-steps { background: var(--tint-cream); }
 .dest-steps .step-num { background: var(--tint-cream); }
-.dest-more { margin-top: 2rem; text-align: center; color: var(--muted); }
-.dest-more a { color: var(--gold-text); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.dest-faq-link-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem 3rem; padding: clamp(2rem, 4vw, 3rem) clamp(1.6rem, 4vw, 3.2rem); border: 1px solid #eadcb8; border-radius: 16px; background: radial-gradient(ellipse at 0% 50%, #fdf8ec, #f3e6c6 90%); }
+.dest-faq-link h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: .6rem; }
+.dest-faq-link h2::after { content: none; }
+.dest-faq-link-inner p:not(.eyebrow) { color: #3a3740; max-width: 34em; }
+.dest-faq-btn { flex: none; border: 1px solid var(--text); color: var(--text); background: transparent; }
+.dest-faq-btn:hover { background: var(--text); color: #fff; }
+@media (max-width: 760px) { .dest-faq-link-inner { flex-direction: column; align-items: flex-start; } }
 
 @media (max-width: 1024px) {
   .dest-weekend-list { grid-template-columns: 1fr 1fr; }
