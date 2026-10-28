@@ -109,8 +109,6 @@ em { font-style: italic; color: var(--gold-text); }
 }
 .btn-gold { background: var(--gold-grad); color: var(--ink); }
 .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -10px rgba(201, 165, 76, .6); }
-.btn-ghost { border-color: var(--gold); color: var(--text); background: rgba(255, 255, 255, .7); }
-.btn-ghost:hover { border-color: var(--blue-text); color: var(--blue-text); }
 .btn-outline { border-color: var(--gold); color: var(--gold-text); }
 .btn-outline:hover { background: var(--gold); color: var(--ink); }
 .btn-sm { padding: .6rem 1.2rem; font-size: .7rem; }
@@ -566,8 +564,6 @@ em { font-style: italic; color: var(--gold-text); }
 .hero-stats { border-top-color: rgba(230, 204, 133, .45); }
 .hero-stats strong { color: #e6cc85; }
 .hero-stats span { color: rgba(255, 255, 255, .88); }
-.hero .btn-ghost { border-color: rgba(255, 255, 255, .7); color: #fff; background: rgba(18, 17, 20, .25); }
-.hero .btn-ghost:hover { border-color: #e6cc85; color: #e6cc85; }
 
 /* ---------- Gallery: show more + photo viewer arrows ---------- */
 .g-item.g-hidden { display: none; }
@@ -633,7 +629,6 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 }
 .ci-socials svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .ci-socials .dot { fill: currentColor; stroke: none; }
-.ci-socials a:hover { background: var(--gold-grad); color: var(--ink); }
 @media (max-width: 560px) {
   .contact-card { padding: 1rem 1.1rem; gap: 1rem; }
   .ci-icon { width: 44px; height: 44px; }
@@ -726,7 +721,6 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 }
 .reviews-btn .g-logo { width: 20px; height: 20px; flex-shrink: 0; }
 .reviews-btn .arrow { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s ease; }
-.reviews-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
 .reviews-btn:hover .arrow { transform: translateX(4px); }
 @media (max-width: 560px) { .reviews-btn { font-size: .72rem; letter-spacing: .08em; padding: .85rem 1.2rem .85rem 1rem; } }
 
@@ -1081,8 +1075,6 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .closing-cta h2 em { color: var(--gold-text); }
 .closing-cta-inner > p:not(.eyebrow) { color: #3a3740; max-width: 540px; margin: 1.2rem auto 2.2rem; }
 .closing-cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; }
-.closing-call { color: var(--text); border: 1px solid rgba(31, 29, 34, .45); background: transparent; }
-.closing-call:hover { border-color: var(--text); background: var(--text); color: #fff; }
 
 /* ---------- Get a Quote page ---------- */
 .quote-page { padding-top: clamp(3.5rem, 6vw, 5rem); }
@@ -1221,9 +1213,6 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .page-hero-link svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .page-hero-link:hover { color: #fff; border-color: #fff; }
 .gallery-more { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; }
-.gallery-more .btn-ghost svg { fill: currentColor; stroke: none; }
-.gallery-more .btn-ghost { border: 1px solid var(--gold); background: #fff; color: var(--text); }
-.gallery-more .btn-ghost:hover { background: var(--tint-cream); border-color: var(--gold-dark); color: var(--gold-text); }
 
 /* Gallery: a large, centered showcase photo at the top of the grid */
 .g-feature-tile { grid-column: 2 / span 2; grid-row: span 2; }
@@ -1243,8 +1232,6 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .dest-hero h1 em { color: #e6cc85; }
 .dest-hero-sub { margin: 1.4rem auto 2.2rem; max-width: 600px; color: rgba(255, 255, 255, .9); font-size: clamp(.98rem, 1.4vw, 1.1rem); line-height: 1.75; }
 .dest-hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; }
-.dest-ghost { border: 1px solid rgba(255, 255, 255, .65); color: #fff; background: rgba(255, 255, 255, .06); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-.dest-ghost:hover { background: #fff; color: var(--ink); border-color: #fff; }
 .dest-ticker { position: relative; z-index: 1; display: flex; overflow: hidden; border-top: 1px solid rgba(230, 204, 133, .3); background: rgba(14, 13, 16, .55); }
 .dest-ticker ul { display: flex; flex: none; list-style: none; animation: dest-scroll 60s linear infinite; }
 .dest-ticker li { padding: 1.05rem 1.6rem; font-family: var(--serif); font-style: italic; font-size: 1.12rem; color: #e6cc85; white-space: nowrap; }
@@ -1297,8 +1284,6 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .dest-faq-link h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: .6rem; }
 .dest-faq-link h2::after { content: none; }
 .dest-faq-link-inner p:not(.eyebrow) { color: #3a3740; max-width: 34em; }
-.dest-faq-btn { flex: none; border: 1px solid var(--text); color: var(--text); background: transparent; }
-.dest-faq-btn:hover { background: var(--text); color: #fff; }
 @media (max-width: 760px) { .dest-faq-link-inner { flex-direction: column; align-items: flex-start; } }
 
 @media (max-width: 1024px) {
@@ -1340,10 +1325,27 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 .dest-faq-link h2 { color: #fff; }
 .dest-faq-link h2 em { color: #e6cc85; }
 .dest-faq-link-inner p:not(.eyebrow) { color: rgba(255, 255, 255, .78); }
-.dest-faq-btn { border-color: #e6cc85; color: #e6cc85; }
-.dest-faq-btn:hover { background: #e6cc85; color: var(--ink); border-color: #e6cc85; }
 
 /* Quote form: local or destination */
 .choices-row { grid-template-columns: 1fr 1fr; }
 @media (max-width: 480px) { .choices-row { grid-template-columns: 1fr; } }
 [data-scroll-top] { scroll-margin-top: 21px; }  /* the browser's own #link jump lands where script.js lines sections up */
+
+/* ---------- One outline button style everywhere ----------
+   Clear with a thin outline: charcoal on light sections, white on dark ones.
+   Every one fills with the site's gold on hover. */
+.btn-line { --line: var(--text); }
+.hero .btn-line, .dest-hero .btn-line, .dest-faq-link .btn-line, .dest-weekend .btn-line { --line: #fff; }
+.btn-line.btn-line {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--line);
+  box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; background-origin: border-box;
+  font-weight: 500; text-decoration: none;
+  transition: background .35s ease, color .35s ease, border-color .35s ease, transform .35s ease, box-shadow .35s ease;
+}
+.btn-line.btn-line:hover, .btn-line.btn-line:focus-visible {
+  background: var(--gold-grad); border-color: #d4b062; color: var(--ink);
+  transform: translateY(-2px); box-shadow: 0 12px 30px -12px rgba(201, 165, 76, .6);
+}
+.dest-faq-link .btn-line { flex: none; }
+.gallery-more .btn-line svg[viewBox] path[d^="M8 5.5"] { fill: currentColor; stroke: none; }

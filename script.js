@@ -446,7 +446,7 @@ if (vGrid && vGrid.children.length > VIDEOS_SHOWN) {
   [...vGrid.children].slice(VIDEOS_SHOWN).forEach(card => card.classList.add('is-extra'));
   const wrap = document.createElement('div');
   wrap.className = 'v-more';
-  wrap.innerHTML = `<button type="button" class="btn btn-ghost">Show all ${vGrid.children.length} videos</button>`;
+  wrap.innerHTML = `<button type="button" class="btn btn-line">Show all ${vGrid.children.length} videos</button>`;
   wrap.querySelector('button').addEventListener('click', () => { vGrid.classList.add('show-all'); wrap.remove(); });
   vGrid.after(wrap);
 }
