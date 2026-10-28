@@ -732,10 +732,9 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
   padding: clamp(1.4rem, 3vw, 2.4rem); margin-bottom: 4rem;
   background: #fbf8f1; border: 1px solid var(--line); border-radius: 10px;
 }
-.g-feature-kicker { font-size: .72rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--label); margin-bottom: .8rem; }
 .g-feature h2 { font-size: clamp(2rem, 3.4vw, 2.8rem); margin-bottom: .5rem; }
 .g-feature-lede { font-family: var(--serif); font-style: italic; font-size: 1.35rem; color: var(--gold-text); margin-bottom: 1rem; line-height: 1.4; }
-.g-feature-text > p:not(.g-feature-kicker):not(.g-feature-lede) { color: var(--muted); }
+.g-feature-text > p:not(.g-feature-lede) { color: var(--muted); }
 .g-feature-tags { list-style: none; display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.4rem; }
 .g-feature-tags li { padding: .35rem .85rem; border: 1px solid var(--line); border-radius: 999px; font-size: .72rem; letter-spacing: .08em; color: var(--text); background: #fff; }
 .g-feature-mosaic { display: grid; grid-template-columns: 1.5fr 1fr; grid-template-rows: 1fr 1fr; gap: .8rem; height: clamp(300px, 34vw, 440px); min-height: 0; }
