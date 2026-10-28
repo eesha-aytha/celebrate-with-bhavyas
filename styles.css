@@ -560,7 +560,7 @@ em { font-style: italic; color: var(--gold-text); }
 .hero h1 { color: #fff; text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
 .hero .gold { background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; }
 .hero .eyebrow { --label: #d6effa; text-shadow: 0 1px 12px rgba(0, 0, 0, .45); }
-.hero-sub { color: rgba(255, 255, 255, .95); }
+.hero-sub { color: #fff; font-weight: 600; text-shadow: 0 1px 3px rgba(6, 10, 18, .45), 0 4px 18px rgba(6, 10, 18, .5); }
 .hero-stats { border-top-color: rgba(230, 204, 133, .45); }
 .hero-stats strong { color: #e6cc85; }
 .hero-stats span { color: rgba(255, 255, 255, .88); }
