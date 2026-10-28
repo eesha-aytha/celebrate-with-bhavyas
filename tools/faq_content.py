@@ -54,7 +54,7 @@ FAQ = [
   ("How far in advance should we book a destination wedding?",
    "As early as you can, ideally 12 months or more ahead once you have a location and date in mind. Destinations involve travel, resort rules and local vendors, so more time gives you more options and better rates for your guests."),
   ("Do you bring your own decor to the destination?",
-   "Yes. We bring signature pieces from our own collection, including decor brought straight from India, and combine them with florals and rentals sourced near your venue so your design travels beautifully."),
+   "It depends on your destination. Based on the location and shipping or transportation costs, we recommend the most practical approach: bringing signature pieces from our own collection, sourcing florals and rentals from trusted vendors near your venue, or a mix of both. Either way, your design looks just as beautiful."),
   ("Can you help with our guests' travel?",
    "Yes. We help with resort research, hotel room blocks, welcome bags, itineraries, shuttles and group activities so your guests have an easy, memorable weekend."),
   ("Can you work with our resort's vendors?",
