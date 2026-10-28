@@ -62,7 +62,7 @@ FAQ = [
   ("How are travel costs handled?",
    "Every destination wedding is quoted individually. We walk you through travel and setup costs in your custom quote so there are no surprises."),
   ("Can you plan a multi-day destination celebration?",
-   "Absolutely. From a welcome dinner, mehndi or sangeet to the ceremony, reception and farewell brunch, we plan and style every event of your destination weekend."),
+   "Absolutely. We plan and style every event of your destination weekend, including the welcome dinner, mehndi, sangeet, ceremony, reception and farewell brunch, each with its own look."),
  ]),
  ('booking', 'Booking & Pricing', [
   ("How much do your services cost?",
