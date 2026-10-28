@@ -55,4 +55,6 @@ If those settings are missing, the form automatically falls back to FormSubmit, 
 - `images/beach-mandap-destination.jpg` (Destinations page): free stock photo from Unsplash, [unsplash.com/photos/_D1rKHYi9lc](https://unsplash.com/photos/_D1rKHYi9lc), used under the Unsplash License (no credit required). Replace it with a photo from one of our own destination weddings when we have one. 
 - `images/cliffside-floral-arch.jpg` (Destinations page top photo): free stock photo from Unsplash, [unsplash.com/photos/vJQEtOj46eA](https://unsplash.com/photos/vJQEtOj46eA), Unsplash License.
 
+- `images/corporate-gala-dinner.jpg` (home page Corporate & Social card): free stock photo from Unsplash, [unsplash.com/photos/EJQnHC6GEe8](https://unsplash.com/photos/EJQnHC6GEe8), Unsplash License.
+
 Every other photo is from our own events.
