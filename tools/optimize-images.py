@@ -12,7 +12,7 @@ import os, re, subprocess, sys, html
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WIDTHS = (480, 960, 1600)                  # phone, tablet/laptop, large screens and the photo viewer
 QUALITY = '78'
-SKIP = {'apple-touch-icon.png', 'share-preview.jpg'}   # social previews need JPG/PNG
+SKIP = {'apple-touch-icon.png', 'share-card.jpg'}   # social previews need JPG/PNG
 PAGES = [f for f in os.listdir(ROOT) if f.endswith('.html')]
 SOURCES = [('images', f) for f in sorted(os.listdir(os.path.join(ROOT, 'images')))] + \
           [('videos', f) for f in sorted(os.listdir(os.path.join(ROOT, 'videos'))) if f.endswith('-poster.jpg')]
