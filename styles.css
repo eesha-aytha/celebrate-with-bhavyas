@@ -1401,3 +1401,10 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
 /* ---------- 404 page ---------- */
 .notfound { min-height: 78vh; display: grid; align-items: center; }
 .notfound-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; margin-top: 2.2rem; }
+
+/* Smallest phones (320–380px): let the hero stats columns shrink so nothing is cut off */
+.hero-inner { min-width: 0; }
+@media (max-width: 380px) {
+  .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1.2rem; }
+  .hero-stats span { letter-spacing: .14em; }
+}
