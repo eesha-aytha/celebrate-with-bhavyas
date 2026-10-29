@@ -99,7 +99,7 @@ const observer = new IntersectionObserver(entries => {
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.15 });
+}, { threshold: 0, rootMargin: "0px 0px -12% 0px" });   // by its top edge, so tall blocks like the quote form show right away
 // Stagger items that sit side by side (cards, steps, reviews, photos) so they fade in one after another
 document.querySelectorAll('.service-grid, .steps, .review-grid, .gallery-grid, .founders, .contact-cards').forEach(group =>
   [...group.querySelectorAll(':scope > .reveal, :scope > li > .reveal, :scope > *')].filter(el => el.classList.contains('reveal'))
