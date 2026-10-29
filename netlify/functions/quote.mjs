@@ -140,6 +140,7 @@ export default async req => {
       attachments: [logo]
     });
   } catch (err) {
+    // Shows in Netlify > Logs > Functions; 'Invalid login' means SMTP_USER or SMTP_PASSWORD is wrong
     console.error('Request email failed:', err.message);
     return json(502, { ok: false, error: 'Could not send right now' });
   }

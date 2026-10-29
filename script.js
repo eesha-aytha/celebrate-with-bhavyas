@@ -120,11 +120,12 @@ const postJson = (url, body) => fetch(url, {
   headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
   body: JSON.stringify(body)
 });
-// Our function's answer, or null when it isn't available here (not deployed or not set up yet)
+// Our function's answer, or null when it can't deliver (not deployed, not set up, or email login failed)
 const sendViaFunction = async payload => {
   try {
     const res = await postJson(QUOTE_ENDPOINT, payload);
-    if ([404, 405, 501, 503].includes(res.status)) return null;
+    // Not deployed, not set up, or our mailbox login failed: let FormSubmit deliver it instead
+    if ([404, 405, 501, 502, 503].includes(res.status)) return null;
     const data = await res.json().catch(() => ({}));
     if (!res.ok || !data.ok) throw new Error(data.error || `HTTP ${res.status}`);
     return data;
