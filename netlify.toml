@@ -50,3 +50,28 @@
   to = "https://bhavyas.events/:splat"
   status = 301
   force = true
+
+# ---------- Caching: make clicking between pages instant ----------
+# styles.css and script.js are linked with a ?v= fingerprint that changes whenever they
+# change, and fonts never change, so browsers can keep them for a year. Photos and videos
+# are kept for a week (new photos get new file names).
+[[headers]]
+  for = "/styles.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/script.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "/videos/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
