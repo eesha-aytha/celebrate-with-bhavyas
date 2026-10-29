@@ -5,7 +5,7 @@ import glob, hashlib, os, re
 root = os.path.join(os.path.dirname(__file__), '..')
 for name in ('styles.css', 'script.js'):
     tag = hashlib.md5(open(os.path.join(root, name), 'rb').read()).hexdigest()[:8]
-    pattern = re.compile(r'((?:href|src)="' + re.escape(name) + r')(\?v=[\w]+)?"')
+    pattern = re.compile(r'((?:href|src)="/?' + re.escape(name) + r')(\?v=[\w]+)?"')
     for page in glob.glob(os.path.join(root, '*.html')):
         text = open(page).read()
         new = pattern.sub(rf'\1?v={tag}"', text)

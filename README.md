@@ -9,6 +9,7 @@ Website for Celebrate with Bhavya's, a luxury event planning business. It's a pl
 - `destination-weddings.html`: destination wedding planning and decor (Michigan, US and abroad), with its own FAQ and structured data
 - `faq.html`: frequently asked questions, written for search engines too (Google can show them in results)
 - `netlify/functions/quote.mjs`: sends the quote emails (the only code that runs on a server)
+- `404.html`: friendly "page not found" page (Netlify shows it automatically for any address that does not exist)
 - `privacy.html`: privacy policy (update it if you add analytics, ads or another form service)
 - `gallery.html`: full gallery page with category filters, photo viewer and highlight videos
 - `styles.css`: gold and light-blue theme on white, soft blue and champagne sections, with dark accent bands
