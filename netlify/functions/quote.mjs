@@ -117,7 +117,7 @@ export default async req => {
   if (!host || !user || !pass) return json(503, { ok: false, error: 'Email is not set up yet' });
   const port = Number(env('SMTP_PORT') || 465);
   const transporter = nodemailer.createTransport({ host, port, secure: port === 465, auth: { user, pass } });
-  const from = env('MAIL_FROM') || `Celebrate with Bhavya's <${user}>`;
+  const from = env('MAIL_FROM') || `Bharathi & Divya at Celebrate with Bhavya's <${user}>`;
   const to = env('MAIL_TO') || user;
 
   const date = field('Event date');
