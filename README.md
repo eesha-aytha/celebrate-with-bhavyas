@@ -51,6 +51,17 @@ Do this once the site is on Netlify. Nothing secret goes in the code; the mailbo
 
 If those settings are missing, the form automatically falls back to FormSubmit, so requests are never lost.
 
+## Recording inquiries in Google Sheets
+
+Each quote request is also added as a new row in a Google Sheet (one column per form question, plus the time it arrived). The sheet lives in Bhavya's Google Drive; set it up while signed in to that Google account.
+
+1. In Google Sheets, create a sheet named "Website Inquiries".
+2. **Extensions → Apps Script**. Delete what's there, paste in `tools/google-sheet-inquiries.gs` and save. Then **Project Settings (gear) → Script Properties → Add script property**: name `SHEET_TOKEN`, value a long random secret. The secret stays out of the code.
+3. **Deploy → New deployment → Select type: Web app**. Execute as: **Me**. Who has access: **Anyone**. Deploy, allow access when Google asks, and copy the **Web app URL**.
+4. In Netlify, add `SHEET_URL` (that URL) and `SHEET_TOKEN` (the same secret), mark both as secret, then trigger a deploy.
+
+"Anyone" only means the website can reach the script; it can't read the sheet, and rows are only added when the secret matches. If the sheet can't be reached, the emails still go out and the problem shows in Netlify's function logs. Requests that go through the FormSubmit fallback arrive by email only.
+
 ## Photo credits
 
 - `images/beach-mandap-destination.jpg` (Destinations page): free stock photo from Unsplash, [unsplash.com/photos/_D1rKHYi9lc](https://unsplash.com/photos/_D1rKHYi9lc), used under the Unsplash License (no credit required). Replace it with a photo from one of our own destination weddings when we have one. 

@@ -94,6 +94,20 @@ ${rows.map(([label, value]) => `        <tr>
       <p style="margin:24px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#5d5862;">Reply to this email to answer them directly.</p>`,
   'A new quote request just came in.');
 
+// Also records the request as a row in the Google Sheet (tools/google-sheet-inquiries.gs), when
+// SHEET_URL and SHEET_TOKEN are set. A problem here is only logged; it never stops the emails.
+const saveToSheet = rows => {
+  const url = env('SHEET_URL'), token = env('SHEET_TOKEN');
+  if (!url || !token) return Promise.resolve();
+  return fetch(url, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token, fields: rows }), signal: AbortSignal.timeout(8000)
+  })
+    .then(res => res.text())
+    .then(text => { if (text !== 'ok') console.error('Sheet copy failed:', text.slice(0, 200)); })
+    .catch(err => console.error('Sheet copy failed:', err.message));
+};
+
 export default async req => {
   if (req.method !== 'POST') return json(405, { ok: false, error: 'Method not allowed' });
 
@@ -113,8 +127,16 @@ export default async req => {
     return json(400, { ok: false, error: 'Please check your name and email.' });
   }
 
+  // Dates read naturally everywhere: "2027-01-25" -> "January 25, 2027"
+  const shownRows = rows.map(([k, v]) => [k, v.replace(/\b\d{4}-\d{2}-\d{2}\b/g, longDate)]);
+  // Runs alongside the emails; awaited before every reply so Netlify doesn't cut it off
+  const sheetSaved = saveToSheet(shownRows);
+
   const host = env('SMTP_HOST'), user = env('SMTP_USER'), pass = env('SMTP_PASSWORD');
-  if (!host || !user || !pass) return json(503, { ok: false, error: 'Email is not set up yet' });
+  if (!host || !user || !pass) {
+    await sheetSaved;
+    return json(503, { ok: false, error: 'Email is not set up yet' });
+  }
   const port = Number(env('SMTP_PORT') || 465);
   const transporter = nodemailer.createTransport({ host, port, secure: port === 465, auth: { user, pass } });
   const from = env('MAIL_FROM') || `Bharathi & Divya at Celebrate with Bhavya's <${user}>`;
@@ -123,8 +145,6 @@ export default async req => {
   const date = field('Event date');
   const lookingFor = field('Looking for');
   const firstName = name.split(/\s+/)[0];
-  // Dates read naturally everywhere: "2027-01-25" -> "January 25, 2027"
-  const shownRows = rows.map(([k, v]) => [k, v.replace(/\b\d{4}-\d{2}-\d{2}\b/g, longDate)]);
   // What the customer sees back: only what they told us, skipping anything blank
   const blank = v => !v || /^\((none|not given|not asked)\)$/.test(v);
   const summary = [['Event date', 'Event date'], ['More days', 'Additional days'], ['Location', 'Location'], ['Looking for', 'Looking for'], ['Services needed', 'Services'], ['Budget', 'Budget'], ['Venue', 'Venue']]
@@ -142,6 +162,7 @@ export default async req => {
   } catch (err) {
     // Shows in Netlify > Logs > Functions; 'Invalid login' means SMTP_USER or SMTP_PASSWORD is wrong
     console.error('Request email failed:', err.message);
+    await sheetSaved;
     return json(502, { ok: false, error: 'Could not send right now' });
   }
 
@@ -158,5 +179,6 @@ export default async req => {
     console.error('Thank-you email failed:', err.message);
   }
 
+  await sheetSaved;
   return json(200, { ok: true });
 };

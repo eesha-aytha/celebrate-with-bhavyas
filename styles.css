@@ -531,7 +531,7 @@ em { font-style: italic; color: var(--gold-text); }
   .hero-bg {
     background:
       linear-gradient(rgba(10, 10, 10, .85), rgba(18, 17, 20, .62) 25%, rgba(18, 17, 20, .6) 60%, rgba(18, 17, 20, .75)),
-      url("images/webp/mandap-celebration-960.webp") center 40% / cover;
+      url("images/webp/hero-mandap-phone-960.webp") center 40% / cover;
   }
 }
 
@@ -1270,7 +1270,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
   .dest-places-grid, .dest-why-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 860px) {
-  .dest-hero-bg { background-image: linear-gradient(180deg, rgba(10, 12, 18, .74), rgba(10, 12, 18, .58) 45%, rgba(10, 12, 18, .82)), url("images/webp/cliffside-floral-arch-960.webp"); background-position: 66% 60%; }
+  .dest-hero-bg { background-image: linear-gradient(180deg, rgba(10, 12, 18, .74), rgba(10, 12, 18, .58) 45%, rgba(10, 12, 18, .82)), url("images/webp/cliffside-floral-arch-phone-900.webp"); background-position: 50% 60%; }
   .dest-grid, .dest-guests-inner { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
@@ -1365,7 +1365,15 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
   .hero-bg {
     background:
       linear-gradient(180deg, rgba(10, 10, 10, .7), rgba(18, 17, 20, .58) 28%, rgba(18, 17, 20, .55) 62%, rgba(18, 17, 20, .68)),
-      url("images/webp/mandap-celebration-960.webp") center 40% / cover;
+      url("images/webp/hero-mandap-phone-960.webp") center 40% / cover;
+  }
+}
+/* Phones show the photo full-screen: a phone-shaped crop from the photographer's original, extra sharp on 3x screens */
+@media (max-width: 860px) and (min-resolution: 2.5dppx) {
+  .hero-bg {
+    background:
+      linear-gradient(180deg, rgba(10, 10, 10, .7), rgba(18, 17, 20, .58) 28%, rgba(18, 17, 20, .55) 62%, rgba(18, 17, 20, .68)),
+      url("images/webp/hero-mandap-phone-1320.webp") center 40% / cover;
   }
 }
 
@@ -1390,7 +1398,7 @@ a.contact-card:hover .ci-value { color: var(--gold-text); }
   filter: saturate(1.15) brightness(1.06) contrast(1.05);
 }
 @media (max-width: 860px) {
-  .dest-hero-bg { background-image: linear-gradient(180deg, rgba(10, 12, 18, .62), rgba(10, 12, 18, .44) 45%, rgba(10, 12, 18, .66)), url("images/webp/cliffside-floral-arch-960.webp"); background-position: 66% 60%; }
+  .dest-hero-bg { background-image: linear-gradient(180deg, rgba(10, 12, 18, .62), rgba(10, 12, 18, .44) 45%, rgba(10, 12, 18, .66)), url("images/webp/cliffside-floral-arch-phone-900.webp"); background-position: 50% 60%; }
   .dest-band-bg { background-image: linear-gradient(180deg, rgba(10, 12, 18, .48), rgba(10, 12, 18, .54)), url("images/webp/cliffside-floral-arch-960.webp"); background-position: 66% 60%; }
 }
 .hero .gold { background: linear-gradient(135deg, #f6e3a6 0%, #e6c66f 50%, #cfa649 100%); -webkit-background-clip: text; background-clip: text; filter: drop-shadow(0 2px 8px rgba(6, 10, 18, .6)); }
