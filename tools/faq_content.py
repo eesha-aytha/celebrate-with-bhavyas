@@ -12,7 +12,7 @@ FAQ = [
   ("What types of events do you plan and decorate?",
    "Weddings and receptions, engagement parties, bridal showers, baby showers and gender reveals, birthday parties and milestone birthdays, sweet 16s, graduation parties, anniversaries, housewarmings, religious and cultural ceremonies (including pooja, haldi, mehndi, sangeet and dhoti or half-saree ceremonies), holiday parties, corporate events, galas and fundraisers, big or small."),
   ("What areas do you serve?",
-   "We are based in Farmington Hills, Michigan, and plan and decorate events throughout metro Detroit and Southeast Michigan, including Novi, Northville, Livonia, Southfield, West Bloomfield, Bloomfield Hills, Troy, Canton, Detroit and Ann Arbor, as well as across Michigan. We also travel for destination weddings and events. Reach out with your venue and date and we'll confirm availability."),
+   "We are based in Farmington Hills, Michigan, and plan and decorate events throughout metro Detroit and Southeast Michigan, including Novi, Northville, Livonia, Southfield, West Bloomfield, Bloomfield Hills, Troy, Royal Oak, Canton, Detroit, Ann Arbor and East Lansing, as well as across Michigan. We also travel for destination weddings and events. Reach out with your venue and date and we'll confirm availability."),
   ("What makes Celebrate with Bhavya's different?",
    "You get one team for both planning and decor, our own decor collection stored in our Farmington Hills warehouse, new pieces brought straight from India, and a personal, family-run approach from founders Bharathi and Divya. We treat every celebration as if it were our own."),
  ]),
