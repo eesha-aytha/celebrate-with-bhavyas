@@ -151,34 +151,32 @@ export default async req => {
     .map(([key, label]) => [label, (shownRows.find(([k]) => k === key) || [])[1]])
     .filter(([, value]) => !blank(value) && value !== '(decor only)');
 
-  try {
-    await transporter.sendMail({
+  // Both emails go out at the same time as the sheet row, so the customer isn't kept waiting
+  // (Netlify stops a request after 10 seconds)
+  const [request, thankYou] = await Promise.allSettled([
+    transporter.sendMail({
       from, to, replyTo: `${name} <${email}>`,
       subject: `New quote request${lookingFor ? ` (${lookingFor}${field('Location').startsWith('Destination') ? ', destination' : ''})` : ''}: ${name}${date ? `, ${longDate(date)}` : ''}`,
       text: shownRows.map(([k, v]) => `${k}: ${v}`).join('\n'),
       html: requestHtml(shownRows),
       attachments: [logo]
-    });
-  } catch (err) {
-    // Shows in Netlify > Logs > Functions; 'Invalid login' means SMTP_USER or SMTP_PASSWORD is wrong
-    console.error('Request email failed:', err.message);
-    await sheetSaved;
-    return json(502, { ok: false, error: 'Could not send right now' });
-  }
-
-  // The request is safely in the inbox; a failed thank-you shouldn't show the customer an error
-  try {
-    await transporter.sendMail({
+    }),
+    transporter.sendMail({
       from, to: `${name} <${email}>`, replyTo: to,
       subject: "Thank you for reaching out to Celebrate with Bhavya's",
       text: thankYouText(firstName, summary),
       html: thankYouHtml(firstName, summary),
       attachments: [logo]
-    });
-  } catch (err) {
-    console.error('Thank-you email failed:', err.message);
-  }
-
+    })
+  ]);
   await sheetSaved;
+
+  // A failed thank-you shouldn't show the customer an error, as long as the request reached the inbox
+  if (thankYou.status === 'rejected') console.error('Thank-you email failed:', thankYou.reason?.message);
+  if (request.status === 'rejected') {
+    // Shows in Netlify > Logs > Functions; 'Invalid login' means SMTP_USER or SMTP_PASSWORD is wrong
+    console.error('Request email failed:', request.reason?.message);
+    return json(502, { ok: false, error: 'Could not send right now' });
+  }
   return json(200, { ok: true });
 };
