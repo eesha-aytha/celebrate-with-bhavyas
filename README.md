@@ -14,6 +14,7 @@ Website for Celebrate with Bhavya's, a luxury event planning business. It's a pl
 - `gallery.html`: full gallery page with category filters, photo viewer and highlight videos
 - `styles.css`: gold and light-blue theme on white, soft blue and champagne sections, with dark accent bands
 - `script.js`: menu, scroll animations, testimonial slider, contact form
+- `sitemap.xml`: the page and photo list for Google and Bing, rebuilt before every commit by `tools/build_sitemap.py` (add a new page to `PAGES` there)
 
 ## Filling in your details
 

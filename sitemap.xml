@@ -1,38 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://bhavyasevents.com/</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <image:image><image:loc>https://bhavyasevents.com/images/hero-mandap-celebration.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/greenery-reception-hall.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/temple-stage-decor.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/floral-canopy-mandap-card.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/grad-candle-card.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/traditional-ceremony-card.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/corporate-gala-dinner.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/pa-monogram-stage.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/first-dance-fog.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/red-carpet-arches.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/blossom-tree-entrance.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/candlelit-long-table.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/gold-dessert-display.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/floral-wedding-cake.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/floral-ballroom.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/bharathi-aytha-studio.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/divya-donthy-studio.jpg</image:loc></image:image>
   </url>
   <url>
     <loc>https://bhavyasevents.com/gallery.html</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://bhavyasevents.com/images/ivory-gold-lattice-stage.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/gold-dessert-display.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/ev-bride-white-arch.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/dance-floor.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/floral-pillar-stage.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/painted-kalash-lotus-urli.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/ev-haldi-blessings.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/friends-cheering.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/red-carpet-arches.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/temple-stage-wide.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/candlelit-long-table.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/grad-candle-display.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/pa-monogram-stage.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/heart-sign-in-table.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/couple-arch-dance.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/ev-floral-arrangement.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/blossom-tree-entrance.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/calla-lily-centerpiece.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/floral-ballroom.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/ev-gold-kalash.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/greenery-reception-hall.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/bride-groom-dolls.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/haldi-checker-backdrop.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/floral-wedding-cake.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/tree-centerpiece-tables.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/brass-lamp-floral-vases.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/reception-crowd.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/ev-mandap-vows.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/garden-welcome-sign.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/couple-floral-bicycle.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/nb-anniversary-stage.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/ballroom-round-table.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/ev-kashi-yatra.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/brass-lamp-florals.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/floral-tower-tables.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/ganesha-altar.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/white-arch-tunnel.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/couple-grand-entrance.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/floral-canopy-mandap.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/draped-garden-aisle.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/ganesha-garland-closeup.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/baraat-dhol.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/welcome-sign-brass-statue.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/mandap-celebration.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/photo-welcome-display.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/coconut-centerpiece.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/ev-anniversary-garlands.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/traditional-ceremony-stage.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/ev-blossom-twirl.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/bridal-canopy-entrance.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/ganesha-velvet-backdrop.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/first-dance-fog.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/gold-arch-stage.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/couple-floral-arch-twirl.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/ganesha-candle-wall.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/green-napkin-table.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/mandap-brass-lamps.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/painted-coconut.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/couple-pillars.jpg</image:loc></image:image>
   </url>
   <url>
     <loc>https://bhavyasevents.com/quote.html</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://bhavyasevents.com/destination-weddings.html</loc>
-    <lastmod>2026-10-28</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://bhavyasevents.com/images/cliffside-floral-arch.jpg</image:loc></image:image>
+    <image:image><image:loc>https://bhavyasevents.com/images/beach-mandap-destination.jpg</image:loc></image:image>
   </url>
   <url>
     <loc>https://bhavyasevents.com/faq.html</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://bhavyasevents.com/privacy.html</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
